@@ -142,7 +142,7 @@ export const ImageSelector = props => {
                                             <React.Fragment>
                                                 {
                                                     props.user.uploads.map(upload => 
-                                                        <img alt="" key={upload.file_name} className={`image_selector--container--upload ${`http://localhost:4000/api/upload/image/${upload.file_name}` === imageUrl ? "image_selector--container--upload-selected" : ""}`} onClick={() => { setImageUrl(`http://localhost:4000/api/upload/image/${upload.file_name}`); }} src={`http://localhost:4000/api/upload/image/${upload.file_name}`} />                                                        
+                                                        <img alt="" key={upload.fileName} className={`image_selector--container--upload ${`http://localhost:4000/api/upload/image/${upload.fileName}` === imageUrl ? "image_selector--container--upload-selected" : ""}`} onClick={() => { setImageUrl(`http://localhost:4000/api/upload/image/${upload.fileName}`); }} src={`http://localhost:4000/api/upload/image/${upload.fileName}`} />                                                        
                                                     )
                                                 }
                                                 <div style={{width: "100%", height: "1rem"}}></div>

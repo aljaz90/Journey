@@ -7,7 +7,7 @@ const uploadSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId, 
         ref: 'User'
     },
-    file_name: {
+    fileName: {
         type: String,
         required: true
     },
@@ -30,7 +30,7 @@ uploadSchema.pre('deleteOne', async function(next) {
             throw "Document not found";
         }
 
-        let path = `../uploads/image/${doc.file_name}`;
+        let path = `../uploads/image/${doc.fileName}`;
         fs.unlinkSync(path)
     } 
     catch (err) {

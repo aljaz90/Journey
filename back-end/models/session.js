@@ -16,7 +16,7 @@ const sessionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    user_agent: {
+    userAgent: {
         type: String
     },
     user: { 

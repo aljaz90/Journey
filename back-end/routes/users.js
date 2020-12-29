@@ -57,7 +57,7 @@ router.post("/new", async (req, res) => {
             try {
                 const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
                 const userAgent = req.headers['user-agent'];
-                let session = new db.Session({ip: ip, user: req.user._id, key: helpers.generateID(CONFIG.SESSION.KEY_LENGTH), user_agent: userAgent});
+                let session = new db.Session({ip: ip, user: req.user._id, key: helpers.generateID(CONFIG.SESSION.KEY_LENGTH), userAgent: userAgent});
                 await session.save(); 
                 req.session.key = session.key;
                 req.session.session = session._id;
@@ -98,13 +98,13 @@ router.post("/", passport.authenticate('local', { session: false }), async (req,
         const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         const userAgent = req.headers['user-agent'];
         
-        let session = new db.Session({ip: ip, user: req.user._id, key: helpers.generateID(CONFIG.SESSION.KEY_LENGTH), user_agent: userAgent});
+        let session = new db.Session({ip: ip, user: req.user._id, key: helpers.generateID(CONFIG.SESSION.KEY_LENGTH), userAgent: userAgent});
         await session.save();
         req.session.key = session.key;
         req.session.session = session._id;
         req.session.expiration = session.expire_at;
 
-        const userData = { user: user._doc };
+        const userData = { user: req.user._doc };
         res.json(userData);
     }
     catch (err) {

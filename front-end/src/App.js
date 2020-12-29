@@ -76,13 +76,9 @@ export default class App extends Component {
         return (
             <div className="container">
                 <NotificationSystem dismissNotification={() => this.dismissNotification()} notification={this.state.notification} />
-                {
-                    this.state.isAuthenticated && !isEmpty(this.state.user) &&
-                        <TutorialSystem {...this.state} {...this.setters} />
-                }
                 <Layout {...this.state} {...this.setters} showNotification={this.showNotification} saveUserData={this.saveUserData} />
                 <Switch>
-                    <Route exact path="/" render={props => <Home />} />
+                    <Route exact path="/dashboard" render={props => <Home />} />
                     <Route path="/signin" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />
                     <Route path="/signup" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />
                     <Route path="/reset" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />

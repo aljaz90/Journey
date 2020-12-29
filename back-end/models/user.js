@@ -51,24 +51,14 @@ userSchema.pre('deleteOne', async function(next) {
         if (!doc) {
             throw `Document not found: User {_id: ${id}}`;
         }
-
-        for (let enroll of doc.enrolled_courses) {
-            await db.Enroll.deleteOne({_id: enroll});
-        }
         
         for (let upload of doc.uploads) {
             await db.Upload.deleteOne({_id: upload});
         }
         
-        let courses = await db.Course.find({author: id});
-        for (let course of courses) {
-            await db.Course.deleteOne({_id: course._id});
-        }
-        
-        let sessions = await db.Session.find({user: id});
-        for (let session of sessions) {
-            await db.Session.deleteOne({_id: session._id});
-        }
+        for (let trip of doc.trips) {
+            await db.Trip.deleteOne({_id: trip});
+        }        
     } 
     catch (err) {
         console.log("[ERROR] An error occured while deleting user (cascade)");

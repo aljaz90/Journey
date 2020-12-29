@@ -36,7 +36,7 @@ router.post("/image", middleware.isLoggedIn, (req, res) => {
     .on('file', async (name, file) => {
         if (!denied) {
             try {
-                let upload = new db.Upload({user: req.user.id, file_name: filename, type: "image", date: new Date()});
+                let upload = new db.Upload({user: req.user.id, fileName: filename, type: "image", date: new Date()});
                 await upload.save(); 
 
                 req.user.uploads.push(upload._id);
