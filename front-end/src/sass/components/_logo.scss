@@ -1,0 +1,28 @@
+.logo {
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+
+    &-white_background {
+        color: $color-primary;
+    }
+    
+    &--title {
+        font-family: $font-heading;
+        font-size: 2.6rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+    
+    &--subtitle {
+        font-family: $font-kanji;
+        font-size: 1.4rem;
+        margin-top: -0.5rem;
+
+        &-last_char {
+            margin-left: 0.5rem;
+        }
+    }
+}

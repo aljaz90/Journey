@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: "Name cannot be blank"
     },
-    image_url: {
+    imageUrl: {
         type: String,
         default: ""
     },
@@ -25,11 +25,12 @@ const userSchema = new mongoose.Schema({
         required: "Email cannot be blank",
         unique: true
     },
-    completed_tutorial: {
+    completedTutorial: {
         type: Boolean,
         default: false
     },
     uploads: [{type: mongoose.Schema.ObjectId, ref: 'Upload'}],
+    trips: [{type: mongoose.Schema.ObjectId, ref: 'Trip'}],
 });
 
 userSchema.pre('updateOne', async function() {

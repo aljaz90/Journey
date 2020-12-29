@@ -26,7 +26,7 @@ router.get("/", middleware.isLoggedIn, async (req, res) => {
 router.put("/", middleware.isLoggedIn, async (req, res) => {
     try {
         // Getting data from permitter fields
-        const permittedFields = ["email", "image_url", "country", "city", "completed_tutorial", "name"];
+        const permittedFields = ["email", "imageUrl", "country", "city", "completedTutorial", "name"];
         let newUserData =  {};
         for (let field of permittedFields) {
             if (req.body[field] !== undefined) {
@@ -51,7 +51,7 @@ router.post("/new", async (req, res) => {
             throw "Password is too short";
         }
 
-        let newUser = new db.User({email: req.body.email, country: req.body.country, name: req.body.name, city: req.body.city, image_url: req.body.image_url});
+        let newUser = new db.User({email: req.body.email, country: req.body.country, name: req.body.name, city: req.body.city, imageUrl: req.body.imageUrl});
         await db.User.register(newUser, req.body.password);
         passport.authenticate('local', {session: false}) (req, res, async () => {
             try {

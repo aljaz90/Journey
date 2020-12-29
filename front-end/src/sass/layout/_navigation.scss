@@ -1,12 +1,12 @@
 .nav {
     display: flex;
     flex-direction: row;
-    grid-column: 2 / -1;
+    grid-column: 1 / -1;
     grid-row: 1 / 2;
     justify-content: space-between;  
     align-items: center;
     font-family: $font-primary; 
-    padding: 0 10rem 0 5rem; 
+    padding: 0 10rem; 
     background-color: $color-white;
     border-bottom: 1px solid $color-grey;
 
@@ -21,128 +21,12 @@
         z-index: 90;
     }
 
-    &--mobile {
-        position: fixed;
-        top: 7rem;
-        left: 0;
-        width: 40rem;
-        height: calc(100vh - 7rem);
-        background-color: $color-white;
-        border-right: 1px solid $color-grey;
-        z-index: 100;
-        display: none;
-        flex-direction: column;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        padding-bottom: 10rem;
-
-        @include respond(tab-land) {
-            display: flex;
-        }
-
-        &--item {
-            font-size: 2.4rem;
-            font-weight: 400;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 1rem 4rem;
-            transition: all .3s;
-            border-bottom: 1px solid $color-grey;
-            user-select: none;
-            cursor: pointer;
-            color: $color-grey-3;
-            
-            &-top_border {
-                border-top: 1px solid $color-grey;
-            }
-
-            &:link, &:visited {
-                text-decoration: none;
-                color: $color-grey-3;
-            }
-
-            &-selected {
-                background-color: $color-white-2;
-            }
-            &:hover {
-                background-color: $color-grey;
-            }
-
-            &--icon {
-                width: 4rem !important;
-                margin-right: 2rem;
-                transition: all .3s;
-            }
-        }
-    }
-
-    &--hamburger {
-        height: 5rem;
-        width: 5rem;
-        margin-left: -3rem;
-        border-radius: 50%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        transition: all .3s;
-        cursor: pointer;        
-
-        @include respond(tab-land) {
-            display: flex;
-        }
-
-        &-active &--icon {
-            transform: rotate(45deg);
-
-            &::before {
-                top: 50%;
-                transform: rotate(-90deg);
-            }
-            
-            &::after {
-                bottom: 50%;
-                transform: rotate(90deg);
-            }
-        }
-
-        &:hover {
-            background-color: $color-grey;
-        }
-        
-        &--icon {
-            width: 3rem;
-            height: 2px;            
-            background-color: #5f6368;
-            border-radius: 10rem;
-            position: relative;
-            transition: all .3s;
-
-            &::before, &::after {
-                content: "";
-                position: absolute;
-                left: 0;
-                width: 3rem;
-                height: 2px;            
-                background-color: #5f6368;
-                border-radius: 10rem;
-                transition: all .3s;
-            }
-
-            &::before {
-                top: -6px;
-            }
-            &::after {
-                bottom: -6px;
-            }
-        }
-    }
-
     &--logo {
-        height: 3rem;
+        /*height: 3rem;
         width: 20rem;
         background-position: center;
         background-size: contain;
-        background-repeat: no-repeat; 
+        background-repeat: no-repeat; */
     }
 
     &--nav {

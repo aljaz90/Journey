@@ -1,6 +1,6 @@
 module.exports = {
     PORT: 4000,
-    DATABASE_URL: "mongodb://localhost:27017/",
+    DATABASE_URL: "mongodb://localhost:27017/journey",
     SESSION: {
         KEY_LENGTH: 64,
         LENGTH: 24,

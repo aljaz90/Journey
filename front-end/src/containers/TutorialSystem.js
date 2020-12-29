@@ -6,13 +6,13 @@ import { Button } from '../components/Forms/Button';
 import { IonIcon } from '../components/IonIcons/IonIcon';
 
 export const TutorialSystem = props => {
-    const [showing, setShowing] = useState(!props.user.completed_tutorial);
+    const [showing, setShowing] = useState(!props.user.completedTutorial);
     const [currentStep, setCurrentStep] = useState(null);
     const [animationsDisabled, setAnimationsDisabled] = useState(false);
 
     const handleOnTutorialComplete = async () => {
         const requestBody = {
-            completed_tutorial: true
+            completedTutorial: true
         };
         const config = {
             headers: {
