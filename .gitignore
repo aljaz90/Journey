@@ -1,6 +1,6 @@
 /build
 /node_modules
-/node-simple-auth/node_modules
-/react-simple-auth/node_modules
-/node-simple-auth/build
-/react-simple-auth/build
+/back-end/node_modules
+/front-end/node_modules
+/back-end/build
+/front-end/build
