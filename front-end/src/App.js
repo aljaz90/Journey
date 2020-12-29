@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Auth from './containers/Auth';
 import Home from './containers/Home';
 import NotificationSystem from './containers/NotificationSystem';
-import { TutorialSystem } from './containers/TutorialSystem';
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from './containers/Layout';
-import { getCookie, getUser, isEmpty } from './Utils';
+import { getCookie, getUser } from './Utils';
+import Account from './containers/Account';
 
 export default class App extends Component {
 
@@ -79,6 +79,7 @@ export default class App extends Component {
                 <Layout {...this.state} {...this.setters} showNotification={this.showNotification} saveUserData={this.saveUserData} />
                 <Switch>
                     <Route exact path="/dashboard" render={props => <Home />} />
+                    <Route exact path="/account" render={props => <Account showNotification={this.showNotification} {...this.state} {...this.setters} {...props} />} />
                     <Route path="/signin" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />
                     <Route path="/signup" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />
                     <Route path="/reset" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />

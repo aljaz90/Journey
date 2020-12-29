@@ -1058,7 +1058,7 @@ body {
   height: 100%;
   z-index: -100; }
   .notification_system-active {
-    z-index: 1000; }
+    z-index: 10000; }
 
 .tutorial_system {
   width: 100%;
@@ -1946,3 +1946,103 @@ body {
   100% {
     opacity: 0;
     transform: translateX(-20%); } }
+
+.account {
+  grid-column: center-start / center-end;
+  grid-row: 2 / -1;
+  background-color: #fff !important;
+  margin: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative; }
+  @media only screen and (max-width: 75em) {
+    .account {
+      grid-column: full-start / center-end; } }
+  @media only screen and (max-width: 56.25em) {
+    .account {
+      grid-column: 1 / full-end; } }
+  .account--title {
+    position: absolute;
+    left: 3rem;
+    top: 2rem;
+    font-size: 2rem;
+    color: #777;
+    font-weight: 600;
+    user-select: none; }
+  .account--header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 0 4rem 0; }
+    .account--header--image {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      margin-right: 4rem; }
+      .account--header--image-alt {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        margin-right: 4rem;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        font-size: 3.2rem;
+        font-weight: 600; }
+    .account--header--details {
+      font-size: 2rem;
+      /*&--location {
+
+            }*/ }
+      .account--header--details--name {
+        font-weight: 500; }
+  .account--nav {
+    padding: 0 6rem;
+    min-height: 4.65rem; }
+    .account--nav .switch--option-nav {
+      font-size: 1.6rem; }
+  .account--content--title {
+    font-size: 2.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-left: 4rem; }
+  .account--content--subtitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-left: 4rem;
+    color: #777; }
+  .account--content--photo {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    align-self: center;
+    object-fit: cover;
+    object-position: center;
+    margin-top: 4rem; }
+    .account--content--photo-alt {
+      margin-top: 4rem;
+      align-self: center;
+      width: 20rem;
+      height: 20rem;
+      border-radius: 50%;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      font-size: 3.2rem;
+      font-weight: 600; }
+  .account--content--submit {
+    margin-top: 4rem;
+    align-self: center; }
+    @media only screen and (max-width: 37.5em) {
+      .account--content--submit {
+        margin-bottom: 3rem; } }

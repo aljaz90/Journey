@@ -1,0 +1,131 @@
+.account {
+    grid-column: center-start / center-end;
+    grid-row: 2 / -1;
+    background-color: $color-white !important;
+    margin: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+
+    @include respond(tab-land) {
+        grid-column: full-start / center-end;
+    }
+    @include respond(tab-port) {
+        grid-column: 1 / full-end;
+    }
+
+    &--title {
+        position: absolute;
+        left: 3rem;
+        top: 2rem;
+        font-size: 2rem;
+        color: $color-grey-2;
+        font-weight: 600;
+        user-select: none;
+    }
+
+    &--header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8rem 0 4rem 0;
+
+        &--image {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            margin-right: 4rem;
+            
+            &-alt {
+                width: 10rem;
+                height: 10rem;
+                border-radius: 50%;
+                margin-right: 4rem;
+                background-color: #f4f4f4;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-transform: uppercase;
+                font-size: 3.2rem; 
+                font-weight: 600;
+
+            }
+        }
+        
+        &--details {
+            font-size: 2rem;
+
+            &--name {
+                font-weight: 500;
+            }
+
+            /*&--location {
+
+            }*/
+        }
+    }
+
+    &--nav {
+        padding: 0 6rem;
+        min-height: 4.65rem;
+        
+        .switch--option-nav {
+            font-size: 1.6rem;
+        }
+    }
+
+    &--content {
+        &--title {
+            font-size: 2.1rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-left: 4rem;
+        }
+        &--subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-left: 4rem;
+            color: $color-grey-2;
+        }
+        
+        &--photo {
+            width: 20rem;
+            height: 20rem;
+            border-radius: 50%;
+            align-self: center;
+            object-fit: cover;
+            object-position: center;
+            margin-top: 4rem;
+            
+            &-alt {
+                margin-top: 4rem;
+                align-self: center;
+                width: 20rem;
+                height: 20rem;
+                border-radius: 50%;
+                background-color: #f4f4f4;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-transform: uppercase;
+                font-size: 3.2rem; 
+                font-weight: 600;
+            }
+        }
+
+        &--submit {
+            margin-top: 4rem;
+            align-self: center;
+
+            @include respond(phone) {
+                margin-bottom: 3rem;
+            }
+        }
+    }
+}
