@@ -1,5 +1,8 @@
 .home {
-  //background-image: linear-gradient(to left bottom, #2c2b30, #232a34, #132b33, #022b2c, #052a1d);
-  //min-width: 100vw;
-  //min-height: 100vh;
+  grid-row: 2 / -1;
+  grid-column: 1 / -1;
+  height: calc(100vh - 7rem);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }

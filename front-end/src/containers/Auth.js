@@ -118,7 +118,7 @@ export default class Auth extends Component {
             destination: "", 
             currentInputGroup: 0, 
             activeMode: activeMode,
-            redirectDestination: redirectDestination ? redirectDestination : "dashboard",
+            redirectDestination: redirectDestination ? redirectDestination : "",
             showingInputs: [],
             firstRun: true
         };        
@@ -162,7 +162,7 @@ export default class Auth extends Component {
                 inputsEdited: [],
                 currentInputGroup: 0, 
                 activeMode: activeMode,
-                redirectDestination: redirectDestination ? redirectDestination : "dashboard",
+                redirectDestination: redirectDestination ? redirectDestination : "",
                 showingInputs: [],
                 firstRun: false
             });
@@ -419,7 +419,7 @@ export default class Auth extends Component {
 
     handleAnimationFinish = e => {
         if (this.state.destination !== "") {
-            this.props.history.push(`${this.state.destination}${this.state.redirectDestination !== "dashboard" ? `?redirectTo=${this.state.redirectDestination}` : ""}`);
+            this.props.history.push(`${this.state.destination}${this.state.redirectDestination !== "" ? `?redirectTo=${this.state.redirectDestination}` : ""}`);
         }
         else {
             this.setState({...this.state, firstRun: false, animations: {...this.state.animations, main: ""}});

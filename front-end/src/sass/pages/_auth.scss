@@ -1,5 +1,5 @@
 .auth {
-    background-image: linear-gradient(to right bottom, $color-primary, $color-secondary-dark);
+    background-image: linear-gradient(to right bottom, rgba($color-primary, 1), rgba($color-secondary-dark, 0.8)), url("http://localhost:3000/japan.jpg");
     grid-column: 1 / -1;
     grid-row: 1 / -1;
     z-index: 90;
@@ -267,7 +267,7 @@
             padding: 4rem 2rem;
             flex-direction: column;
             justify-content: center;
-            background-image:linear-gradient(to right bottom, rgba($color-grey-3, 0.5), rgba($color-grey-3, 0.45)), linear-gradient(to left top, rgba(#6d327c, 0.4), rgba(#485DA6, 0.4), rgba(#00a1ba, 0.4), rgba(#00BF98, 0.4), rgba(#36C486, 0.4)), url("/akihabara.jpg");
+            background-color: $color-white;
             background-position: center;
             background-size: cover;
             position: relative;

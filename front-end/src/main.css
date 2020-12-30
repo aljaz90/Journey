@@ -1337,6 +1337,11 @@ body {
     .form--submit:hover {
       letter-spacing: unset; }
 
+.map {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 10rem; }
+
 .logo {
   color: #fff;
   display: flex;
@@ -1535,7 +1540,7 @@ body {
             background-color: #eee; }
 
 .auth {
-  background-image: linear-gradient(to right bottom, #640AFF, #ad3a00);
+  background-image: linear-gradient(to right bottom, #640aff, rgba(173, 58, 0, 0.8)), url("http://localhost:3000/japan.jpg");
   grid-column: 1 / -1;
   grid-row: 1 / -1;
   z-index: 90;
@@ -1733,7 +1738,7 @@ body {
         padding: 4rem 2rem;
         flex-direction: column;
         justify-content: center;
-        background-image: linear-gradient(to right bottom, rgba(51, 51, 51, 0.5), rgba(51, 51, 51, 0.45)), linear-gradient(to left top, rgba(109, 50, 124, 0.4), rgba(72, 93, 166, 0.4), rgba(0, 161, 186, 0.4), rgba(0, 191, 152, 0.4), rgba(54, 196, 134, 0.4)), url("/akihabara.jpg");
+        background-color: #fff;
         background-position: center;
         background-size: cover;
         position: relative;
@@ -1946,6 +1951,14 @@ body {
   100% {
     opacity: 0;
     transform: translateX(-20%); } }
+
+.home {
+  grid-row: 2 / -1;
+  grid-column: 1 / -1;
+  height: calc(100vh - 7rem);
+  width: 100%;
+  position: relative;
+  overflow: hidden; }
 
 .account {
   grid-column: center-start / center-end;
