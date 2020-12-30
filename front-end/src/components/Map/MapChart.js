@@ -1,37 +1,18 @@
-import React, { useState } from 'react';
-import {
-    ComposableMap,
-    Geographies,
-    Geography,
-    ZoomableGroup
-} from "react-simple-maps";
+import React from 'react';
+import { Map, Marker, Overlay } from 'pigeon-maps';
   
-const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
   
 export const MapChart = props => {
 
-    const [width, setWidth] = useState(800);
-    const [height, setHeight] = useState(500);
-
     return (
         <div className="map">
-            <ComposableMap
-                width={980}
-                height={551}
-                style={{
-                    width: "100%",
-                    height: "auto",
-                }}
-  
+            <Map 
+                defaultCenter={[25, 0]} 
+                defaultZoom={2.9}
+                attribution={false}
             >
-                    <Geographies geography={geoUrl}>
-                    {({ geographies }) =>
-                        geographies.map(geo => (
-                        <Geography key={geo.rsmKey} geography={geo} />
-                        ))
-                    }
-                    </Geographies>
-            </ComposableMap>
+                <Marker anchor={[50.874, 4.6947]} payload={1} onClick={({ event, anchor, payload }) => {}} />
+            </Map>    
         </div>
     );
 };
