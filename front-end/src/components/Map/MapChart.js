@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Leaflet, { LatLngBounds } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';

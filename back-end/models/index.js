@@ -19,3 +19,6 @@ module.exports.Session = require("./session");
 module.exports.User = require("./user");
 module.exports.Upload = require("./upload");
 module.exports.Trip = require("./trip");
+module.exports.Destination = require("./destination");
+module.exports.Stopover = require("./stopover");
+module.exports.Route = require("./route");
