@@ -51,10 +51,10 @@ export const Layout = props => {
                     { !props.isAuthenticated ?
                     <React.Fragment>
                         <NavLink activeClassName="nav--nav--item-active" className="nav--nav--item" to="/signin">
-                        Sign in
+                            Sign in
                         </NavLink>
                         <NavLink activeClassName="nav--nav--item-active" className="nav--nav--item" to="/signup">
-                        Sign up
+                            Sign up
                         </NavLink>
                     </React.Fragment>
                     :

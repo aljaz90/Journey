@@ -78,7 +78,7 @@ export default class App extends Component {
                 <NotificationSystem dismissNotification={() => this.dismissNotification()} notification={this.state.notification} />
                 <Layout {...this.state} {...this.setters} showNotification={this.showNotification} saveUserData={this.saveUserData} />
                 <Switch>
-                    <Route exact path="/" render={props => <Home />} />
+                    <Route exact path="/" render={props => <Home {...this.state} {...props} />} />
                     <Route exact path="/account" render={props => <Account showNotification={this.showNotification} {...this.state} {...this.setters} {...props} />} />
                     <Route path="/signin" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />
                     <Route path="/signup" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />

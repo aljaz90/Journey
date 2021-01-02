@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Leaflet from 'leaflet';
+import Leaflet, { LatLngBounds } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -17,9 +17,10 @@ let DefaultIcon = Leaflet.icon({
 export const MapChart = props => {
 
     const position = [51.505, -0.09];
+
     return (
         <div className="map">
-            <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
+            <MapContainer zoomControl={false} worldCopyJump={true} center={position} maxBounds={new LatLngBounds([-85, -99999999999999999], [85, 99999999999999999])} maxBoundsViscosity={0.9} minZoom={2} zoom={3} scrollWheelZoom={true}>
                 <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

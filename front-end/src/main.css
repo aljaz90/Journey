@@ -1343,7 +1343,9 @@ body {
 
 .map {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  z-index: 4;
+  position: relative; }
 
 .logo {
   color: #fff;
@@ -1958,12 +1960,142 @@ body {
     transform: translateX(-20%); } }
 
 .home {
-  grid-row: 2 / -1;
+  grid-row: 1 / -1;
   grid-column: 1 / -1;
-  height: calc(100vh - 7rem);
+  height: 100vh;
   width: 100%;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  z-index: 90;
+  background-color: #fff; }
+  .home--account {
+    height: 100%;
+    width: 20rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .home--account--button {
+      border: 0;
+      min-width: unset; }
+      .home--account--button .dropdown--button--icon {
+        display: none; }
+      .home--account--button:hover {
+        background-color: unset; }
+      .home--account--button + .dropdown--options {
+        min-width: 15rem; }
+    .home--account--wrapper {
+      position: absolute;
+      top: 2rem;
+      right: 8rem;
+      z-index: 5; }
+    .home--account--icon {
+      text-transform: uppercase;
+      font-size: 2rem;
+      background-color: #f4f4f4;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      letter-spacing: 0.2rem;
+      user-select: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center; }
+      .home--account--icon-image {
+        transition: all .3s;
+        cursor: pointer !important; }
+        .home--account--icon-image:hover {
+          filter: blur(4px); }
+        .home--account--icon-image:hover .home--account--icon-image--edit {
+          filter: blur(0); }
+    .home--account:hover .home--account--dropdown {
+      max-height: 50rem;
+      opacity: 1; }
+    .home--account--dropdown {
+      z-index: 50;
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translate(50%, calc(100% - 0.1rem));
+      width: 25rem;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eee;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: all .35s; }
+      .home--account--dropdown--image {
+        transition: all .3s;
+        cursor: pointer !important; }
+        .home--account--dropdown--image-edit {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, calc(-50% + 0.5rem));
+          color: #fff;
+          font-size: 2.6rem;
+          z-index: 1;
+          opacity: 0;
+          transition: all .3s; }
+          .home--account--dropdown--image-edit-dark {
+            color: #333; }
+      .home--account--dropdown--image_container {
+        position: relative;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        border: 1px solid #000;
+        border-radius: 50%;
+        transition: all .3s; }
+        .home--account--dropdown--image_container:hover {
+          border: 1px solid transparent; }
+      .home--account--dropdown--image_container:hover .home--account--dropdown--image {
+        filter: blur(4px); }
+      .home--account--dropdown--image_container:hover .home--account--dropdown--image-edit {
+        opacity: 1;
+        transform: translate(-50%, -50%); }
+      .home--account--dropdown--item {
+        text-transform: none;
+        font-size: 1.4rem;
+        font-weight: 500;
+        letter-spacing: normal;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        width: 100%;
+        user-select: none;
+        cursor: pointer; }
+        .home--account--dropdown--item:link, .home--account--dropdown--item:visited {
+          text-decoration: none;
+          color: inherit; }
+        .home--account--dropdown--item-header {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          align-self: stretch;
+          background-color: white;
+          padding: 4rem 0rem;
+          color: #333;
+          font-size: 1.6rem;
+          font-weight: 500;
+          line-height: 2rem; }
+        .home--account--dropdown--item-text {
+          text-transform: capitalize;
+          font-weight: 600; }
+        .home--account--dropdown--item-email {
+          text-transform: lowercase; }
+        .home--account--dropdown--item-icon {
+          width: 10rem;
+          height: 10rem;
+          cursor: unset; }
+        .home--account--dropdown--item:hover {
+          background-color: #eee; }
 
 .account {
   grid-column: center-start / center-end;

@@ -115,9 +115,9 @@ export const Dropdown = props => {
                             }
                             {
                                 options.map(option => 
-                                    (<div key={option.key ? option.key : option} onClick={() => onSelect(option.key ? option.key : option)} className={`dropdown--options--item dropdown--options--item-${props.type}`}>
+                                    <div key={option.key ? option.key : option} onClick={() => onSelect(option.key ? option.key : option)} className={`dropdown--options--item dropdown--options--item-${props.type}`}>
                                         {option.icon && <IonIcon className={`dropdown--options--item--icon`} name={option.icon} />} {option.text ? option.text : option}
-                                    </div>)
+                                    </div>
                                 )
                             }
                         </div>
