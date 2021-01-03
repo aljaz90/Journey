@@ -11,6 +11,14 @@ import { IonIcon } from '../components/IonIcons/IonIcon';
 
 export default class Home extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            sidebarOpen: false
+        };
+    }
+
     handleUserAction = action => {
         if (action === "edit") {
             window.location.replace("/account");
@@ -49,19 +57,22 @@ export default class Home extends Component {
                 <Button className="home--trips--add" hintText="Add trip">
                     <IonIcon icon="add-outline" />
                 </Button>
-                <EzAnime transitionName="animation--sidebar">
-                    {
-                        this.state.sidebarOpen ?
-                            <div className="home--sidebar">
-
-                            </div>
-                        :
-                            <Button>
-
-                            </Button>
-                    }
-                </EzAnime>
             </div>
+            <EzAnime transitionName="animation--sidebar">
+                {
+                    this.state.sidebarOpen ?
+                        <div className="home--sidebar" id="sidebar">
+                            <Button onClick={() => this.setState({...this.state, sidebarOpen: false})} hintText="Close sidebar" hintPosition="right" wrapperClassName="home--sidebar--close--wrapper" className="home--sidebar--close">
+                                <IonIcon icon="chevron-back-outline" />
+                            </Button>
+
+                        </div>
+                    :
+                        <Button onClick={() => this.setState({...this.state, sidebarOpen: true})} id="sidebar-open" hintText="Open sidebar" hintPosition="right" wrapperClassName="home--sidebar--open--wrapper" className="home--sidebar--open">
+                            <IonIcon icon="chevron-forward-outline" />
+                        </Button>
+                }
+            </EzAnime>
         </div>
         )
     }

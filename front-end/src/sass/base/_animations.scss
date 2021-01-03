@@ -97,7 +97,7 @@
     }
     
     &--sidebar {
-        @keyframes showSidebarMyCourses {
+        @keyframes showLessonNavigation {
             0% {
                 transform: translateX(-100%);
                 opacity: 0;
@@ -108,7 +108,7 @@
             }
         }
           
-        @keyframes hideSidebarMyCourses {
+        @keyframes hideLessonNavigation {
             0% {
                 transform: translateX(0);
                 opacity: 1;
@@ -123,26 +123,23 @@
         } 
 
         &-enter {
-            transform: translateX(-100%);
             animation-duration: 0.3s;
             animation-fill-mode: both;
             animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
-            animation-play-state: paused;
+            animation-name: showLessonNavigation; 
 
             &-active {
-                animation-name: showSidebarMyCourses; 
                 animation-play-state: running;
             }
         }
-                    
+            
         &-leave {
             animation-duration: 0.3s;
             animation-fill-mode: both;
             animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
-            animation-play-state: paused;
+            animation-name: hideLessonNavigation;
 
             &-active {
-                animation-name: hideSidebarMyCourses;
                 animation-play-state: running;
             }
         } 
