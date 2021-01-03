@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import EzAnime from '../components/Animations/EzAnime';
 import { Redirect } from 'react-router-dom';
 import { Logo } from '../components/Layout/Logo';
 import { Dropdown } from '../components/Forms/Dropdown';
+import { Button } from '../components/Forms/Button';
 import { MapChart } from '../components/Map/MapChart';
 import { getInitialsForName, isEmpty, signOut } from '../Utils';
 import { Loader } from '../components/Utils/Loader';
+import { IonIcon } from '../components/IonIcons/IonIcon';
 
 export default class Home extends Component {
 
@@ -39,6 +42,26 @@ export default class Home extends Component {
             </div>
             <MapChart />
             <Logo background="white" className="home--logo" />
+            <div className="home--trips">
+                <Dropdown className="home--trips--dropdown" onSelect={opt => console.log(opt)} options={[{key: "asjkdasjldsadjlksad", text: "Unknamed trip"}]}>
+                    Select a trip
+                </Dropdown>
+                <Button className="home--trips--add" hintText="Add trip">
+                    <IonIcon icon="add-outline" />
+                </Button>
+                <EzAnime transitionName="animation--sidebar">
+                    {
+                        this.state.sidebarOpen ?
+                            <div className="home--sidebar">
+
+                            </div>
+                        :
+                            <Button>
+
+                            </Button>
+                    }
+                </EzAnime>
+            </div>
         </div>
         )
     }

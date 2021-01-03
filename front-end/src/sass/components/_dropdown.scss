@@ -203,7 +203,6 @@
             transition: all .3s;
             cursor: pointer;
             text-overflow: ellipsis;
-            text-transform: capitalize;
             white-space: nowrap;
 
             &:not(:last-child) {
