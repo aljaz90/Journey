@@ -2179,6 +2179,8 @@ body {
       display: flex;
       justify-content: center;
       align-items: center; }
+      .home--trips--add:active {
+        transform: none; }
   .home--sidebar {
     position: fixed;
     top: 0;
