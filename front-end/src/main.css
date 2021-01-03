@@ -283,6 +283,51 @@ body {
     animation-name: hideSidebarMyCourses;
     animation-play-state: running; }
 
+@keyframes pulseIcon {
+  0% {
+    box-shadow: 0 0 5.2rem 2rem rgba(100, 10, 255, 0.8); }
+  50% {
+    box-shadow: 0 0 8.2rem 5rem rgba(100, 10, 255, 0.75); }
+  100% {
+    box-shadow: 0 0 5.2rem 2rem rgba(100, 10, 255, 0.8); } }
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff; }
+  .loader--icon {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    width: 15rem;
+    height: 13rem;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    background-color: #640AFF; }
+    .loader--icon-2 {
+      transform: translate(4rem, calc(-50% - 3rem)) rotate(60deg);
+      background-color: #E04B00;
+      animation: none;
+      width: 8.5rem;
+      height: 7rem; }
+  .loader--shadow {
+    display: block;
+    z-index: 3;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    animation: pulseIcon 2.6s cubic-bezier(0.61, 1, 0.88, 1) infinite; }
+
 .btn {
   background-color: #640AFF;
   color: #fff;
@@ -1965,6 +2010,17 @@ body {
   overflow: hidden;
   z-index: 90;
   background-color: #fff; }
+  .home--logo {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    color: #843dff; }
+    .home--logo .logo--title {
+      font-size: 2rem; }
+    .home--logo .logo--subtitle {
+      font-size: 1rem; }
   .home--account {
     height: 100%;
     width: 20rem;

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { Logo } from '../components/Layout/Logo';
 import { Dropdown } from '../components/Forms/Dropdown';
 import { MapChart } from '../components/Map/MapChart';
 import { getInitialsForName, isEmpty, signOut } from '../Utils';
+import { Loader } from '../components/Utils/Loader';
 
 export default class Home extends Component {
 
@@ -19,8 +21,11 @@ export default class Home extends Component {
 
     render() {
 
-        if (isEmpty(this.props.user)) {
+        if (!this.props.isAuthenticated) {
             return <Redirect to="/signin" />;
+        }
+        else if (isEmpty(this.props.user)) {
+            return <Loader />;
         }
 
         return (
@@ -33,6 +38,7 @@ export default class Home extends Component {
                 </Dropdown>
             </div>
             <MapChart />
+            <Logo background="white" className="home--logo" />
         </div>
         )
     }

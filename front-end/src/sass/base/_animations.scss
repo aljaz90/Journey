@@ -147,5 +147,19 @@
             }
         } 
     }
+
+    &--loader {
+        @keyframes pulseIcon {
+            0% {
+                box-shadow: 0 0 5.2rem 2rem rgba($color-primary, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 8.2rem 5rem rgba($color-primary, 0.75);
+            }
+            100% {
+                box-shadow: 0 0 5.2rem 2rem rgba($color-primary, 0.8);
+            }
+        }
+    }
 }
  
