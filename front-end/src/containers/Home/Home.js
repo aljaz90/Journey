@@ -41,7 +41,7 @@ export default class Home extends Component {
             });
 
             this.props.setTrips([...this.props.trips, res.data], () => {
-                this.setState({...this.state, selectedTrip: res.data});
+                this.setState({...this.state, selectedTrip: res.data._id});
             });
 
         } 
@@ -72,7 +72,7 @@ export default class Home extends Component {
             <Logo background="white" className="home--logo" />
 
             <div className="home--trips">
-                <Dropdown selectedOption={this.state.selectedTrip?._id} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id === tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
+                <Dropdown selectedOption={this.state.selectedTrip} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: tripID})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
                     Select a trip
                 </Dropdown>
                 <Button onClick={() => this.handleAddTrip()} className="home--trips--add" hintText="Add trip">
@@ -80,7 +80,7 @@ export default class Home extends Component {
                 </Button>
             </div>
 
-            <Sidebar trip={this.state.selectedTrip} />
+            <Sidebar setTrip={this.props.setTrip} showNotification={this.props.showNotification} trip={this.props.trips.find(el => el._id === this.state.selectedTrip)} />
         </div>
         )
     }

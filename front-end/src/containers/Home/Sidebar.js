@@ -1,31 +1,112 @@
 import React, { useState } from 'react';
 import EzAnime from '../../components/Animations/EzAnime';
+import axios from 'axios';
+import OutsideClick from '../../components/Utils/OutsideClick';
 import { Button } from '../../components/Forms/Button';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 
-export const Sidebar = () => {
-    const [open, setOpen] = useState(false);
+export const Sidebar = props => {
+    const [open, _setOpen] = useState(false);
+    const [showingEditButton, setShowEditButton] = useState(false);
+    const [showingEditInput, _setShowEditInput] = useState(false);
+    const [tripName, setTripName] = useState(null);
+
+    const setOpen = value => {
+        if (open === value) {
+            return;
+        }
+
+        _setOpen(value);
+
+        if (value) {
+            setTimeout(() => setShowEditButton(true), 600);
+        }
+        else {
+            setShowEditButton(false);
+        }
+    };
+
+    const setShowEditInput = value => {
+        if (value === showingEditInput) {
+            return;
+        }
+
+        _setShowEditInput(value);
+
+        if (value) {
+            setTripName(props.trip.name);
+        }
+    };
+
+    const changeName = async () => {
+        setShowEditInput(false);
+
+        if (tripName === props.trip.name) {
+            return;
+        }
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const body = {
+            name: tripName
+        };
+
+        try {
+            let res = await axios.put(`http://localhost:4000/api/trip/${props.trip._id}`, body, config);
+            props.setTrip(res.data);
+        }
+        catch (err) {
+            props.showNotification({
+                type: "toast",
+                contentType: "error",
+                text: "An error occured while trying to save trip details",
+                time: 2.5
+            });
+            console.error("An error occured while trying to save trip details");
+            console.log(err);
+        }
+
+    };
 
     return (
-        <EzAnime transitionName="animation--sidebar">
-            {
-                open ?
-                    <div className="home--sidebar" id="sidebar">
-                        <Button onClick={() => setOpen(false)} hintText="Close sidebar" hintPosition="right" wrapperClassName="home--sidebar--close--wrapper" className="home--sidebar--close">
-                            <IonIcon icon="chevron-back-outline" />
+        <React.Fragment>
+            <EzAnime transitionName="animation--sidebar">
+                {
+                    open ?
+                        <div className="home--sidebar" id="sidebar">
+                            <Button onClick={() => setOpen(false)} hintText="Close sidebar" hintPosition="right" wrapperClassName="home--sidebar--close--wrapper" className="home--sidebar--close">
+                                <IonIcon icon="chevron-back-outline" />
+                            </Button>
+                            <div className="home--sidebar--header">
+                                <Button onClick={() => setOpen(false)} hintText="Close sidebar" hintPosition="right" wrapperClassName="home--sidebar--close--wrapper" className="home--sidebar--close">
+                                    <IonIcon icon="chevron-back-outline" />
+                                </Button>                                
+                            </div>
+                            <div className="home--sidebar--destinations">
+
+                            </div>
+                        </div>
+                    :
+                        <Button onClick={() => setOpen(true)} id="sidebar-open" hintText="Open sidebar" hintPosition="right" wrapperClassName="home--sidebar--open--wrapper" className="home--sidebar--open">
+                            <IonIcon icon="chevron-forward-outline" />
                         </Button>
-                        <div className="home--sidebar--header">
-
-                        </div>
-                        <div className="home--sidebar--destinations">
-
-                        </div>
-                    </div>
-                :
-                    <Button onClick={() => setOpen(true)} id="sidebar-open" hintText="Open sidebar" hintPosition="right" wrapperClassName="home--sidebar--open--wrapper" className="home--sidebar--open">
-                        <IonIcon icon="chevron-forward-outline" />
+                }
+            </EzAnime>
+            {
+                showingEditButton && props.trip &&
+                    <Button onClick={() => showingEditInput ? changeName() : setShowEditInput(true)} hintText="Change trip name" hintPosition="right" className="home--sidebar--header--edit" wrapperClassName="home--sidebar--header--edit--wrapper">
+                        <IonIcon className="home--sidebar--header--edit--icon" icon="create-outline" />
                     </Button>
             }
-        </EzAnime>
-    )
-}
+            {
+                showingEditInput &&
+                    <OutsideClick exceptions={["home--sidebar--header--edit", "home--sidebar--header--edit--icon"]} onOutsideClick={() => changeName()}>
+                        <input autoFocus value={tripName} onChange={e => setTripName(e.target.value)} className="home--sidebar--header--edit_input" />
+                    </OutsideClick>
+            }
+        </React.Fragment>
+    );
+};

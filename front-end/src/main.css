@@ -2149,26 +2149,32 @@ body {
     display: flex;
     position: fixed;
     top: 3rem;
-    left: 5rem;
+    left: 7rem;
     z-index: 6;
     background-color: #fff;
     border-radius: 4px; }
-    .home--trips--dropdown + .dropdown--options {
-      border: none;
-      min-width: unset; }
-    .home--trips--dropdown--selected {
-      position: relative;
-      padding-left: 3rem; }
-      .home--trips--dropdown--selected::before {
-        content: "";
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 1rem;
-        height: 1rem;
-        border-radius: 50%;
-        background-color: #640AFF; }
+    .home--trips--dropdown {
+      max-width: 17rem;
+      max-height: 4.76rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+      .home--trips--dropdown + .dropdown--options {
+        border: none;
+        min-width: unset; }
+      .home--trips--dropdown--selected {
+        position: relative;
+        padding-left: 3rem; }
+        .home--trips--dropdown--selected::before {
+          content: "";
+          position: absolute;
+          left: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 1rem;
+          height: 1rem;
+          border-radius: 50%;
+          background-color: #640AFF; }
     .home--trips--add {
       border-radius: 0;
       height: 4.76rem;
@@ -2210,6 +2216,44 @@ body {
     .home--sidebar--close--wrapper {
       top: 3rem;
       left: 32rem; }
+    .home--sidebar--header {
+      display: flex;
+      align-items: center;
+      height: 11rem;
+      border-bottom: 1px solid #eee;
+      padding: 0 1rem; }
+      .home--sidebar--header--edit {
+        background-color: #fff;
+        color: #777;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        height: 4rem; }
+        .home--sidebar--header--edit--wrapper {
+          position: fixed;
+          z-index: 8;
+          top: 3.5rem;
+          left: 1rem; }
+        .home--sidebar--header--edit:hover {
+          background-color: #fff;
+          color: #333; }
+        .home--sidebar--header--edit:active {
+          transform: none; }
+      .home--sidebar--header--edit_input {
+        position: fixed;
+        top: 3rem;
+        left: 7rem;
+        z-index: 7;
+        height: 4.76rem;
+        width: 17rem;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        font-size: 1.6rem;
+        font-family: "Lato", sans-serif;
+        padding: 0 1rem;
+        color: #777; }
 
 .account {
   grid-column: center-start / center-end;
