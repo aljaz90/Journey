@@ -6,8 +6,12 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    author: {
+        type: mongoose.Schema.ObjectId, ref: 'User',
+        required: true
+    },
     stopovers: [{type: mongoose.Schema.ObjectId, ref: 'Stopover'}],
-    route: [{type: mongoose.Schema.ObjectId, ref: 'Route'}]
+    routes: [{type: mongoose.Schema.ObjectId, ref: 'Route'}]
 });
 
 tripSchema.pre('deleteOne', async function(next) {

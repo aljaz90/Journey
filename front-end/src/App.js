@@ -15,6 +15,7 @@ export default class App extends Component {
         this.state = {
             isAuthenticated: false,
             user: {},
+            trips: [],
             notification: null,
             notificationsBuffer: []
         };
@@ -22,6 +23,19 @@ export default class App extends Component {
         this.setters = {
             setUser: user => {
                 this.setState({ ...this.state, user: { ...this.state.user, ...user } });
+            },
+            setTrips: (trips, callback=null) => {
+                this.setState({ ...this.state, trips: trips }, callback);
+            },
+            setTrip: (trip, callback=null) => {
+                let trips = [...this.state.trips];
+                let index = trips.findIndex(el => el._id === trip._id);
+
+                if (index !== -1) {
+                    trips[index] = trip;
+                }
+
+                this.setState({ ...this.state, trips: trips });
             }
         };
     };
@@ -64,9 +78,10 @@ export default class App extends Component {
     };
 
     saveUserData = (isAuthenticated, data = {}, callback = null) => {
-        let newState = { ...this.state, isAuthenticated, user: {}, courses: [], enrolls: [] };
+        let newState = { ...this.state, isAuthenticated, user: {}, trips: [] };
         if (isAuthenticated) {
             newState.user = data.user;
+            newState.trips = data.user.trips;
         }
         this.setState(newState, () => { if (callback) { callback(); } });
     };
@@ -78,7 +93,7 @@ export default class App extends Component {
                 <NotificationSystem dismissNotification={() => this.dismissNotification()} notification={this.state.notification} />
                 <Layout {...this.state} {...this.setters} showNotification={this.showNotification} saveUserData={this.saveUserData} />
                 <Switch>
-                    <Route exact path="/" render={props => <Home {...this.state} {...props} />} />
+                    <Route exact path="/" render={props => <Home showNotification={this.showNotification} {...this.state} {...this.setters} {...props} />} />
                     <Route exact path="/account" render={props => <Account showNotification={this.showNotification} {...this.state} {...this.setters} {...props} />} />
                     <Route path="/signin" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />
                     <Route path="/signup" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />

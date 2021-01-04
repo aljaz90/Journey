@@ -4,6 +4,10 @@ const stopoverSchema = new mongoose.Schema({
     name: {
         type: String,
     },
+    author: {
+        type: mongoose.Schema.ObjectId, ref: 'User',
+        required: true
+    },
     lat: {
         type: Number,
         required: true

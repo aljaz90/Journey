@@ -2156,19 +2156,19 @@ body {
     .home--trips--dropdown + .dropdown--options {
       border: none;
       min-width: unset; }
-      .home--trips--dropdown + .dropdown--options .dropdown--options--item {
-        position: relative;
-        padding-left: 3rem; }
-        .home--trips--dropdown + .dropdown--options .dropdown--options--item::before {
-          content: "";
-          position: absolute;
-          left: 1rem;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 1rem;
-          height: 1rem;
-          border-radius: 50%;
-          background-color: #640AFF; }
+    .home--trips--dropdown--selected {
+      position: relative;
+      padding-left: 3rem; }
+      .home--trips--dropdown--selected::before {
+        content: "";
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: #640AFF; }
     .home--trips--add {
       border-radius: 0;
       height: 4.76rem;

@@ -25,7 +25,10 @@ export const Dropdown = props => {
         }
 
         setIsDropdownOpen(false); 
-        setSelectedOption(selectedOption); 
+
+        if (props.selectedOption === undefined) {
+            setSelectedOption(selectedOption); 
+        }
 
         if (props.onSelect) {
             props.onSelect(selectedOption);
@@ -33,6 +36,11 @@ export const Dropdown = props => {
     };
 
     let options = props.options || [];
+    let sOption = selectedOption;
+    if (props.selectedOption !== undefined) {
+        sOption = props.selectedOption
+    }
+
     if (props.searchEnabled && options.length > 5 && query === "") {
         //options = options;
     }
@@ -41,8 +49,8 @@ export const Dropdown = props => {
     }
 
     let selectedOptionText = props.children;
-    if (!props.staticButton && selectedOption) {
-        let opt = (props.options || []).find(el => (el.key && el.key === selectedOption) || (el.key === undefined && el === selectedOption));
+    if (!props.staticButton && sOption) {
+        let opt = (props.options || []).find(el => (el.key && el.key === sOption) || (el.key === undefined && el === sOption));
         if (opt && opt.key) {
             selectedOptionText = opt.text;
         }
@@ -77,9 +85,9 @@ export const Dropdown = props => {
                                 }
                                 {
                                     options.map(option => 
-                                        (<div onClick={() => onSelect(option.key ? option.key : option)} className={`dropdown--options--item dropdown--options--item-${props.type}`}>
+                                        <div onClick={() => onSelect(option.key ? option.key : option)} className={`dropdown--options--item dropdown--options--item-${props.type} ${props.selectedClassName && (option.key ? option.key : option) === sOption ? props.selectedClassName : ""}`}>
                                             {option.icon && <IonIcon className={`dropdown--options--item--icon`} name={option.icon} />} {option.text ? option.text : option}
-                                        </div>)
+                                        </div>
                                     )
                                 }
                             </React.Fragment>
@@ -115,7 +123,7 @@ export const Dropdown = props => {
                             }
                             {
                                 options.map(option => 
-                                    <div key={option.key ? option.key : option} onClick={() => onSelect(option.key ? option.key : option)} className={`dropdown--options--item dropdown--options--item-${props.type}`}>
+                                    <div key={option.key ? option.key : option} onClick={() => onSelect(option.key ? option.key : option)} className={`dropdown--options--item dropdown--options--item-${props.type} ${props.selectedClassName && (option.key ? option.key : option) === sOption ? props.selectedClassName : ""}`}>
                                         {option.icon && <IonIcon className={`dropdown--options--item--icon`} name={option.icon} />} {option.text ? option.text : option}
                                     </div>
                                 )

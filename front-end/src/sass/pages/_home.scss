@@ -219,23 +219,23 @@
             & + .dropdown--options {
                 border: none;
                 min-width: unset;
+            }
 
-                & .dropdown--options--item {
-                    position: relative;
-                    padding-left: 3rem;
+            &--selected {
+                position: relative;
+                padding-left: 3rem;
 
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        left: 1rem;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        width: 1rem;
-                        height: 1rem;
-                        border-radius: 50%;
-                        background-color: $color-primary;
-                    }
-                } 
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 1rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 1rem;
+                    height: 1rem;
+                    border-radius: 50%;
+                    background-color: $color-primary;
+                }
             }
         }
 
@@ -308,7 +308,7 @@
         }
 
         &--destinations {
-            
+
         }
     }
 }
