@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Auth from './containers/Auth';
-import Home from './containers/Home';
+import Home from './containers/Home/Home';
 import NotificationSystem from './containers/NotificationSystem';
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from './containers/Layout';
