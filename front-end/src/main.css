@@ -1600,7 +1600,7 @@ body {
       flex-direction: column;
       align-items: center; } }
   .auth--animation-enter {
-    animation: enterAnimation 0.3s 1 cubic-bezier(0.61, 1, 0.88, 1) forwards; }
+    animation: enterAnimation 0.6s 1 cubic-bezier(0.61, 1, 0.88, 1) forwards; }
   .auth--animation-exit {
     animation: exitAnimation 0.3s 1 cubic-bezier(0.61, 1, 0.88, 1) forwards; }
   .auth--nav {
@@ -1968,7 +1968,7 @@ body {
 @keyframes enterAnimation {
   0% {
     opacity: 0;
-    transform: translate(-50%, -70%); }
+    transform: translate(-50%, calc(-50% - 4rem)); }
   100% {
     opacity: 1;
     transform: translate(-50%, -50%); } }
@@ -1979,7 +1979,7 @@ body {
     transform: translate(-50%, -50%); }
   100% {
     opacity: 0;
-    transform: translate(-50%, -70%); } }
+    transform: translate(-50%, calc(-50% - 4rem)); } }
 
 @keyframes enterInputAnimation {
   0% {
