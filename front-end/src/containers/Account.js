@@ -184,20 +184,6 @@ export default class Account extends Component {
                 </React.Fragment>
             );
         }
-        else if (this.state.activeTab === "subscription") {
-            content = (
-                <React.Fragment>
-                    <div className="account--content--title">Manage subscriptions</div>
-                </React.Fragment>
-            );
-        }
-        else if (this.state.activeTab === "goal") {
-            content = (
-                <React.Fragment>
-                    <div className="account--content--title">Setup a goal</div>
-                </React.Fragment>
-            );
-        }
 
         return (
             <React.Fragment>
@@ -224,7 +210,7 @@ export default class Account extends Component {
                             </div>
                         </div>
                     </div>
-                    <Switch defaultOption={this.state.activeTab} className="account--nav" type="nav" onSelect={opt => this.setState({...this.state, activeTab: opt})} options={[{key: "account", text: "Account"}, {key: "photo", text: "Photo"}, {key: "subscription", text: "Subscription"}, {key: "goal", text: "Goal"}]} />
+                    <Switch defaultOption={this.state.activeTab} className="account--nav" type="nav" onSelect={opt => this.setState({...this.state, activeTab: opt})} options={[{key: "account", text: "Account"}, {key: "photo", text: "Photo"}]} />
                     {content}
                 </div>
             </React.Fragment>

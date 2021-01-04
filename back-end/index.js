@@ -4,6 +4,7 @@ const   // CORE EXPRESS
         // ROUTES
         userRoutes      = require("./routes/users"),
         uploadRoutes    = require("./routes/uploads"),
+        tripRoutes      = require("./routes/trips"),
         // DATABASE
         db              = require("./models"),
         // CONFIG FILES
@@ -51,6 +52,7 @@ passport.deserializeUser(db.User.deserializeUser());
 
 app.use("/api/user", userRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/trip", tripRoutes);
 
 app.get("api/*", (_, res) => {
     res.status(404).send("Url not found: 404");
