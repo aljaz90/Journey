@@ -4,7 +4,7 @@ export const Button = React.forwardRef((props, ref) => {
     if (props.hintText)
         return (
             <div id={props.id ? props.id : null} onAnimationEnd={props.onAnimationEnd ? props.onAnimationEnd : null} ref={ref} className={`btn--wrapper ${props.wrapperClassName}`}>
-                <div style={{position: props.hintText ? "relative" : null}} onClick={props.disabled ? null : props.onClick} className={`btn ${props.disabled ? "btn-disabled" : ""} ${props.disableDefaultStyle ? "btn-no_style" : `btn-${props.type}`} ${props.className}`}>
+                <div style={{...props.style, position: props.hintText ? "relative" : null}} onClick={props.disabled ? null : props.onClick} className={`btn ${props.disabled ? "btn-disabled" : ""} ${props.disableDefaultStyle ? "btn-no_style" : `btn-${props.type}`} ${props.className}`}>
                     {props.children}
                     {
                         props.hintText && !props.disabled &&
@@ -16,7 +16,7 @@ export const Button = React.forwardRef((props, ref) => {
             </div>
         );
     return (
-        <div id={props.id ? props.id : null} onAnimationEnd={props.onAnimationEnd ? props.onAnimationEnd : null} ref={ref} onClick={props.disabled ? null : props.onClick} className={`btn ${props.disabled ? "btn-disabled" : ""} ${props.disableDefaultStyle ? "btn-no_style" : `btn-${props.type}`} ${props.className}`}>
+        <div style={props.style} id={props.id ? props.id : null} onAnimationEnd={props.onAnimationEnd ? props.onAnimationEnd : null} ref={ref} onClick={props.disabled ? null : props.onClick} className={`btn ${props.disabled ? "btn-disabled" : ""} ${props.disableDefaultStyle ? "btn-no_style" : `btn-${props.type}`} ${props.className}`}>
             {props.children}
         </div>
     );

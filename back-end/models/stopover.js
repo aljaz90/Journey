@@ -16,12 +16,8 @@ const stopoverSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    begin: {
-        type: Date,
-        required: true
-    },
-    end: {
-        type: Date,
+    days: {
+        type: Number,
         required: true
     }
 });

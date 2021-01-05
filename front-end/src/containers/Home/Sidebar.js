@@ -40,37 +40,13 @@ export const Sidebar = props => {
 
     const changeName = async () => {
         setShowEditInput(false);
-
         if (tripName === props.trip.name) {
             return;
         }
 
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-        const body = {
-            name: tripName
-        };
-
-        try {
-            let res = await axios.put(`http://localhost:4000/api/trip/${props.trip._id}`, body, config);
-            props.setTrip(res.data);
-        }
-        catch (err) {
-            props.showNotification({
-                type: "toast",
-                contentType: "error",
-                text: "An error occured while trying to save trip details",
-                time: 2.5
-            });
-            console.error("An error occured while trying to save trip details");
-            console.log(err);
-        }
-
+        props.handleTripChange(tripName);
     };
-
+    
     return (
         <React.Fragment>
             <EzAnime transitionName="animation--sidebar">
@@ -89,13 +65,13 @@ export const Sidebar = props => {
                                 <div className="home--sidebar--destinations--header">
                                     Destinations
                                 </div>
-                                <Button onClick={() => console.log()} hintText="Add destination" hintPosition="right" wrapperClassName="home--sidebar--destinations--add--wrapper" className="home--sidebar--destinations--add">
+                                <Button onClick={() => props.handleAddDestination()} hintText="Add destination" hintPosition="right" wrapperClassName="home--sidebar--destinations--add--wrapper" className="home--sidebar--destinations--add">
                                     <IonIcon icon="add-outline" />
                                 </Button>
                             </div>
                         </div>
                     :
-                        <Button onClick={() => setOpen(true)} id="sidebar-open" hintText="Open sidebar" hintPosition="right" wrapperClassName="home--sidebar--open--wrapper" className="home--sidebar--open">
+                        <Button style={{display: !props.trip ? "none" : null}} onClick={() => setOpen(true)} id="sidebar-open" hintText="Open sidebar" hintPosition="right" wrapperClassName="home--sidebar--open--wrapper" className="home--sidebar--open">
                             <IonIcon icon="chevron-forward-outline" />
                         </Button>
                 }

@@ -13,7 +13,7 @@ Date.prototype.addHours = function(hours) {
 
 router.get("/", middleware.isLoggedIn, async (req, res) => {
     try {
-        let user = await db.User.populate(req.user, [{path: "uploads", model: "Upload"}, {path: "trips", model: "Trip"}]);
+        let user = await db.User.populate(req.user, [{ path: "uploads", model: "Upload" }, { path: "trips", model: "Trip", populate: { path: "stopovers", model: "Stopover" } }]);
         const userData = {user: user._doc};
         res.json(userData);
     }
@@ -105,7 +105,7 @@ router.post("/", passport.authenticate('local', { session: false }), async (req,
         req.session.session = session._id;
         req.session.expiration = session.expire_at;
 
-        let user = await db.User.populate(req.user, [{path: "uploads", model: "Upload"}, {path: "trips", model: "Trip"}]);
+        let user = await db.User.populate(req.user, [{ path: "uploads", model: "Upload" }, { path: "trips", model: "Trip", populate: { path: "stopovers", model: "Stopover" } }]);
         const userData = { user: user._doc };
         res.json(userData);
     }

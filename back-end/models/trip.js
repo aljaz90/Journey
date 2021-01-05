@@ -10,6 +10,12 @@ const tripSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId, ref: 'User',
         required: true
     },
+    from: {
+        type: Date
+    },
+    to: {
+        type: Date
+    },
     stopovers: [{type: mongoose.Schema.ObjectId, ref: 'Stopover'}],
     routes: [{type: mongoose.Schema.ObjectId, ref: 'Route'}]
 });

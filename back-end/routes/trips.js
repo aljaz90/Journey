@@ -38,13 +38,66 @@ router.put("/:id", middleware.isLoggedIn, async (req, res) => {
 
         await trip.save();
 
-        res.json(trip._doc);
+        if (req.body.stopovers && Array.isArray(req.body.stopovers)) {
+            for (let stopoverData of req.body.stopovers) {
+                let stopover = await db.Stopover.findById(stopoverData._id);
+
+                if (!stopover) {
+                    throw `Document not found: Stopover {_id: ${stopoverData._id}}`;
+                }
+                else if (!stopover.author.equals(req.user._id)) {
+                    throw "Forbidden";
+                }
+
+                if (stopoverData.name && typeof stopoverData.name === "string") {
+                    stopover.name = stopoverData.name;
+                }
+                if (stopoverData.lat && typeof stopoverData.lat === "number") {
+                    stopover.lat = stopoverData.lat;
+                }
+                if (stopoverData.long && typeof stopoverData.long === "number") {
+                    stopover.long = stopoverData.long;
+                }
+                
+                await stopover.save();
+            }
+        }
+
+
+        res.send("Success");
     } 
     catch (err) {
-        console.log("[ERROR] An error occured while creating a new trip");
+        console.log("[ERROR] An error occured while updating a trip");
         console.log(err);
 
-        res.status(400).send("An error occured while creating a new trip");
+        res.status(400).send("An error occured while updating a trip");
+    }
+});
+
+router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
+    try {
+        let trip = await db.Trip.findById(req.params.id);
+
+        if (!trip) {
+            throw `Document not found: Trip {_id: ${req.params.id}}`;
+        }
+        else if (!trip.author.equals(req.user._id)) {
+            throw "Forbidden";
+        }
+
+        let stopover = new db.Stopover({ name: "Unknown stop", days: 1, author: req.user._id, lat: 0.0, long: 0.0, days: 1 });
+        await stopover.save();
+
+        trip.stopovers.push(stopover);
+        await trip.save();
+
+        res.json(stopover._doc);
+    } 
+    catch (err) {
+        console.log("[ERROR] An error occured while adding a new stopover");
+        console.log(err);
+
+        res.status(400).send("An error occured while adding a new stopover");
     }
 });
 

@@ -8,7 +8,7 @@ import { Logo } from '../components/Layout/Logo';
 
 const signinForm = {
     "title": "Sign In",
-    "subtitle": "Sign in with your email or phone",
+    "subtitle": "Sign in with your email",
     "submitButton": {submit: "Sign in", continue: "Continue"},
     "inputGroups": [
         {
@@ -22,7 +22,7 @@ const signinForm = {
 
 const signupForm = {
     "title": "Sign Up",
-    "subtitle": "Sign up with your email or phone",
+    "subtitle": "Sign up with your email",
     "submitButton": {submit: "Sign up", continue: "Continue"},
     "inputGroups": [
         {
