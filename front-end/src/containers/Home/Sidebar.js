@@ -86,7 +86,12 @@ export const Sidebar = props => {
                                 </Button>                                
                             </div>
                             <div className="home--sidebar--destinations">
-
+                                <div className="home--sidebar--destinations--header">
+                                    Destinations
+                                </div>
+                                <Button onClick={() => console.log()} hintText="Add destination" hintPosition="right" wrapperClassName="home--sidebar--destinations--add--wrapper" className="home--sidebar--destinations--add">
+                                    <IonIcon icon="add-outline" />
+                                </Button>
                             </div>
                         </div>
                     :
@@ -97,14 +102,14 @@ export const Sidebar = props => {
             </EzAnime>
             {
                 showingEditButton && props.trip &&
-                    <Button onClick={() => showingEditInput ? changeName() : setShowEditInput(true)} hintText="Change trip name" hintPosition="right" className="home--sidebar--header--edit" wrapperClassName="home--sidebar--header--edit--wrapper">
+                    <Button onClick={() => showingEditInput ? changeName() : setShowEditInput(true)} hintText="Change name" hintPosition="right" className="home--sidebar--header--edit" wrapperClassName="home--sidebar--header--edit--wrapper">
                         <IonIcon className="home--sidebar--header--edit--icon" icon="create-outline" />
                     </Button>
             }
             {
                 showingEditInput &&
                     <OutsideClick exceptions={["home--sidebar--header--edit", "home--sidebar--header--edit--icon"]} onOutsideClick={() => changeName()}>
-                        <input autoFocus value={tripName} onChange={e => setTripName(e.target.value)} className="home--sidebar--header--edit_input" />
+                        <input autoFocus placeholder="Trip name" value={tripName} onChange={e => setTripName(e.target.value)} className="home--sidebar--header--edit_input" />
                     </OutsideClick>
             }
         </React.Fragment>

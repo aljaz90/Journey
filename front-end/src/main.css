@@ -2234,8 +2234,8 @@ body {
         .home--sidebar--header--edit--wrapper {
           position: fixed;
           z-index: 8;
-          top: 3.5rem;
-          left: 1rem; }
+          top: 3.2rem;
+          left: 1.5rem; }
         .home--sidebar--header--edit:hover {
           background-color: #fff;
           color: #333; }
@@ -2254,6 +2254,37 @@ body {
         font-family: "Lato", sans-serif;
         padding: 0 1rem;
         color: #777; }
+        .home--sidebar--header--edit_input:focus {
+          outline: none; }
+    .home--sidebar--destinations {
+      position: relative; }
+      .home--sidebar--destinations--header {
+        position: absolute;
+        left: 2rem;
+        top: 1rem;
+        font-size: 2rem;
+        color: #777;
+        font-weight: 600;
+        user-select: none;
+        font-family: "Tajawal", sans-serif; }
+      .home--sidebar--destinations--add {
+        background-color: #fff;
+        color: #777;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        height: 4rem; }
+        .home--sidebar--destinations--add:hover {
+          background-color: #fff;
+          color: #333; }
+        .home--sidebar--destinations--add:active {
+          transform: none; }
+        .home--sidebar--destinations--add--wrapper {
+          position: absolute;
+          right: 2rem;
+          top: 1rem; }
 
 .account {
   grid-column: center-start / center-end;

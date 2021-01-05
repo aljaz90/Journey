@@ -17,6 +17,7 @@ mongoose.set('useCreateIndex', true);
 
 module.exports.Session = require("./session");
 module.exports.User = require("./user");
+module.exports.PasswordResetLink = require("./password_reset_link");
 module.exports.Upload = require("./upload");
 module.exports.Trip = require("./trip");
 module.exports.Destination = require("./destination");
