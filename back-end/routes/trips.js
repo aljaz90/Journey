@@ -85,7 +85,19 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
             throw "Forbidden";
         }
 
-        let stopover = new db.Stopover({ name: "Unknown stop", days: 1, author: req.user._id, lat: 0.0, long: 0.0, days: 1 });
+        let lat = 0;
+        let long = 0;
+
+        if (req.body.lat && typeof req.body.lat === "number") {
+            lat = req.body.lat;
+        }
+        if (req.body.long && typeof req.body.long === "number") {
+            long = req.body.long;
+        }
+
+        
+        let stopover = new db.Stopover({ name: "Unknown stop", days: 1, author: req.user._id, lat: lat, long: long, days: 1 });
+        console.log(req.body)
         await stopover.save();
 
         trip.stopovers.push(stopover);

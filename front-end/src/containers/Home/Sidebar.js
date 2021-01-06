@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import EzAnime from '../../components/Animations/EzAnime';
-import axios from 'axios';
 import OutsideClick from '../../components/Utils/OutsideClick';
 import { Button } from '../../components/Forms/Button';
 import { IonIcon } from '../../components/IonIcons/IonIcon';

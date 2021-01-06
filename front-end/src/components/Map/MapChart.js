@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Leaflet, { LatLngBounds } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import axios from 'axios';
+import { MapEvents } from './MapEvents';
 
 import 'leaflet/dist/leaflet.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -20,7 +20,7 @@ export const MapChart = props => {
 
     return (
         <div className="map">
-            <MapContainer zoomControl={false} worldCopyJump={true} center={center} maxBounds={new LatLngBounds([-85, -99999999999999999], [85, 99999999999999999])} maxBoundsViscosity={0.9} minZoom={2} zoom={3} scrollWheelZoom={true}>
+            <MapContainer eventHandlers={{drag: e => console.log(e)}} zoomControl={false} worldCopyJump={true} center={center} maxBounds={new LatLngBounds([-85, -99999999999999999], [85, 99999999999999999])} maxBoundsViscosity={0.9} minZoom={2} zoom={3} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -34,6 +34,7 @@ export const MapChart = props => {
                         </Marker>
                     )
                 }
+                <MapEvents onDragEnd={(latlang) => props.onCenterChange(latlang)} />
         </MapContainer>
         </div>
     );

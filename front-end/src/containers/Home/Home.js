@@ -18,7 +18,8 @@ export default class Home extends Component {
 
         this.state = {
             selectedTrip: null,
-            autosaveTimeout: null
+            autosaveTimeout: null,
+            center: {lat: 51.505, lng: 0}
         }
 
         this.mapSelectionDropdown = null;
@@ -75,7 +76,7 @@ export default class Home extends Component {
         trip.stopovers[index].lat = latlong.lat;
         trip.stopovers[index].long = latlong.lng;
 
-        this.setState({...this.state, selectedTrip: trip, autosaveTimeout: setTimeout(() => this.saveChanges(), 2000)});
+        this.setState({...this.state, selectedTrip: trip, autosaveTimeout: setTimeout(() => this.saveChanges(), 1000)});
     };
 
     handleTripChange = name => {
@@ -95,10 +96,18 @@ export default class Home extends Component {
                 'Content-Type': 'application/json'
             }
         };
+        const body = {
+            lat: this.state.center.lat,
+            long: this.state.center.lng
+        };
 
         try {
-            let res = await axios.post(`http://localhost:4000/api/trip/${this.state.selectedTrip._id}/stopover/new`, {}, config);
-            this.props.setTrip({...this.state.selectedTrip, stopovers: [...this.state.selectedTrip.stopovers, res.data]});
+            let res = await axios.post(`http://localhost:4000/api/trip/${this.state.selectedTrip._id}/stopover/new`, body, config);
+            let selectedTrip = {...this.state.selectedTrip, stopovers: [...this.state.selectedTrip.stopovers, res.data]};
+            let trip = {...this.props.trips.find(el => el._id === selectedTrip._id), stopovers: [...this.state.selectedTrip.stopovers, res.data]};
+
+            this.setState({...this.state, selectedTrip: selectedTrip});
+            this.props.setTrip(trip);
         }
         catch (err) {
             this.props.showNotification({
@@ -111,6 +120,8 @@ export default class Home extends Component {
             console.log(err);
         }
     };
+
+
 
 
     saveChanges = async () => {
@@ -154,11 +165,11 @@ export default class Home extends Component {
         return (
         <div className="home">
             <AccountDropdown saveUserData={this.props.saveUserData} user={this.props.user} />            
-            <MapChart handleDragMarker={this.handleDragMarker} trip={this.state.selectedTrip} />
+            <MapChart onCenterChange={latlang => this.setState({...this.state, center: latlang})} handleDragMarker={this.handleDragMarker} trip={this.state.selectedTrip} />
             <Logo background="white" className="home--logo" />
 
             <div className="home--trips">
-                <Dropdown selectedOption={this.state.selectedTrip?._id} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id == tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
+                <Dropdown selectedOption={this.state.selectedTrip?._id} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id === tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
                     Select a trip
                 </Dropdown>
                 <Button onClick={() => this.handleAddTrip()} className="home--trips--add" hintText="Add trip">
