@@ -49,12 +49,12 @@ export const Dropdown = props => {
     }
 
     let selectedOptionText = props.children;
-    if (!props.staticButton && sOption) {
+    if (!props.staticButton && sOption !== null) {
         let opt = (props.options || []).find(el => (el.key && el.key === sOption) || (el.key === undefined && el === sOption));
-        if (opt && opt.key) {
+        if (opt !== null && opt.key !== null && opt.key !== undefined) {
             selectedOptionText = opt.text;
         }
-        else if (opt) {
+        else if (opt !== null) {
             selectedOptionText = opt;
         }
     }

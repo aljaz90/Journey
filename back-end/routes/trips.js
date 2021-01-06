@@ -49,14 +49,17 @@ router.put("/:id", middleware.isLoggedIn, async (req, res) => {
                     throw "Forbidden";
                 }
 
-                if (stopoverData.name && typeof stopoverData.name === "string") {
+                if (stopoverData.name !== undefined && typeof stopoverData.name === "string") {
                     stopover.name = stopoverData.name;
                 }
-                if (stopoverData.lat && typeof stopoverData.lat === "number") {
+                if (stopoverData.lat !== undefined && typeof stopoverData.lat === "number") {
                     stopover.lat = stopoverData.lat;
                 }
-                if (stopoverData.long && typeof stopoverData.long === "number") {
+                if (stopoverData.long !== undefined && typeof stopoverData.long === "number") {
                     stopover.long = stopoverData.long;
+                }
+                if (stopoverData.days !== undefined && typeof stopoverData.days === "number") {
+                    stopover.days = stopoverData.days;
                 }
                 
                 await stopover.save();
@@ -88,10 +91,10 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
         let lat = 0;
         let long = 0;
 
-        if (req.body.lat && typeof req.body.lat === "number") {
+        if (req.body.lat !== undefined && typeof req.body.lat === "number") {
             lat = req.body.lat;
         }
-        if (req.body.long && typeof req.body.long === "number") {
+        if (req.body.long !== undefined && typeof req.body.long === "number") {
             long = req.body.long;
         }
 

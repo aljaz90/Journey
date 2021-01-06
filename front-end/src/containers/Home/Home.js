@@ -19,7 +19,8 @@ export default class Home extends Component {
         this.state = {
             selectedTrip: null,
             autosaveTimeout: null,
-            center: {lat: 51.505, lng: 0}
+            center: {lat: 51.505, lng: 0},
+            updatedStopovers: []
         }
 
         this.mapSelectionDropdown = null;
@@ -76,18 +77,38 @@ export default class Home extends Component {
         trip.stopovers[index].lat = latlong.lat;
         trip.stopovers[index].long = latlong.lng;
 
-        this.setState({...this.state, selectedTrip: trip, autosaveTimeout: setTimeout(() => this.saveChanges(), 1000)});
+        this.setState({...this.state, updatedStopovers: this.state.updatedStopovers.includes(stopoverId) ? this.state.updatedStopovers : [...this.state.updatedStopovers, stopoverId], selectedTrip: trip, autosaveTimeout: setTimeout(() => this.saveChanges(), 1000)});
     };
 
-    handleTripChange = name => {
+    handleTripChange = (key, value) => {
         if (this.state.autosaveTimeout) {
             clearTimeout(this.state.autosaveTimeout);
         }
 
         let trip = {...this.state.selectedTrip};
-        trip.name = name;
+        let updatedStopovers = [...this.state.updatedStopovers];
 
-        this.setState({...this.state, selectedTrip: trip, autosaveTimeout: setTimeout(() => this.saveChanges(), 2000)});
+        if (key === "stopover") {
+            let stopoverIndex = trip.stopovers.findIndex(el => el._id === value._id);
+
+            if (["lat", "long"].includes(value.key)) {
+                if (isNaN(value.value)) {
+                    return;
+                }
+
+                value.value = Number.parseFloat(value.value);
+            }
+
+            trip.stopovers[stopoverIndex][value.key] = value.value;
+            if (!updatedStopovers.includes(value._id)) {
+                updatedStopovers.push(value._id);
+            }
+        }
+        else {
+            trip[key] = value;
+        }
+
+        this.setState({...this.state, updatedStopovers: updatedStopovers, selectedTrip: trip, autosaveTimeout: setTimeout(() => this.saveChanges(), 2000)});
     };
 
     handleAddDestination = async () => {
@@ -121,11 +142,20 @@ export default class Home extends Component {
         }
     };
 
+    getUpdatedStopovers = updatedStopovers => {
+        let stopovers = [];
 
+        for (let stopoverId of updatedStopovers) {
+            let stopover = this.state.selectedTrip.stopovers.find(el => el._id === stopoverId);
+            stopovers.push({_id: stopoverId, lat: stopover.lat, long: stopover.long, name: stopover.name, days: stopover.days});
+        }
 
+        return stopovers;
+    }
 
     saveChanges = async () => {
-        this.setState({...this.state, autosaveTimeout: null});
+        let stopoversSaved = [...this.state.updatedStopovers];
+        this.setState({...this.state, updatedStopovers: [], autosaveTimeout: null});
 
         const config = {
             headers: {
@@ -134,14 +164,13 @@ export default class Home extends Component {
         };
         const body = {
             name: this.state.selectedTrip.name,
-            stopovers: this.state.selectedTrip.stopovers.map(el => ({_id: el._id, lat: el.lat, long: el.long}))
+            stopovers: this.getUpdatedStopovers(stopoversSaved) 
         };
     
         try {
             await axios.put(`http://localhost:4000/api/trip/${this.state.selectedTrip._id}`, body, config);
             this.props.setTrip(this.state.selectedTrip);
         }
-
         catch (err) {
             this.props.showNotification({
                 type: "toast",
@@ -151,6 +180,7 @@ export default class Home extends Component {
             });
             console.error("An error occured while trying to save destination data");
             console.log(err);
+            this.setState({...this.state, updatedStopovers: [...new Set([...this.state.updatedStopovers, ...stopoversSaved])]});
         }
     };
 
