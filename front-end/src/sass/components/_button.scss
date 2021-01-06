@@ -27,7 +27,7 @@
     }
     
     &:active {
-        transform: translateY(0.2rem) scale(0.98);
+        //transform: translateY(0.2rem) scale(0.98);
         background-color: darken($color-primary, $amount: 10%);
     }
 

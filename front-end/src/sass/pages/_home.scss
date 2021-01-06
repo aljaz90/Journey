@@ -416,7 +416,25 @@
                 display: flex;
                 border-bottom: 1px solid $color-grey;
                 padding: 2rem 0.25rem 2rem 1rem;
-                max-width: 100%;
+                position: relative;
+
+                &--delete {
+                    background-color: unset;
+                    font-size: 1.3rem;
+                    color: $color-grey-2;
+                    padding: 0;
+
+                    &:hover {
+                        background-color: unset;
+                        color: $color-grey-3;
+                    }
+
+                    &--wrapper {
+                        position: absolute;
+                        right: 0.5rem;
+                        top: 0.5rem;
+                    }
+                }
                 
                 &--details {
                     display: flex;
@@ -468,6 +486,7 @@
                             font-weight: 600;
                             font-family: $font-heading;
                             font-size: 1.3rem;
+                            user-select: none;
                         }
                     }
                 }

@@ -74,6 +74,9 @@ export const Sidebar = props => {
                                     {
                                         props.trip?.stopovers.map(el => 
                                             <div key={el._id} className="home--sidebar--destinations--item">
+                                                <Button hintText="Delete destination" hintPosition="left" className="home--sidebar--destinations--item--delete" wrapperClassName="home--sidebar--destinations--item--delete--wrapper" onClick={() => props.handleDeleteDestination(el._id)}>
+                                                    <IonIcon icon="trash-outline" />
+                                                </Button>
                                                 <div className="home--sidebar--destinations--item--details">
                                                     <input onChange={e => props.handleTripChange("stopover", { _id: el._id, key: "name", value: e.target.value })} value={el.name} placeholder="Destination" className="home--sidebar--destinations--item--details--name" />
                                                     <div className="home--sidebar--destinations--item--coordinates">

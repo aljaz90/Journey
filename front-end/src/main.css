@@ -345,7 +345,6 @@ body {
     letter-spacing: unset;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
   .btn:active {
-    transform: translateY(0.2rem) scale(0.98);
     background-color: #4f00d6; }
   .btn-secondary {
     background-color: #E04B00; }
@@ -2298,7 +2297,19 @@ body {
         display: flex;
         border-bottom: 1px solid #eee;
         padding: 2rem 0.25rem 2rem 1rem;
-        max-width: 100%; }
+        position: relative; }
+        .home--sidebar--destinations--item--delete {
+          background-color: unset;
+          font-size: 1.3rem;
+          color: #777;
+          padding: 0; }
+          .home--sidebar--destinations--item--delete:hover {
+            background-color: unset;
+            color: #333; }
+          .home--sidebar--destinations--item--delete--wrapper {
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem; }
         .home--sidebar--destinations--item--details {
           display: flex;
           flex-direction: column;
@@ -2336,7 +2347,8 @@ body {
               text-transform: uppercase;
               font-weight: 600;
               font-family: "Tajawal", sans-serif;
-              font-size: 1.3rem; }
+              font-size: 1.3rem;
+              user-select: none; }
         .home--sidebar--destinations--item--coordinates {
           display: flex;
           position: relative;

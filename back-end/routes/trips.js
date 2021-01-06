@@ -1,3 +1,5 @@
+const { deleteOne } = require("../models/user");
+
 const express     = require("express"),
       router      = express.Router(),
       db          = require("../models"),
@@ -112,6 +114,36 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
         console.log(err);
 
         res.status(400).send("An error occured while adding a new stopover");
+    }
+});
+
+router.delete("/:tripId/stopover/:id", middleware.isLoggedIn, async (req, res) => {
+    try {
+        let trip = await db.Trip.findById(req.params.tripId);
+
+        if (!trip) {
+            throw `Document not found: Trip {_id: ${req.params.tripId}}`;
+        }
+        else if (!trip.author.equals(req.user._id)) {
+            throw "Forbidden";
+        }
+
+        if (!trip.stopovers.includes(req.params.id)) {
+            throw "Stopover not found"
+        }
+
+        trip.stopovers = trip.stopovers.filter(el => !el.equals(req.params.id));
+        await trip.save();
+
+        await db.Stopover.deleteOne({ _id: req.params.id });
+
+        res.send("Success");
+    } 
+    catch (err) {
+        console.log("[ERROR] An error occured while deleting a stopover");
+        console.log(err);
+
+        res.status(400).send("An error occured while deleting a stopover");
     }
 });
 

@@ -184,6 +184,32 @@ export default class Home extends Component {
         }
     };
 
+    handleDeleteDestination = async destinationId => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+    
+        try {
+            await axios.delete(`http://localhost:4000/api/trip/${this.state.selectedTrip._id}/stopover/${destinationId}`, config);
+
+            let trip = this.props.trips.find(el => el._id === this.state.selectedTrip._id);
+            this.props.setTrip({...trip, stopovers: trip.stopovers.filter(el => el._id !== destinationId)});
+            this.setState({...this.state, selectedTrip: { ...this.state.selectedTrip, stopovers: this.state.selectedTrip.stopovers.filter(el => el._id !== destinationId) }});
+        }
+        catch (err) {
+            this.props.showNotification({
+                type: "toast",
+                contentType: "error",
+                text: "An error occured while trying to delete a destination",
+                time: 2.5
+            });
+            console.error("An error occured while trying to delete a destination");
+            console.log(err);
+        }
+    }
+
     render() {
         if (!this.props.isAuthenticated) {
             return <Redirect to="/signin" />;
@@ -207,7 +233,7 @@ export default class Home extends Component {
                 </Button>
             </div>
 
-            <Sidebar handleAddDestination={this.handleAddDestination} handleTripChange={this.handleTripChange} setTrip={this.props.setTrip} showNotification={this.props.showNotification} trip={this.state.selectedTrip} />
+            <Sidebar handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} setTrip={this.props.setTrip} showNotification={this.props.showNotification} trip={this.state.selectedTrip} />
         </div>
         )
     }
