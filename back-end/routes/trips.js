@@ -97,7 +97,6 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
 
         
         let stopover = new db.Stopover({ name: "Unknown stop", days: 1, author: req.user._id, lat: lat, long: long, days: 1 });
-        console.log(req.body)
         await stopover.save();
 
         trip.stopovers.push(stopover);

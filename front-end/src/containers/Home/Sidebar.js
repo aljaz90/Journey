@@ -3,6 +3,7 @@ import EzAnime from '../../components/Animations/EzAnime';
 import OutsideClick from '../../components/Utils/OutsideClick';
 import { Button } from '../../components/Forms/Button';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
+import { Dropdown } from '../../components/Forms/Dropdown';
 
 export const Sidebar = props => {
     const [open, _setOpen] = useState(false);
@@ -67,6 +68,32 @@ export const Sidebar = props => {
                                 <Button onClick={() => props.handleAddDestination()} hintText="Add destination" hintPosition="right" wrapperClassName="home--sidebar--destinations--add--wrapper" className="home--sidebar--destinations--add">
                                     <IonIcon icon="add-outline" />
                                 </Button>
+                                <div className="home--sidebar--destinations--list">
+                                    {
+                                        props.trip?.stopovers.map(el => 
+                                            <div key={el._id} className="home--sidebar--destinations--item">
+                                                <div className="home--sidebar--destinations--item--details">
+                                                    <input value={el.name} placeholder="Destination" className="home--sidebar--destinations--item--details--name" />
+                                                    <div className="home--sidebar--destinations--item--coordinates">
+                                                        <div className="home--sidebar--destinations--item--coordinates--label home--sidebar--destinations--item--coordinates--label-lat">
+                                                            Lat.
+                                                        </div>
+                                                        <div className="home--sidebar--destinations--item--coordinates--label home--sidebar--destinations--item--coordinates--label-long">
+                                                            Long.
+                                                        </div>
+                                                        <input value={el.lat.toFixed(2)} placeholder="Latitude" className="home--sidebar--destinations--item--coordinates--item" />
+                                                        <input value={el.long.toFixed(2)} placeholder="Longitude" className="home--sidebar--destinations--item--coordinates--item" />
+                                                    </div>
+                                                </div>
+                                                <div className="home--sidebar--destinations--item--details--days">
+                                                    <Dropdown selectedOption={el.days} wrapperClassName="home--sidebar--destinations--item--details--days--dropdown--wrapper" className="home--sidebar--destinations--item--details--days--dropdown" options={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]} />
+                                                    <div className="home--sidebar--destinations--item--details--days--label">Days</div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                    <span style={{minHeight: "5rem"}}></span>
+                                </div>
                             </div>
                         </div>
                     :
