@@ -142,3 +142,29 @@ export const getCategories = async (courses, setCategories) => {
         console.log(err);
     }
 };
+
+export const formatDigits = (number, digits) => {
+    let num = String(number);
+
+    if (num.length > digits) {
+        return num.slice(0, digits);
+    }
+    else if (num.length === digits) {
+        return num;
+    }
+
+    let newDigits = digits - num.length;
+    for (let i = 0; i < newDigits; i++) {
+        num = "0" + num;
+    }
+
+    return num;
+};
+
+export const formatDate = date => {
+    if (!date instanceof Date) {
+        return "Invalid date";
+    }
+
+    return `${formatDigits(date.getDate(), 2)}/${formatDigits(date.getMonth()+1, 2)}/${date.getFullYear()}`;
+};

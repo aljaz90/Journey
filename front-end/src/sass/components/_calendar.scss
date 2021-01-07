@@ -1,0 +1,32 @@
+.calendar {
+
+    &--wrapper {
+        position: relative;
+    }
+
+    &--button {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: $color-grey-2;
+        border: 1px solid $color-grey;
+        border-radius: 4px;
+        padding: 1rem 1rem 1rem 2rem;
+        cursor: pointer;
+        transition: all .3s;
+        user-select: none;
+
+        &:hover {
+            background-color: $color-grey;
+        }
+
+        &--icon {
+            margin-left: 1rem;
+        }
+    }
+
+    &--calendar {
+        width: 10rem;
+        height: 10rem;
+        background-color: red;
+    }
+}
