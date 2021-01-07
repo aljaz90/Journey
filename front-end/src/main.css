@@ -583,7 +583,9 @@ body {
   padding: 1rem 1rem 1rem 2rem;
   cursor: pointer;
   transition: all .3s;
-  user-select: none; }
+  user-select: none;
+  min-width: 15.2rem;
+  text-align: center; }
   .calendar--button:hover {
     background-color: #eee; }
   .calendar--button--icon {

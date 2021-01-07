@@ -102,7 +102,7 @@ export const Calendar = props => {
                                                     <tr key={i}>
                                                         {
                                                             week.map((el, j) => 
-                                                                <td key={j} className="calendar--calendar--dates--item">
+                                                                <td onClick={() => setSelectedDate(el)} key={j} className="calendar--calendar--dates--item">
                                                                     {el.getDate()}
                                                                 </td>
                                                             )
