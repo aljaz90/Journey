@@ -168,3 +168,9 @@ export const formatDate = date => {
 
     return `${formatDigits(date.getDate(), 2)}/${formatDigits(date.getMonth()+1, 2)}/${date.getFullYear()}`;
 };
+
+export const addDays = (date, days) => {
+    let tmpDate = new Date(date.valueOf());
+    tmpDate.setDate(tmpDate.getDate() + days);
+    return tmpDate;
+};

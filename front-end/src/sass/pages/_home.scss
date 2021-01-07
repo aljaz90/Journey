@@ -309,10 +309,11 @@
 
         &--header {
             display: flex;
-            align-items: center;
+            justify-content: flex-end;
+            align-items: flex-end;
             height: 18rem;
             border-bottom: 1px solid $color-grey;
-            padding: 0 1rem;
+            padding: 2rem 7rem;
 
             &--edit {
                 background-color: $color-white;

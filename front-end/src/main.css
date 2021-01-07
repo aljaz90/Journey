@@ -408,29 +408,6 @@ body {
       .btn-no_style .btn-no_style-danger:hover {
         background-color: unset; }
 
-.calendar--wrapper {
-  position: relative; }
-
-.calendar--button {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #777;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  padding: 1rem 1rem 1rem 2rem;
-  cursor: pointer;
-  transition: all .3s;
-  user-select: none; }
-  .calendar--button:hover {
-    background-color: #eee; }
-  .calendar--button--icon {
-    margin-left: 1rem; }
-
-.calendar--calendar {
-  width: 10rem;
-  height: 10rem;
-  background-color: red; }
-
 .dropdown {
   position: relative; }
   .dropdown--button {
@@ -593,6 +570,75 @@ body {
         background-color: #E2CC00; }
       .dropdown--options--item-danger:hover {
         background-color: #E25214; }
+
+.calendar--wrapper {
+  position: relative; }
+
+.calendar--button {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #777;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 1rem 1rem 1rem 2rem;
+  cursor: pointer;
+  transition: all .3s;
+  user-select: none; }
+  .calendar--button:hover {
+    background-color: #eee; }
+  .calendar--button--icon {
+    margin-left: 1rem; }
+
+.calendar--calendar {
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  background-color: #fff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 5;
+  width: 30rem;
+  height: 35rem;
+  border: 1px solid #eee; }
+  .calendar--calendar--header {
+    height: 5rem;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .calendar--calendar--header--previous, .calendar--calendar--header--next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.8rem;
+      color: #843dff;
+      cursor: pointer;
+      transition: all .3s; }
+      .calendar--calendar--header--previous:hover, .calendar--calendar--header--next:hover {
+        color: #640AFF; }
+    .calendar--calendar--header--next {
+      right: 2rem; }
+    .calendar--calendar--header--previous {
+      left: 2rem; }
+    .calendar--calendar--header--dropdown {
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      font-size: 1.4rem;
+      min-width: 15rem; }
+      .calendar--calendar--header--dropdown--wrapper .dropdown--options {
+        min-width: 18rem; }
+  .calendar--calendar--dates {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse; }
+    .calendar--calendar--dates--header {
+      border-bottom: 1px solid #eee;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem; }
+    .calendar--calendar--dates--item {
+      font-size: 1.6rem;
+      text-align: center; }
 
 .alert {
   position: fixed;
@@ -2240,10 +2286,11 @@ body {
       left: 40rem; }
     .home--sidebar--header {
       display: flex;
-      align-items: center;
+      justify-content: flex-end;
+      align-items: flex-end;
       height: 18rem;
       border-bottom: 1px solid #eee;
-      padding: 0 1rem; }
+      padding: 2rem 7rem; }
       .home--sidebar--header--edit {
         background-color: #fff;
         color: #777;
