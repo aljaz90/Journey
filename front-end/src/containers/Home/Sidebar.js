@@ -5,7 +5,7 @@ import { Button } from '../../components/Forms/Button';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Destination } from './Destination';
 import { Calendar } from '../../components/Forms/Calendar';
-import { addYears } from '../../Utils';
+import { addYears, datesEqual } from '../../Utils';
 
 export const Sidebar = props => {
     const [open, _setOpen] = useState(false);
@@ -40,13 +40,21 @@ export const Sidebar = props => {
         }
     };
 
-    const changeName = async () => {
+    const changeName = () => {
         setShowEditInput(false);
         if (tripName === props.trip.name) {
             return;
         }
 
         props.handleTripChange("name", tripName);
+    };
+    
+    const changeDate = newDate => {
+        if (props.trip.from && datesEqual(new Date(props.trip.from), newDate)) {
+            return;
+        }
+
+        props.handleTripChange("from", newDate);
     };
 
 
@@ -64,9 +72,13 @@ export const Sidebar = props => {
                                 <Button onClick={() => setOpen(false)} hintText="Close sidebar" hintPosition="right" wrapperClassName="home--sidebar--close--wrapper" className="home--sidebar--close">
                                     <IonIcon icon="chevron-back-outline" />
                                 </Button>
-                                <Calendar minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
-                                    From
-                                </Calendar>                                
+                                <div>                      
+                                    <div>                      
+                                        <Calendar onSelect={date => changeDate(date)} defaultValue={props.trip?.from ? new Date(props.trip.from) : null} minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
+                                            From
+                                        </Calendar>
+                                    </div>                      
+                                </div>                            
                             </div>
                             <div className="home--sidebar--destinations">
                                 <div className="home--sidebar--destinations--header">

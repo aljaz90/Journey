@@ -186,3 +186,9 @@ export const addYears = (date, years) => {
     tmpDate.setFullYear(tmpDate.getFullYear() + years);
     return tmpDate;
 };
+
+export const datesEqual = (date, date2) => {
+    return  date.getFullYear() === date2.getFullYear()
+            && date.getMonth() === date2.getMonth()
+            && date.getDate() === date2.getDate();
+};

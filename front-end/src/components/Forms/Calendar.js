@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import EzAnimate from '../Animations/EzAnimate';
 import OutsideClick from '../Utils/OutsideClick';
 import { IonIcon } from '../IonIcons/IonIcon';
-import { formatDate, addDays, addMonths } from '../../Utils';
+import { formatDate, addDays, addMonths, datesEqual } from '../../Utils';
 import { Dropdown } from './Dropdown';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -64,7 +64,7 @@ export const Calendar = props => {
     const [showing, setShowing] = useState(false);
     const [selectedMonth, setSelectedMonth] = useState(new Date());
     const [weeks, setWeeks] = useState(getDatesForTheMonth(new Date()));
-    const [selectedDate, _setSelectedDate] = useState(null);
+    const [selectedDate, _setSelectedDate] = useState(props.defaultValue ? props.defaultValue : null);
 
     const nextMonth = () => {
         let nextMonth = addMonths(selectedMonth, 1);
@@ -88,6 +88,8 @@ export const Calendar = props => {
         if (props.onSelect) {
             props.onSelect(date);
         }
+
+        setTimeout(() => setShowing(false), 700);
     };
 
     const selectMonth = opt => {
@@ -154,7 +156,7 @@ export const Calendar = props => {
                                                     <tr key={i}>
                                                         {
                                                             week.map((el, j) => 
-                                                                <td onClick={() => setSelectedDate(el)} key={j} className={`calendar--calendar--dates--item ${el.getMonth() !== selectedMonth.getMonth() ? "calendar--calendar--dates--item-not_important" : ""} ${selectedDate && el.getTime() === selectedDate.getTime() ? "calendar--calendar--dates--item-selected" : ""} ${(props.maxDate && el > props.maxDate) || (props.minDate && el < props.minDate) ? "calendar--calendar--dates--item-disabled" : ""}`}>
+                                                                <td onClick={() => setSelectedDate(el)} key={j} className={`calendar--calendar--dates--item ${el.getMonth() !== selectedMonth.getMonth() ? "calendar--calendar--dates--item-not_important" : ""} ${selectedDate && datesEqual(selectedDate, el) ? "calendar--calendar--dates--item-selected" : ""} ${(props.maxDate && el > props.maxDate) || (props.minDate && el < props.minDate) ? "calendar--calendar--dates--item-disabled" : ""}`}>
                                                                     <span className="calendar--calendar--dates--item--text">{el.getDate()}</span>
                                                                 </td>
                                                             )

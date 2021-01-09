@@ -164,6 +164,7 @@ export default class Home extends Component {
         };
         const body = {
             name: this.state.selectedTrip.name,
+            from: this.state.selectedTrip.from,
             stopovers: this.getUpdatedStopovers(stopoversSaved) 
         };
     
