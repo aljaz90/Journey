@@ -174,3 +174,15 @@ export const addDays = (date, days) => {
     tmpDate.setDate(tmpDate.getDate() + days);
     return tmpDate;
 };
+
+export const addMonths = (date, months) => {
+    let tmpDate = new Date(date.valueOf());
+    tmpDate.setMonth(tmpDate.getMonth() + months);
+    return tmpDate;
+};
+
+export const addYears = (date, years) => {
+    let tmpDate = new Date(date.valueOf());
+    tmpDate.setFullYear(tmpDate.getFullYear() + years);
+    return tmpDate;
+};

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import EzAnimate from '../Animations/EzAnimate';
 import OutsideClick from '../Utils/OutsideClick';
 import { IonIcon } from '../IonIcons/IonIcon';
-import { formatDate, addDays } from '../../Utils';
+import { formatDate, addDays, addMonths } from '../../Utils';
 import { Dropdown } from './Dropdown';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -11,7 +11,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 export const Calendar = props => {
 
-    const getDatesForTheMonth = () => {
+    const getDatesForTheMonth = selectedMonth => {
         let dates = [];
 
         let firstDayOfTheMonth = new Date(selectedMonth.valueOf());
@@ -49,10 +49,56 @@ export const Calendar = props => {
         return weeks;
     };
 
+    const getDropdownOptions = () => {
+        let options = [];
+
+        let month = new Date();
+        for (let i = 0; i < 13; i++) {
+            options.push(`${monthNames[month.getMonth()]} ${month.getFullYear()}`);
+            month = addMonths(month, 1);
+        }
+
+        return options;
+    };
+
     const [showing, setShowing] = useState(false);
     const [selectedMonth, setSelectedMonth] = useState(new Date());
-    const [weeks, setWeeks] = useState(getDatesForTheMonth());
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [weeks, setWeeks] = useState(getDatesForTheMonth(new Date()));
+    const [selectedDate, _setSelectedDate] = useState(null);
+
+    const nextMonth = () => {
+        let nextMonth = addMonths(selectedMonth, 1);
+        setSelectedMonth(nextMonth);
+        setWeeks(getDatesForTheMonth(nextMonth));
+    };
+    
+    const previousMonth = () => {
+        let previousMonth = addMonths(selectedMonth, -1);
+        setSelectedMonth(previousMonth);
+        setWeeks(getDatesForTheMonth(previousMonth));
+    };
+
+    const setSelectedDate = date => {
+        if ((props.maxDate && date > props.maxDate) || (props.minDate && date < props.minDate)) {
+            return;
+        }
+
+        _setSelectedDate(date);
+        
+        if (props.onSelect) {
+            props.onSelect(date);
+        }
+    };
+
+    const selectMonth = opt => {
+        let [month, year] = opt.split(" ");
+        month = monthNames.indexOf(month);
+
+        let newSelectedMonth = new Date(year, month);
+        setSelectedMonth(newSelectedMonth);
+        setWeeks(getDatesForTheMonth(newSelectedMonth));
+
+    };
 
     return (
         <OutsideClick onOutsideClick={() => setShowing(false)}>
@@ -66,9 +112,15 @@ export const Calendar = props => {
                             showing &&
                                 <div className="calendar--calendar">
                                     <div className="calendar--calendar--header">
-                                        <IonIcon className="calendar--calendar--header--previous" icon="caret-back-outline" />
-                                        <Dropdown wrapperClassName="calendar--calendar--header--dropdown--wrapper" className="calendar--calendar--header--dropdown" selectedOption={`${monthNames[selectedMonth.getMonth()]} ${selectedMonth.getFullYear()}`} options={[`${monthNames[selectedMonth.getMonth()]} ${selectedMonth.getFullYear()}`]} />
-                                        <IonIcon className="calendar--calendar--header--next" icon="caret-forward-outline" />
+                                        <IonIcon onClick={() => previousMonth()} className="calendar--calendar--header--previous" icon="caret-back-outline" />
+                                        <Dropdown 
+                                            wrapperClassName="calendar--calendar--header--dropdown--wrapper" 
+                                            className="calendar--calendar--header--dropdown" 
+                                            selectedOption={`${monthNames[selectedMonth.getMonth()]} ${selectedMonth.getFullYear()}`} 
+                                            options={getDropdownOptions()}
+                                            onSelect={opt => selectMonth(opt)}
+                                        />
+                                        <IonIcon onClick={() => nextMonth()} className="calendar--calendar--header--next" icon="caret-forward-outline" />
                                     </div>
                                     <table className="calendar--calendar--dates">
                                         <thead>
@@ -102,8 +154,8 @@ export const Calendar = props => {
                                                     <tr key={i}>
                                                         {
                                                             week.map((el, j) => 
-                                                                <td onClick={() => setSelectedDate(el)} key={j} className="calendar--calendar--dates--item">
-                                                                    {el.getDate()}
+                                                                <td onClick={() => setSelectedDate(el)} key={j} className={`calendar--calendar--dates--item ${el.getMonth() !== selectedMonth.getMonth() ? "calendar--calendar--dates--item-not_important" : ""} ${selectedDate && el.getTime() === selectedDate.getTime() ? "calendar--calendar--dates--item-selected" : ""} ${(props.maxDate && el > props.maxDate) || (props.minDate && el < props.minDate) ? "calendar--calendar--dates--item-disabled" : ""}`}>
+                                                                    <span className="calendar--calendar--dates--item--text">{el.getDate()}</span>
                                                                 </td>
                                                             )
                                                         }

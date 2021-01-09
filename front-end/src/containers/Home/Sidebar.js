@@ -5,6 +5,7 @@ import { Button } from '../../components/Forms/Button';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Destination } from './Destination';
 import { Calendar } from '../../components/Forms/Calendar';
+import { addYears } from '../../Utils';
 
 export const Sidebar = props => {
     const [open, _setOpen] = useState(false);
@@ -63,7 +64,7 @@ export const Sidebar = props => {
                                 <Button onClick={() => setOpen(false)} hintText="Close sidebar" hintPosition="right" wrapperClassName="home--sidebar--close--wrapper" className="home--sidebar--close">
                                     <IonIcon icon="chevron-back-outline" />
                                 </Button>
-                                <Calendar className="home--sidebar--header--from">
+                                <Calendar minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
                                     From
                                 </Calendar>                                
                             </div>

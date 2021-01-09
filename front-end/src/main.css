@@ -599,11 +599,11 @@ body {
   background-color: #fff;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   z-index: 5;
-  width: 30rem;
-  height: 35rem;
-  border: 1px solid #eee; }
+  width: 35rem;
+  border: 1px solid #eee;
+  padding: 0 2rem; }
   .calendar--calendar--header {
-    height: 5rem;
+    height: 6rem;
     border-bottom: 1px solid #eee;
     position: relative;
     display: flex;
@@ -632,15 +632,55 @@ body {
   .calendar--calendar--dates {
     width: 100%;
     table-layout: fixed;
-    border-collapse: collapse; }
+    border-collapse: collapse;
+    margin: 0 0 3rem 0; }
     .calendar--calendar--dates--header {
       border-bottom: 1px solid #eee;
       font-size: 1.2rem;
       font-weight: 600;
-      padding: 0.25rem 0.5rem; }
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+      user-select: none; }
     .calendar--calendar--dates--item {
       font-size: 1.6rem;
-      text-align: center; }
+      text-align: center;
+      padding: 1rem;
+      padding-top: 2rem;
+      position: relative;
+      user-select: none;
+      cursor: pointer;
+      color: #3c00a3;
+      font-weight: 600; }
+      .calendar--calendar--dates--item--text {
+        position: relative;
+        z-index: 5;
+        transition: all .3s; }
+      .calendar--calendar--dates--item::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, calc(-50% + 0.5rem));
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        transition: all .3s;
+        z-index: 4; }
+      .calendar--calendar--dates--item:hover::after {
+        border: 1px solid #eee; }
+      .calendar--calendar--dates--item-not_important {
+        color: #777; }
+      .calendar--calendar--dates--item-selected {
+        color: #fff; }
+      .calendar--calendar--dates--item-selected::after {
+        background-color: #640AFF;
+        border: 1px solid #640AFF !important; }
+      .calendar--calendar--dates--item-disabled {
+        opacity: 0.7;
+        cursor: not-allowed; }
+      .calendar--calendar--dates--item-disabled:hover::after {
+        border: 1px solid transparent; }
 
 .alert {
   position: fixed;

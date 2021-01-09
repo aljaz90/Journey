@@ -34,17 +34,19 @@
         background-color: $color-white;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         z-index: 5;
-        width: 30rem;
-        height: 35rem;
+        width: 35rem;
+        //height: 35rem;
         border: 1px solid $color-grey;
+        padding: 0 2rem;
 
         &--header {
-            height: 5rem;
+            height: 6rem;
             border-bottom: 1px solid $color-grey;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            //margin-bottom: 2rem;
 
             &--previous, &--next {
                 position: absolute;
@@ -85,18 +87,73 @@
             width: 100%;
             table-layout: fixed;
             border-collapse: collapse;
+            margin: 0 0 3rem 0;
 
             &--header {
                 border-bottom: 1px solid $color-grey;
                 font-size: 1.2rem;
                 font-weight: 600;
                 padding: 0.25rem 0.5rem;
+                text-align: center;
+                user-select: none;
             }
 
             &--item {
                 font-size: 1.6rem;
                 text-align: center;
-                //border: 1px solid $color-grey;
+                padding: 1rem;
+                padding-top: 2rem;
+                position: relative;
+                user-select: none;
+                cursor: pointer;
+                color: $color-primary-dark-2;
+                font-weight: 600;
+
+                &--text {
+                    position: relative;
+                    z-index: 5;
+                    transition: all .3s;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, calc(-50% + 0.5rem));
+                    width: 4rem;
+                    height: 4rem;
+                    border-radius: 50%;
+                    border: 1px solid transparent;
+                    transition: all .3s;
+                    z-index: 4;
+                }
+
+                &:hover::after {
+                    border: 1px solid $color-grey;
+                }
+
+                &-not_important {
+                    color: $color-grey-2;
+                }
+                
+                &-selected {
+                    color: $color-white;
+                }
+
+                &-selected::after {
+                    background-color: $color-primary;
+                    border: 1px solid $color-primary !important;
+                }
+
+                &-disabled {
+                    opacity: 0.7;
+                    cursor: not-allowed;
+                }
+                
+                &-disabled:hover::after {
+                    border: 1px solid transparent;
+                }
             }
         }
     }
