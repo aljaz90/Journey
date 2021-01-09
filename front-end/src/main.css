@@ -593,15 +593,36 @@ body {
 
 .calendar--calendar {
   position: absolute;
-  bottom: -1rem;
-  left: 50%;
-  transform: translate(-50%, 100%);
   background-color: #fff;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   z-index: 5;
   width: 35rem;
   border: 1px solid #eee;
   padding: 0 2rem; }
+  .calendar--calendar-bottom {
+    bottom: -1rem;
+    left: 50%;
+    transform: translate(-50%, 100%); }
+  .calendar--calendar-bottom_right {
+    bottom: -1rem;
+    left: 0;
+    transform: translate(0, 100%); }
+  .calendar--calendar-bottom_left {
+    bottom: -1rem;
+    right: 0;
+    transform: translate(0, 100%); }
+  .calendar--calendar-top {
+    top: -1rem;
+    left: 50%;
+    transform: translate(-50%, -100%); }
+  .calendar--calendar-top_right {
+    top: -1rem;
+    left: 0;
+    transform: translate(0, -100%); }
+  .calendar--calendar-top_left {
+    top: -1rem;
+    right: 0;
+    transform: translate(0, -100%); }
   .calendar--calendar--header {
     height: 6rem;
     border-bottom: 1px solid #eee;
@@ -2328,11 +2349,12 @@ body {
       left: 40rem; }
     .home--sidebar--header {
       display: flex;
+      flex-direction: column;
       justify-content: flex-end;
-      align-items: flex-end;
+      align-items: center;
       height: 18rem;
       border-bottom: 1px solid #eee;
-      padding: 2rem 7rem; }
+      padding: 2rem 0; }
       .home--sidebar--header--edit {
         background-color: #fff;
         color: #777;
@@ -2367,6 +2389,29 @@ body {
         color: #777; }
         .home--sidebar--header--edit_input:focus {
           outline: none; }
+      .home--sidebar--header--date {
+        display: flex; }
+        .home--sidebar--header--date--from, .home--sidebar--header--date--to {
+          position: relative; }
+          .home--sidebar--header--date--from--label, .home--sidebar--header--date--to--label {
+            font-weight: 600;
+            color: #777;
+            font-size: 1.3rem;
+            position: absolute;
+            left: 0;
+            top: -2.5rem; }
+        .home--sidebar--header--date--to {
+          margin-left: 2rem;
+          font-size: 1.6rem;
+          font-weight: 600;
+          color: #777;
+          border: 1px solid #eee;
+          border-radius: 4px;
+          min-width: 15.2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          user-select: none; }
     .home--sidebar--destinations {
       position: relative;
       display: flex;

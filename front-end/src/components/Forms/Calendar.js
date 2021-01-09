@@ -9,6 +9,15 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+export const ECalendarPostition = {
+    BOTTOM: "bottom",
+    BOTTOM_RIGHT: "bottom_right",
+    BOTTOM_LEFT: "bottom_left",
+    TOP: "top",
+    TOP_RIGHT: "top_right",
+    TOP_LEFT: "top_left",
+};
+
 export const Calendar = props => {
 
     const getDatesForTheMonth = selectedMonth => {
@@ -64,7 +73,7 @@ export const Calendar = props => {
     const [showing, setShowing] = useState(false);
     const [selectedMonth, setSelectedMonth] = useState(new Date());
     const [weeks, setWeeks] = useState(getDatesForTheMonth(new Date()));
-    const [selectedDate, _setSelectedDate] = useState(props.defaultValue ? props.defaultValue : null);
+    const [_selectedDate, _setSelectedDate] = useState(props.defaultDate ? props.defaultDate : null);
 
     const nextMonth = () => {
         let nextMonth = addMonths(selectedMonth, 1);
@@ -102,6 +111,9 @@ export const Calendar = props => {
 
     };
 
+    let postition = (props.calendarPosition && Object.values(ECalendarPostition).includes(props.calendarPosition) && props.calendarPosition) || ECalendarPostition.BOTTOM;
+    const selectedDate = props.selectedDate !== undefined ? props.selectedDate : _selectedDate;
+
     return (
         <OutsideClick onOutsideClick={() => setShowing(false)}>
             <div className="calendar">
@@ -112,7 +124,7 @@ export const Calendar = props => {
                     <EzAnimate transitionName="animation--fadeInOut">
                         { 
                             showing &&
-                                <div className="calendar--calendar">
+                                <div className={`calendar--calendar calendar--calendar-${postition}`}>
                                     <div className="calendar--calendar--header">
                                         <IonIcon onClick={() => previousMonth()} className="calendar--calendar--header--previous" icon="caret-back-outline" />
                                         <Dropdown 

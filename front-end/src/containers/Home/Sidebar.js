@@ -4,8 +4,8 @@ import OutsideClick from '../../components/Utils/OutsideClick';
 import { Button } from '../../components/Forms/Button';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Destination } from './Destination';
-import { Calendar } from '../../components/Forms/Calendar';
-import { addYears, datesEqual } from '../../Utils';
+import { Calendar, ECalendarPostition } from '../../components/Forms/Calendar';
+import { addDays, addYears, datesEqual, formatDate } from '../../Utils';
 
 export const Sidebar = props => {
     const [open, _setOpen] = useState(false);
@@ -58,6 +58,8 @@ export const Sidebar = props => {
     };
 
 
+    let daysOfTrip = 10;
+    let dateTo = (props.trip && props.trip.from && formatDate(addDays(new Date(props.trip.from), daysOfTrip))) || "Unknown";
     
     return (
         <React.Fragment>
@@ -72,11 +74,20 @@ export const Sidebar = props => {
                                 <Button onClick={() => setOpen(false)} hintText="Close sidebar" hintPosition="right" wrapperClassName="home--sidebar--close--wrapper" className="home--sidebar--close">
                                     <IonIcon icon="chevron-back-outline" />
                                 </Button>
-                                <div>                      
-                                    <div>                      
-                                        <Calendar onSelect={date => changeDate(date)} defaultValue={props.trip?.from ? new Date(props.trip.from) : null} minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
+                                <div className="home--sidebar--header--date">                      
+                                    <div className="home--sidebar--header--date--from">                     
+                                        <div className="home--sidebar--header--date--from--label">
+                                            From
+                                        </div>                   
+                                        <Calendar calendarPosition={ECalendarPostition.BOTTOM_RIGHT} onSelect={date => changeDate(date)} selectedDate={props.trip?.from ? new Date(props.trip.from) : null} minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
                                             From
                                         </Calendar>
+                                    </div>                      
+                                    <div className="home--sidebar--header--date--to">                     
+                                        <div className="home--sidebar--header--date--to--label">
+                                            To
+                                        </div>    
+                                        {dateTo}               
                                     </div>                      
                                 </div>                            
                             </div>

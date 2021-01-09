@@ -309,11 +309,12 @@
 
         &--header {
             display: flex;
+            flex-direction: column;
             justify-content: flex-end;
-            align-items: flex-end;
+            align-items: center;
             height: 18rem;
             border-bottom: 1px solid $color-grey;
-            padding: 2rem 7rem;
+            padding: 2rem 0;
 
             &--edit {
                 background-color: $color-white;
@@ -358,6 +359,41 @@
 
                 &:focus {
                     outline: none;
+                }
+            }
+
+            &--date {
+                display: flex;
+
+                &--from, &--to {
+                    position: relative;
+
+                    &--label {
+                        font-weight: 600;
+                        color: $color-grey-2;
+                        font-size: 1.3rem;
+                        position: absolute;
+                        left: 0;
+                        top: -2.5rem;
+                    }
+                }
+
+                &--from {
+
+                }
+
+                &--to {
+                    margin-left: 2rem;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    color: $color-grey-2;
+                    border: 1px solid $color-grey;
+                    border-radius: 4px;
+                    min-width: 15.2rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    user-select: none;
                 }
             }
         }
