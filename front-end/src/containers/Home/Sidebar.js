@@ -57,8 +57,24 @@ export const Sidebar = props => {
         props.handleTripChange("from", newDate);
     };
 
+    const getDaysInATrip = () => {
+        let days = 0;
 
-    let daysOfTrip = 10;
+        if (!props.trip || !props.trip.from) {
+            return;
+        }
+
+        for (let stopover of props.trip.stopovers) {
+            if (stopover.days) {
+                days += stopover.days;
+            }
+        }
+
+        return days;
+    }
+
+
+    let daysOfTrip = getDaysInATrip();
     let dateTo = (props.trip && props.trip.from && formatDate(addDays(new Date(props.trip.from), daysOfTrip))) || "Unknown";
     
     return (

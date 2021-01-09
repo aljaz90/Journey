@@ -41,7 +41,6 @@ router.put("/:id", middleware.isLoggedIn, async (req, res) => {
         if (req.body.from && typeof req.body.from === "string") {
             trip.from = req.body.from;
         }
-        console.log(req.body)
 
         await trip.save();
 
