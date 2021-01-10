@@ -23,3 +23,4 @@ module.exports.Trip = require("./trip");
 module.exports.Destination = require("./destination");
 module.exports.Stopover = require("./stopover");
 module.exports.Route = require("./route");
+module.exports.Segment = require("./segment");

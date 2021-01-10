@@ -2416,7 +2416,7 @@ body {
       position: relative;
       display: flex;
       flex-direction: column;
-      padding-top: 7rem; }
+      padding-top: 8rem; }
       .home--sidebar--destinations--header {
         position: absolute;
         left: 2rem;
@@ -2450,12 +2450,21 @@ body {
         height: calc(100vh - 25rem);
         max-height: calc(100vh - 25rem);
         overflow-y: auto;
-        border-top: 2px solid #640AFF; }
+        border-top: 2px solid #eee; }
       .home--sidebar--destinations--item {
         display: flex;
         border-bottom: 1px solid #eee;
-        padding: 2rem 0.25rem 2rem 1rem;
         position: relative; }
+        .home--sidebar--destinations--item::before {
+          content: "";
+          position: absolute;
+          left: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 7px;
+          height: 80%;
+          background-color: #640AFF;
+          border-radius: 4px; }
         .home--sidebar--destinations--item--delete {
           background-color: unset;
           font-size: 1.3rem;
@@ -2468,72 +2477,69 @@ body {
             position: absolute;
             right: 0.5rem;
             top: 0.5rem; }
+        .home--sidebar--destinations--item--days {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin-right: 2rem;
+          padding-top: 2rem; }
+          .home--sidebar--destinations--item--days--dropdown {
+            min-width: unset;
+            width: 9rem;
+            height: 100%;
+            font-size: 1.4rem;
+            padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+            color: #333; }
+            .home--sidebar--destinations--item--days--dropdown:hover {
+              background-color: unset; }
+            .home--sidebar--destinations--item--days--dropdown--wrapper .dropdown--options {
+              min-width: 8rem; }
+          .home--sidebar--destinations--item--days--label {
+            color: #777;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-family: "Tajawal", sans-serif;
+            font-size: 1.3rem;
+            user-select: none; }
         .home--sidebar--destinations--item--details {
           display: flex;
           flex-direction: column;
-          padding-right: 2rem;
-          width: calc(100% - 9rem); }
+          padding: 1rem 3rem; }
           .home--sidebar--destinations--item--details--name {
             border: 1px solid #eee;
             font-family: "Lato", sans-serif;
             color: #333;
             font-size: 1.6rem;
             padding: 0.75rem 1rem; }
-          .home--sidebar--destinations--item--details--days {
-            position: relative;
+          .home--sidebar--destinations--item--details--coordinates {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-width: 8rem;
-            height: 8rem;
-            border-radius: 50%;
-            background-color: #E04B00; }
-            .home--sidebar--destinations--item--details--days--dropdown {
-              min-width: unset;
-              width: 5rem;
-              font-size: 1.4rem;
-              padding: 0.5rem 0.5rem 0.5rem 1.25rem;
-              color: #fff;
-              border: 0; }
-              .home--sidebar--destinations--item--details--days--dropdown:hover {
-                background-color: unset; }
-              .home--sidebar--destinations--item--details--days--dropdown--wrapper .dropdown--options {
-                min-width: 8rem; }
-            .home--sidebar--destinations--item--details--days--label {
-              color: #fff;
+            position: relative;
+            margin-top: 2rem; }
+            .home--sidebar--destinations--item--details--coordinates--label {
+              position: absolute;
+              top: -1.5rem;
               text-transform: uppercase;
-              font-weight: 600;
-              font-family: "Tajawal", sans-serif;
               font-size: 1.3rem;
-              user-select: none; }
-        .home--sidebar--destinations--item--coordinates {
-          display: flex;
-          position: relative;
-          margin-top: 2rem; }
-          .home--sidebar--destinations--item--coordinates--label {
-            position: absolute;
-            top: -1.5rem;
-            text-transform: uppercase;
-            font-size: 1.3rem;
-            font-family: "Tajawal", sans-serif;
-            font-weight: 600;
-            transform: translateX(-50%); }
-            .home--sidebar--destinations--item--coordinates--label-lat {
-              left: 25%; }
-            .home--sidebar--destinations--item--coordinates--label-long {
-              left: 75%; }
-          .home--sidebar--destinations--item--coordinates--item {
-            border: 0;
-            font-family: "Lato", sans-serif;
-            color: #777;
-            font-size: 1.3rem;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            width: 50%;
-            text-align: center; }
-            .home--sidebar--destinations--item--coordinates--item:not(:last-child) {
-              border-right: 1px solid #eee; }
+              font-family: "Tajawal", sans-serif;
+              font-weight: 600;
+              transform: translateX(-50%); }
+              .home--sidebar--destinations--item--details--coordinates--label-lat {
+                left: 25%; }
+              .home--sidebar--destinations--item--details--coordinates--label-long {
+                left: 75%; }
+            .home--sidebar--destinations--item--details--coordinates--item {
+              border: 0;
+              font-family: "Lato", sans-serif;
+              color: #777;
+              font-size: 1.3rem;
+              font-weight: 600;
+              padding: 0.5rem 1rem;
+              width: 50%;
+              text-align: center; }
+              .home--sidebar--destinations--item--details--coordinates--item:not(:last-child) {
+                border-right: 1px solid #eee; }
 
 .account {
   grid-column: center-start / center-end;

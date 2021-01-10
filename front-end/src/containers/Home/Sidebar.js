@@ -117,7 +117,7 @@ export const Sidebar = props => {
                                 <div className="home--sidebar--destinations--list">
                                     {
                                         props.trip?.stopovers.map(el => 
-                                            <Destination key={el._id} destination={el} handleTripChange={props.handleTripChange} />
+                                            <Destination key={el._id} destination={el} handleTripChange={props.handleTripChange} handleDeleteDestination={props.handleDeleteDestination} />
                                         )
                                     }
                                     <span style={{minHeight: "5rem"}}></span>

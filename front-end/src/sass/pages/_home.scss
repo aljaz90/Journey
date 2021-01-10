@@ -402,7 +402,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            padding-top: 7rem;
+            padding-top: 8rem;
 
             &--header {
                 position: absolute;
@@ -447,14 +447,26 @@
                 height: calc(100vh - 25rem);
                 max-height: calc(100vh - 25rem);
                 overflow-y: auto;
-                border-top: 2px solid $color-primary;
+                border-top: 2px solid $color-grey;
             }
 
             &--item {
                 display: flex;
                 border-bottom: 1px solid $color-grey;
-                padding: 2rem 0.25rem 2rem 1rem;
+                //padding: 2rem 0.25rem 2rem 1rem;
                 position: relative;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 1rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 7px;
+                    height: 80%;
+                    background-color: $color-primary;
+                    border-radius: 4px;
+                }
 
                 &--delete {
                     background-color: unset;
@@ -473,12 +485,49 @@
                         top: 0.5rem;
                     }
                 }
+
+                &--days {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 2rem;
+                    padding-top: 2rem;
+
+                    &--dropdown {
+                        min-width: unset;
+                        width: 9rem;
+                        height: 100%;
+                        font-size: 1.4rem;
+                        padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+                        color: $color-grey-3;
+
+                        &:hover {
+                            background-color: unset;
+                        }
+
+                        &--wrapper {
+                            .dropdown--options {
+                                min-width: 8rem;
+                            }
+                        }
+                    }
+
+                    &--label {
+                        color: $color-grey-2;
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        font-family: $font-heading;
+                        font-size: 1.3rem;
+                        user-select: none;
+                    }
+                }
                 
                 &--details {
                     display: flex;
                     flex-direction: column;
-                    padding-right: 2rem;
-                    width: calc(100% - 9rem);
+                    padding: 1rem 3rem;
 
                     &--name {
                         border: 1px solid $color-grey;
@@ -488,82 +537,42 @@
                         padding: 0.75rem 1rem;
                     }
 
-                    &--days {
-                        position: relative;
+                    &--coordinates {
                         display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        min-width: 8rem;
-                        height: 8rem;
-                        border-radius: 50%;
-                        background-color: $color-secondary;
-
-                        &--dropdown {
-                            min-width: unset;
-                            width: 5rem;
-                            font-size: 1.4rem;
-                            padding: 0.5rem 0.5rem 0.5rem 1.25rem;
-                            color: $color-white;
-                            border: 0;
-
-                            &:hover {
-                                background-color: unset;
+                        position: relative;
+                        margin-top: 2rem;
+    
+                        &--label {
+                            position: absolute;
+                            top: -1.5rem;
+                            text-transform: uppercase;
+                            font-size: 1.3rem;
+                            font-family: $font-heading;
+                            font-weight: 600;
+                            transform: translateX(-50%);
+    
+                            &-lat {
+                                left: 25%;
                             }
     
-                            &--wrapper {
-                                .dropdown--options {
-                                    min-width: 8rem;
-                                }
+                            &-long {
+                                left: 75%;
                             }
                         }
-
-                        &--label {
-                            color: $color-white;
-                            text-transform: uppercase;
-                            font-weight: 600;
-                            font-family: $font-heading;
+    
+                        &--item {
+                            border: 0;
+                            font-family: $font-primary;
+                            color: $color-grey-2;
                             font-size: 1.3rem;
-                            user-select: none;
-                        }
-                    }
-                }
-
-                &--coordinates {
-                    display: flex;
-                    position: relative;
-                    margin-top: 2rem;
-
-                    &--label {
-                        position: absolute;
-                        top: -1.5rem;
-                        text-transform: uppercase;
-                        font-size: 1.3rem;
-                        font-family: $font-heading;
-                        font-weight: 600;
-                        transform: translateX(-50%);
-
-                        &-lat {
-                            left: 25%;
-                        }
-
-                        &-long {
-                            left: 75%;
-                        }
-                    }
-
-                    &--item {
-                        border: 0;
-                        font-family: $font-primary;
-                        color: $color-grey-2;
-                        font-size: 1.3rem;
-                        font-weight: 600;
-                        padding: 0.5rem 1rem;
-                        width: 50%;
-                        text-align: center;
-
-                        &:not(:last-child) {
-                            border-right: 1px solid $color-grey;
+                            font-weight: 600;
+                            padding: 0.5rem 1rem;
+                            width: 50%;
+                            text-align: center;
+    
+                            &:not(:last-child) {
+                                border-right: 1px solid $color-grey;
+                            }
                         }
                     }
                 }
