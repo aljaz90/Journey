@@ -342,6 +342,33 @@
                     transform: none;
                 }
             }
+            
+            &--delete {
+                background-color: $color-white;
+                color: $color-grey-2;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 4rem;
+                height: 4rem;
+
+                &--wrapper {
+                    position: fixed;
+                    z-index: 8;
+                    top: 3.2rem;
+                    left: 33.6rem;
+                }
+
+                &:hover {
+                    background-color: $color-white;
+                    color: $color-grey-3;
+                }
+
+                &:active {
+                    transform: none;
+                }
+            }
 
             &--edit_input {
                 position: fixed;

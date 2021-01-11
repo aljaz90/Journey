@@ -10,6 +10,7 @@ import { addDays, addYears, datesEqual, formatDate } from '../../Utils';
 export const Sidebar = props => {
     const [open, _setOpen] = useState(false);
     const [showingEditButton, setShowEditButton] = useState(false);
+    const [showingDeleteButton, setShowDeleteButton] = useState(false);
     const [showingEditInput, _setShowEditInput] = useState(false);
     const [tripName, setTripName] = useState(null);
 
@@ -21,10 +22,11 @@ export const Sidebar = props => {
         _setOpen(value);
 
         if (value) {
-            setTimeout(() => setShowEditButton(true), 600);
+            setTimeout(() => { setShowEditButton(true); setShowDeleteButton(true); }, 600);
         }
         else {
             setShowEditButton(false);
+            setShowDeleteButton(false);
         }
     };
 
@@ -71,7 +73,16 @@ export const Sidebar = props => {
         }
 
         return days;
-    }
+    };
+
+    const deleteTrip = () => {
+        if (showingEditInput) {
+            setShowEditInput(false);
+        }
+
+        setTripName(null);
+        props.handleDeleteTrip();
+    };
 
 
     let daysOfTrip = getDaysInATrip();
@@ -90,39 +101,45 @@ export const Sidebar = props => {
                                 <Button onClick={() => setOpen(false)} hintText="Close sidebar" hintPosition="right" wrapperClassName="home--sidebar--close--wrapper" className="home--sidebar--close">
                                     <IonIcon icon="chevron-back-outline" />
                                 </Button>
-                                <div className="home--sidebar--header--date">                      
-                                    <div className="home--sidebar--header--date--from">                     
-                                        <div className="home--sidebar--header--date--from--label">
-                                            From
-                                        </div>                   
-                                        <Calendar calendarPosition={ECalendarPostition.BOTTOM_RIGHT} onSelect={date => changeDate(date)} selectedDate={props.trip?.from ? new Date(props.trip.from) : null} minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
-                                            From
-                                        </Calendar>
-                                    </div>                      
-                                    <div className="home--sidebar--header--date--to">                     
-                                        <div className="home--sidebar--header--date--to--label">
-                                            To
-                                        </div>    
-                                        {dateTo}               
-                                    </div>                      
-                                </div>                            
+                                {
+                                    props.trip &&
+                                        <div className="home--sidebar--header--date">                      
+                                            <div className="home--sidebar--header--date--from">                     
+                                                <div className="home--sidebar--header--date--from--label">
+                                                    From
+                                                </div>                   
+                                                <Calendar calendarPosition={ECalendarPostition.BOTTOM_RIGHT} onSelect={date => changeDate(date)} selectedDate={props.trip?.from ? new Date(props.trip.from) : null} minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
+                                                    From
+                                                </Calendar>
+                                            </div>                      
+                                            <div className="home--sidebar--header--date--to">                     
+                                                <div className="home--sidebar--header--date--to--label">
+                                                    To
+                                                </div>    
+                                                {dateTo}               
+                                            </div>                      
+                                        </div>
+                                }                            
                             </div>
-                            <div className="home--sidebar--destinations">
-                                <div className="home--sidebar--destinations--header">
-                                    Destinations
-                                </div>
-                                <Button onClick={() => props.handleAddDestination()} hintText="Add destination" hintPosition="right" wrapperClassName="home--sidebar--destinations--add--wrapper" className="home--sidebar--destinations--add">
-                                    <IonIcon icon="add-outline" />
-                                </Button>
-                                <div className="home--sidebar--destinations--list">
-                                    {
-                                        props.trip?.stopovers.map(el => 
-                                            <Destination key={el._id} destination={el} handleTripChange={props.handleTripChange} handleDeleteDestination={props.handleDeleteDestination} />
-                                        )
-                                    }
-                                    <span style={{minHeight: "5rem"}}></span>
-                                </div>
-                            </div>
+                            {
+                                props.trip &&
+                                    <div className="home--sidebar--destinations">
+                                        <div className="home--sidebar--destinations--header">
+                                            Destinations
+                                        </div>
+                                        <Button onClick={() => props.handleAddDestination()} hintText="Add destination" hintPosition="right" wrapperClassName="home--sidebar--destinations--add--wrapper" className="home--sidebar--destinations--add">
+                                            <IonIcon icon="add-outline" />
+                                        </Button>
+                                        <div className="home--sidebar--destinations--list">
+                                            {
+                                                props.trip?.stopovers.map(el => 
+                                                    <Destination key={el._id} destination={el} handleTripChange={props.handleTripChange} handleDeleteDestination={props.handleDeleteDestination} />
+                                                )
+                                            }
+                                            <span style={{minHeight: "5rem"}}></span>
+                                        </div>
+                                    </div>
+                            }
                         </div>
                     :
                         <Button style={{display: !props.trip ? "none" : null}} onClick={() => setOpen(true)} id="sidebar-open" hintText="Open sidebar" hintPosition="right" wrapperClassName="home--sidebar--open--wrapper" className="home--sidebar--open">
@@ -134,6 +151,12 @@ export const Sidebar = props => {
                 showingEditButton && props.trip &&
                     <Button onClick={() => showingEditInput ? changeName() : setShowEditInput(true)} hintText="Change name" hintPosition="right" className="home--sidebar--header--edit" wrapperClassName="home--sidebar--header--edit--wrapper">
                         <IonIcon className="home--sidebar--header--edit--icon" icon="create-outline" />
+                    </Button>
+            }
+            {
+                showingDeleteButton && props.trip &&
+                    <Button onClick={() => deleteTrip()} hintText="Delete trip" hintPosition="right" className="home--sidebar--header--delete" wrapperClassName="home--sidebar--header--delete--wrapper">
+                        <IonIcon className="home--sidebar--header--edit--icon" icon="close-outline" />
                     </Button>
             }
             {

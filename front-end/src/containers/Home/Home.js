@@ -185,6 +185,33 @@ export default class Home extends Component {
         }
     };
 
+    handleDeleteTrip = async () => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        let tripId = this.state.selectedTrip._id;
+    
+        try {
+            await axios.delete(`http://localhost:4000/api/trip/${tripId}`, config);
+
+            this.setState({...this.state, selectedTrip: null});
+            this.props.setTrips(this.props.trips.filter(el => el._id !== tripId));
+        }
+        catch (err) {
+            this.props.showNotification({
+                type: "toast",
+                contentType: "error",
+                text: "An error occured while trying to delete a trip",
+                time: 2.5
+            });
+            console.error("An error occured while trying to delete a trip");
+            console.log(err);
+        }
+    }
+
     handleDeleteDestination = async destinationId => {
         const config = {
             headers: {
@@ -226,7 +253,7 @@ export default class Home extends Component {
             <Logo background="white" className="home--logo" />
 
             <div className="home--trips">
-                <Dropdown selectedOption={this.state.selectedTrip?._id} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id === tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
+                <Dropdown selectedOption={this.state.selectedTrip ? this.state.selectedTrip._id : null} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id === tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
                     Select a trip
                 </Dropdown>
                 <Button onClick={() => this.handleAddTrip()} className="home--trips--add" hintText="Add trip">
@@ -234,7 +261,7 @@ export default class Home extends Component {
                 </Button>
             </div>
 
-            <Sidebar handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} setTrip={this.props.setTrip} showNotification={this.props.showNotification} trip={this.state.selectedTrip} />
+            <Sidebar handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} handleDeleteTrip={this.handleDeleteTrip} trip={this.state.selectedTrip} />
         </div>
         )
     }

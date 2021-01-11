@@ -81,6 +81,31 @@ router.put("/:id", middleware.isLoggedIn, async (req, res) => {
     }
 });
 
+router.delete("/:id", middleware.isLoggedIn, async (req, res) => {
+    try {
+        let trip = await db.Trip.findById(req.params.id);
+
+        if (!trip) {
+            throw `Document not found: Trip {_id: ${req.params.id}}`;
+        }
+        else if (!trip.author.equals(req.user._id)) {
+            throw "Forbidden";
+        }
+
+        await db.Trip.deleteOne({ _id: trip._id });
+
+        res.send("Success");
+    } 
+    catch (err) {
+        console.log("[ERROR] An error occured while deleting a trip");
+        console.log(err);
+
+        res.status(400).send("An error occured while deleting a trip");
+    }
+});
+
+// ROUTES FOR
+// Stopovers + Segments 
 router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
     try {
         let trip = await db.Trip.findById(req.params.id);
@@ -143,8 +168,8 @@ router.delete("/:tripId/stopover/:id", middleware.isLoggedIn, async (req, res) =
         await db.Stopover.deleteOne({ _id: req.params.id });
         
         trip.stopovers = trip.stopovers.filter(el => !el.equals(req.params.id));
-        await trip.save();
 
+        await trip.save();
 
         res.send("Success");
     } 

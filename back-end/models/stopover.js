@@ -30,14 +30,33 @@ const stopoverSchema = new mongoose.Schema({
 stopoverSchema.pre('deleteOne', async function(next) {
     try {
         const id = this.getFilter()["_id"];
-        let doc = await db.Stopover.findById(id).populate({ path: "trip", model: "Trip" });
+        let doc = await db.Stopover.findById(id);
 
         if (!doc) {
             throw `Document not found: Stopover {_id: ${id}}`;
         }
+
+        let trip = await db.Trip.findById(doc.trip);
         
-        if (doc.trip.stopovers.indexOf(id) === doc.trip.stopovers.length - 1) {
-            await db.Segment.deleteOne({ to: id });
+        if (trip.stopovers.indexOf(id) === trip.stopovers.length - 1) {
+            let segment = await db.Segment.findOne({ to: id });
+
+            if (!segment) {
+                return next();
+            }
+
+            await db.Trip.updateOne({ _id: trip._id }, { $set: { segments: trip.segments.filter(el => !el.equals(segment._id)) }});            
+            await db.Segment.deleteOne({ _id: segment._id });
+        }
+        else if (trip.stopovers.indexOf(id) === 0) {
+            let segment = await db.Segment.findOne({ from: id });
+
+            if (!segment) {
+                return next();
+            }
+
+            await db.Trip.updateOne({ _id: trip._id }, { $set: { segments: trip.segments.filter(el => !el.equals(segment._id)) }});            
+            await db.Segment.deleteOne({ _id: segment._id });
         }
         else {
             let toSegment = await db.Segment.findOne({ to: id });
@@ -48,8 +67,10 @@ stopoverSchema.pre('deleteOne', async function(next) {
             }
 
             toSegment.to = fromSegment.to;
+
             await toSegment.save();
 
+            await db.Trip.updateOne({ _id: trip._id }, { $set: { segments: trip.segments.filter(el => !el.equals(fromSegment._id)) }});    
             await db.Segment.deleteOne({ id: fromSegment._id });
         }
     } 

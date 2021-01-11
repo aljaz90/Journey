@@ -29,7 +29,7 @@ tripSchema.pre('deleteOne', async function(next) {
             throw `Document not found: Trip {_id: ${id}}`;
         }
         
-        for (let stopover of doc.stopover) {
+        for (let stopover of doc.stopovers) {
             await db.Stopover.deleteOne({ _id: stopover});
         }
     } 

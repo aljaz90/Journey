@@ -2374,6 +2374,25 @@ body {
           color: #333; }
         .home--sidebar--header--edit:active {
           transform: none; }
+      .home--sidebar--header--delete {
+        background-color: #fff;
+        color: #777;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        height: 4rem; }
+        .home--sidebar--header--delete--wrapper {
+          position: fixed;
+          z-index: 8;
+          top: 3.2rem;
+          left: 33.6rem; }
+        .home--sidebar--header--delete:hover {
+          background-color: #fff;
+          color: #333; }
+        .home--sidebar--header--delete:active {
+          transform: none; }
       .home--sidebar--header--edit_input {
         position: fixed;
         top: 3rem;
