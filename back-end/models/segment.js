@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+const mongoose  = require("mongoose"),
+      CONFIG    = require("../config/config");
 
 const segmentSchema = new mongoose.Schema({
     name: {
@@ -7,7 +8,8 @@ const segmentSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        required: true
+        required: true,
+        enum: CONFIG.ROUTE.TYPES
     },
     from: {
         type: mongoose.Schema.ObjectId, 
@@ -20,8 +22,7 @@ const segmentSchema = new mongoose.Schema({
         required: true
     },
     duration: {
-        type: Number,
-        required: true
+        type: Number
     }
 });
 

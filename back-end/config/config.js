@@ -12,6 +12,9 @@ module.exports = {
         KEY_LENGTH: 64,
         LENGTH: 900,
     },
+    ROUTE: {
+        TYPES: ["car", "boat", "plane", "bus", "train", "other", "any"]
+    },
     CORS: {
         ORIGIN_URLS: [
             'http://localhost:3000',

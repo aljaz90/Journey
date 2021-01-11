@@ -1,5 +1,3 @@
-const { deleteOne } = require("../models/user");
-
 const express     = require("express"),
       router      = express.Router(),
       db          = require("../models"),
@@ -7,7 +5,7 @@ const express     = require("express"),
 
 router.post("/new", middleware.isLoggedIn, async (req, res) => {
     try {
-        let trip = new db.Trip({ name: "Unnamed trip", author: req.user._id, stopovers: [], routes: []});
+        let trip = new db.Trip({ name: "Unnamed trip", author: req.user._id, stopovers: [], segments: []});
         await trip.save();
 
         req.user.trips.push(trip._id);
@@ -105,8 +103,14 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
         }
 
         
-        let stopover = new db.Stopover({ name: "Unknown stop", days: 1, author: req.user._id, lat: lat, long: long, days: 1 });
+        let stopover = new db.Stopover({ name: "Unknown stop", days: 1, author: req.user._id, trip: trip._id, lat: lat, long: long, days: 1 });
         await stopover.save();
+        
+        if (trip.stopovers.length > 0) {           
+            let segment = new db.Segment({ name: "", days: 1, type: "any", from: trip.stopovers[trip.stopovers.length - 1], to: stopover._id, duration: null });
+            await segment.save();
+            trip.segments.push(segment);
+        }
 
         trip.stopovers.push(stopover);
         await trip.save();
@@ -136,10 +140,11 @@ router.delete("/:tripId/stopover/:id", middleware.isLoggedIn, async (req, res) =
             throw "Stopover not found"
         }
 
+        await db.Stopover.deleteOne({ _id: req.params.id });
+        
         trip.stopovers = trip.stopovers.filter(el => !el.equals(req.params.id));
         await trip.save();
 
-        await db.Stopover.deleteOne({ _id: req.params.id });
 
         res.send("Success");
     } 

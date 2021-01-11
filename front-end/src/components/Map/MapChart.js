@@ -1,6 +1,6 @@
 import React from 'react';
 import Leaflet, { LatLngBounds } from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import { MapEvents } from './MapEvents';
 
 import 'leaflet/dist/leaflet.css';
@@ -28,9 +28,9 @@ export const MapChart = props => {
                 {
                     props.trip?.stopovers.map(el => 
                         <Marker key={el._id} eventHandlers={{drag: e => props.handleDragMarker(e.latlng, el._id)}} draggable={true} position={[el.lat, el.long]}>
-                            <Popup>
+                            <Tooltip offset={[5, 0]}>
                                 {el.name}
-                            </Popup>
+                            </Tooltip>
                         </Marker>
                     )
                 }

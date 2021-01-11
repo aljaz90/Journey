@@ -17,7 +17,7 @@ const tripSchema = new mongoose.Schema({
         type: Date
     },
     stopovers: [{type: mongoose.Schema.ObjectId, ref: 'Stopover'}],
-    routes: [{type: mongoose.Schema.ObjectId, ref: 'Route'}]
+    segments: [{type: mongoose.Schema.ObjectId, ref: 'Segment'}]
 });
 
 tripSchema.pre('deleteOne', async function(next) {
