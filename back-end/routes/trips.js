@@ -128,11 +128,12 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
         }
 
         
+        let segment = null;
         let stopover = new db.Stopover({ name: "Unknown stop", days: 1, author: req.user._id, trip: trip._id, lat: lat, long: long, days: 1 });
         await stopover.save();
         
         if (trip.stopovers.length > 0) {           
-            let segment = new db.Segment({ name: "", days: 1, type: "any", from: trip.stopovers[trip.stopovers.length - 1], to: stopover._id, duration: null });
+            segment = new db.Segment({ name: "", days: 1, type: "any", from: trip.stopovers[trip.stopovers.length - 1], to: stopover._id, duration: null });
             await segment.save();
             trip.segments.push(segment);
         }
@@ -140,7 +141,7 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
         trip.stopovers.push(stopover);
         await trip.save();
 
-        res.json(stopover._doc);
+        res.json({stopover: stopover._doc, segment: segment ? segment._doc : undefined});
     } 
     catch (err) {
         console.log("[ERROR] An error occured while adding a new stopover");
@@ -165,13 +166,13 @@ router.delete("/:tripId/stopover/:id", middleware.isLoggedIn, async (req, res) =
             throw "Stopover not found"
         }
 
-        await db.Stopover.deleteOne({ _id: req.params.id });
-        
+        await db.Stopover.deleteOne({ _id: req.params.id });        
         trip.stopovers = trip.stopovers.filter(el => !el.equals(req.params.id));
-
         await trip.save();
 
-        res.send("Success");
+        await db.Trip.populate(trip, { model: "Segment", path: "segments" });
+
+        res.send(trip.segments);
     } 
     catch (err) {
         console.log("[ERROR] An error occured while deleting a stopover");

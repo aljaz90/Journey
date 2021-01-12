@@ -71,7 +71,7 @@ stopoverSchema.pre('deleteOne', async function(next) {
             await toSegment.save();
 
             await db.Trip.updateOne({ _id: trip._id }, { $set: { segments: trip.segments.filter(el => !el.equals(fromSegment._id)) }});    
-            await db.Segment.deleteOne({ id: fromSegment._id });
+            await db.Segment.deleteOne({ _id: fromSegment._id });
         }
     } 
     catch (err) {

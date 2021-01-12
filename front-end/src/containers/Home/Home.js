@@ -124,8 +124,18 @@ export default class Home extends Component {
 
         try {
             let res = await axios.post(`http://localhost:4000/api/trip/${this.state.selectedTrip._id}/stopover/new`, body, config);
-            let selectedTrip = {...this.state.selectedTrip, stopovers: [...this.state.selectedTrip.stopovers, res.data]};
-            let trip = {...this.props.trips.find(el => el._id === selectedTrip._id), stopovers: [...this.state.selectedTrip.stopovers, res.data]};
+
+            let stopover = res.data.stopover;
+            let segment = res.data.segment;
+
+            let segments = [...this.state.selectedTrip.segments];
+
+            if (segment) {
+                segments.push(segment);
+            }
+
+            let selectedTrip = { ...this.state.selectedTrip, stopovers: [...this.state.selectedTrip.stopovers, stopover], segments: segments };
+            let trip = { ...this.props.trips.find(el => el._id === selectedTrip._id), stopovers: [...this.state.selectedTrip.stopovers, stopover], segments: segments };
 
             this.setState({...this.state, selectedTrip: selectedTrip});
             this.props.setTrip(trip);
@@ -220,11 +230,12 @@ export default class Home extends Component {
         };
     
         try {
-            await axios.delete(`http://localhost:4000/api/trip/${this.state.selectedTrip._id}/stopover/${destinationId}`, config);
+            let res = await axios.delete(`http://localhost:4000/api/trip/${this.state.selectedTrip._id}/stopover/${destinationId}`, config);
 
             let trip = this.props.trips.find(el => el._id === this.state.selectedTrip._id);
-            this.props.setTrip({...trip, stopovers: trip.stopovers.filter(el => el._id !== destinationId)});
-            this.setState({...this.state, selectedTrip: { ...this.state.selectedTrip, stopovers: this.state.selectedTrip.stopovers.filter(el => el._id !== destinationId) }});
+
+            this.props.setTrip({ ...trip, stopovers: trip.stopovers.filter(el => el._id !== destinationId), segments: res.data });
+            this.setState({...this.state, selectedTrip: { ...this.state.selectedTrip, stopovers: this.state.selectedTrip.stopovers.filter(el => el._id !== destinationId), segments: res.data }});
         }
         catch (err) {
             this.props.showNotification({

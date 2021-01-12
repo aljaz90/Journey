@@ -1,6 +1,6 @@
 import React from 'react';
 import Leaflet, { LatLngBounds } from 'leaflet';
-import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Tooltip, Polyline } from 'react-leaflet';
 import { MapEvents } from './MapEvents';
 
 import 'leaflet/dist/leaflet.css';
@@ -26,13 +26,32 @@ export const MapChart = props => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {
-                    props.trip?.stopovers.map(el => 
+                    props.trip?.stopovers.map((el, i) => 
                         <Marker key={el._id} eventHandlers={{drag: e => props.handleDragMarker(e.latlng, el._id)}} draggable={true} position={[el.lat, el.long]}>
                             <Tooltip offset={[5, 0]}>
-                                {el.name}
+                                {i+1}. {el.name}
                             </Tooltip>
                         </Marker>
                     )
+                }
+                {
+                    props.trip?.segments.map(el => {
+                        let from = props.trip.stopovers.find(el2 => el2._id === el.from);
+                        let to = props.trip.stopovers.find(el2 => el2._id === el.to);
+
+                        if (!from || !to) {
+                            return null;
+                        }
+
+                        return (
+                            <Polyline key={el._id} positions={[[from.lat, from.long], [to.lat, to.long]]}>
+                                <Tooltip sticky offset={[10, 0]}>
+                                    {from.name} - {to.name}
+                                </Tooltip>
+                            </Polyline>
+                        );
+                    })
+                    
                 }
                 <MapEvents onDragEnd={(latlang) => props.onCenterChange(latlang)} />
         </MapContainer>
