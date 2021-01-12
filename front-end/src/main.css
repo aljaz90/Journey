@@ -2532,6 +2532,8 @@ body {
             color: #333;
             font-size: 1.6rem;
             padding: 0.75rem 1rem; }
+            .home--sidebar--destinations--item--details--name:focus {
+              outline: none; }
           .home--sidebar--destinations--item--details--coordinates {
             display: flex;
             position: relative;
@@ -2559,6 +2561,8 @@ body {
               text-align: center; }
               .home--sidebar--destinations--item--details--coordinates--item:not(:last-child) {
                 border-right: 1px solid #eee; }
+              .home--sidebar--destinations--item--details--coordinates--item:focus {
+                outline: none; }
 
 .account {
   grid-column: center-start / center-end;

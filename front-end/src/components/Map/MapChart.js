@@ -44,7 +44,7 @@ export const MapChart = props => {
                         }
 
                         return (
-                            <Polyline key={el._id} positions={[[from.lat, from.long], [to.lat, to.long]]}>
+                            <Polyline key={el._id} weight={4} lineJoin="round" positions={[[from.lat, from.long], [to.lat, to.long]]}>
                                 <Tooltip sticky offset={[10, 0]}>
                                     {from.name} - {to.name}
                                 </Tooltip>
