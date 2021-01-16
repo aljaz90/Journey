@@ -6,11 +6,11 @@ import { IonIcon } from '../../components/IonIcons/IonIcon';
 export const Destination = props => {
     return (
         <div className="home--sidebar--destinations--item">
-            <Button hintText="Delete destination" hintPosition="left" className="home--sidebar--destinations--item--delete" wrapperClassName="home--sidebar--destinations--item--delete--wrapper" onClick={() => props.handleDeleteDestination(props.destination._id)}>
+            <Button hintText="Delete stop" hintPosition="left" className="home--sidebar--destinations--item--delete" wrapperClassName="home--sidebar--destinations--item--delete--wrapper" onClick={() => props.handleDeleteDestination(props.destination._id)}>
                 <IonIcon icon="close-outline" />
             </Button>
             <div className="home--sidebar--destinations--item--details">
-                <input onChange={e => props.handleTripChange("stopover", { _id: props.destination._id, key: "name", value: e.target.value })} value={props.destination.name} placeholder="Destination" className="home--sidebar--destinations--item--details--name" />
+                <input onChange={e => props.handleTripChange("stopover", { _id: props.destination._id, key: "name", value: e.target.value })} value={props.destination.name} placeholder="Stop name" className="home--sidebar--destinations--item--details--name" />
                 <div className="home--sidebar--destinations--item--details--coordinates">
                     <div className="home--sidebar--destinations--item--details--coordinates--label home--sidebar--destinations--item--details--coordinates--label-lat">
                         Lat.

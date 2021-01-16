@@ -255,9 +255,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            min-width: unset;
+            background-color: $color-primary;
+            border: 0;
+            color: $color-white;
+            font-size: 1.8rem;
+
+            &:hover {
+                background-color: $color-primary-dark;
+            }
 
             &:active {
-                transform: none;
+                background-color: $color-primary-dark-2;
             }
         }
     }
@@ -471,16 +480,16 @@
             &--list {
                 display: flex;
                 flex-direction: column;
-                height: calc(100vh - 25rem);
-                max-height: calc(100vh - 25rem);
-                overflow-y: auto;
+                height: calc(100vh - 34rem); 
+                max-height: calc(100vh - 34rem);
+                overflow-y: auto;  
                 border-top: 2px solid $color-grey;
+                position: relative;
             }
 
             &--item {
                 display: flex;
                 border-bottom: 1px solid $color-grey;
-                //padding: 2rem 0.25rem 2rem 1rem;
                 position: relative;
 
                 &::before {
@@ -611,6 +620,15 @@
                         }
                     }
                 }
+            }
+        }
+
+        &--review {
+            margin-top: 2rem;
+            align-self: center; 
+            
+            &--icon {
+                margin-right: 1rem;
             }
         }
     }

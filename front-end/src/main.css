@@ -495,7 +495,6 @@ body {
     transform: translate(-50%, calc(100% + 1rem));
     flex-direction: column;
     display: flex;
-    min-width: 25rem;
     border: 1px solid #eee;
     border-radius: 2px;
     overflow-x: hidden;
@@ -2315,9 +2314,16 @@ body {
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: center; }
+      align-items: center;
+      min-width: unset;
+      background-color: #640AFF;
+      border: 0;
+      color: #fff;
+      font-size: 1.8rem; }
+      .home--trips--add:hover {
+        background-color: #4f00d6; }
       .home--trips--add:active {
-        transform: none; }
+        background-color: #3c00a3; }
   .home--sidebar {
     position: fixed;
     top: 0;
@@ -2466,10 +2472,11 @@ body {
       .home--sidebar--destinations--list {
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 25rem);
-        max-height: calc(100vh - 25rem);
+        height: calc(100vh - 34rem);
+        max-height: calc(100vh - 34rem);
         overflow-y: auto;
-        border-top: 2px solid #eee; }
+        border-top: 2px solid #eee;
+        position: relative; }
       .home--sidebar--destinations--item {
         display: flex;
         border-bottom: 1px solid #eee;
@@ -2563,6 +2570,11 @@ body {
                 border-right: 1px solid #eee; }
               .home--sidebar--destinations--item--details--coordinates--item:focus {
                 outline: none; }
+    .home--sidebar--review {
+      margin-top: 2rem;
+      align-self: center; }
+      .home--sidebar--review--icon {
+        margin-right: 1rem; }
 
 .account {
   grid-column: center-start / center-end;

@@ -64,7 +64,11 @@ export const Dropdown = props => {
             <OutsideClick onOutsideClick={() => { setQuery(""); setIsDropdownOpen(false); }}>
                 <div className={`dropdown dropdown-${props.type} ${props.wrapperClassName}`}>
                     <div onClick={() => { setQuery(""); setIsDropdownOpen(!isDropdownOpen); }} className={`dropdown--button dropdown--button-${props.type} ${props.className}`}>
-                        {selectedOptionText} <IonIcon className={`dropdown--button--icon ${props.iconClassName}`} name={isDropdownOpen ? props.openIcon ? props.openIcon : defaultIcons[position].open : props.closedIcon ? props.closedIcon : defaultIcons[position].closed} />
+                        { selectedOptionText }
+                        {
+                            !props.noOpenIcon && 
+                                <IonIcon className={`dropdown--button--icon ${props.iconClassName}`} name={isDropdownOpen ? props.openIcon ? props.openIcon : defaultIcons[position].open : props.closedIcon ? props.closedIcon : defaultIcons[position].closed} />
+                        } 
                     </div>
                     {
                         props.hintText &&
@@ -102,7 +106,11 @@ export const Dropdown = props => {
         <OutsideClick className={props.wrapperClassName} onOutsideClick={() => {setQuery(""); setIsAnimationDisabled(false); setIsDropdownOpen(false);}}>
             <div className={`dropdown dropdown-${props.type} ${props.wrapperClass}`}>
                 <div onClick={() => {setIsAnimationDisabled(false); setQuery(""); setIsDropdownOpen(!isDropdownOpen);}} className={`dropdown--button dropdown--button-${props.type} ${props.className}`}>
-                    {selectedOptionText} <IonIcon className={`dropdown--button--icon ${props.iconClassName}`} name={isDropdownOpen ? props.openIcon ? props.openIcon : defaultIcons[position].open : props.closedIcon ? props.closedIcon : defaultIcons[position].closed} />
+                    {selectedOptionText} 
+                    {
+                            !props.noOpenIcon && 
+                                <IonIcon className={`dropdown--button--icon ${props.iconClassName}`} name={isDropdownOpen ? props.openIcon ? props.openIcon : defaultIcons[position].open : props.closedIcon ? props.closedIcon : defaultIcons[position].closed} />
+                    } 
                 </div>
                 {
                     props.hintText &&

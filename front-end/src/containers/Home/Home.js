@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Logo } from '../../components/Layout/Logo';
 import { Dropdown } from '../../components/Forms/Dropdown';
-import { Button } from '../../components/Forms/Button';
 import { MapChart } from '../../components/Map/MapChart';
 import { isEmpty } from '../../Utils';
 import { Loader } from '../../components/Utils/Loader';
@@ -267,9 +266,9 @@ export default class Home extends Component {
                 <Dropdown selectedOption={this.state.selectedTrip ? this.state.selectedTrip._id : null} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id === tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
                     Select a trip
                 </Dropdown>
-                <Button onClick={() => this.handleAddTrip()} className="home--trips--add" hintText="Add trip">
+                <Dropdown noOpenIcon={true} onSelect={opt => this.handleAddTrip()} options={[{ text: "Custom", key: "custom", icon: "pin-outline" }, { text: "Generated", key: "generated", icon: "hardware-chip-outline" }]} className="home--trips--add" hintText="Add trip">
                     <IonIcon icon="add-outline" />
-                </Button>
+                </Dropdown>
             </div>
 
             <Sidebar handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} handleDeleteTrip={this.handleDeleteTrip} trip={this.state.selectedTrip} />

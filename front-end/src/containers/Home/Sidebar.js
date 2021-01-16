@@ -125,9 +125,9 @@ export const Sidebar = props => {
                                 props.trip &&
                                     <div className="home--sidebar--destinations">
                                         <div className="home--sidebar--destinations--header">
-                                            Destinations
+                                            Stops
                                         </div>
-                                        <Button onClick={() => props.handleAddDestination()} hintText="Add destination" hintPosition="right" wrapperClassName="home--sidebar--destinations--add--wrapper" className="home--sidebar--destinations--add">
+                                        <Button onClick={() => props.handleAddDestination()} hintText="Add a stop" hintPosition="right" wrapperClassName="home--sidebar--destinations--add--wrapper" className="home--sidebar--destinations--add">
                                             <IonIcon icon="add-outline" />
                                         </Button>
                                         <div className="home--sidebar--destinations--list">
@@ -136,8 +136,10 @@ export const Sidebar = props => {
                                                     <Destination key={el._id} destination={el} handleTripChange={props.handleTripChange} handleDeleteDestination={props.handleDeleteDestination} />
                                                 )
                                             }
-                                            <span style={{minHeight: "5rem"}}></span>
-                                        </div>
+                                        </div>                                        
+                                        <Button onClick={() => console.log("Trip review")} className="home--sidebar--review">
+                                            <IonIcon className="home--sidebar--review--icon" icon="trail-sign-outline" /> Trip overview
+                                        </Button>
                                     </div>
                             }
                         </div>
