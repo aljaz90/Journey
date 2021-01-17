@@ -18,7 +18,7 @@ export const ECalendarPostition = {
     TOP_LEFT: "top_left",
 };
 
-export const Calendar = props => {
+export const CalendarInput = props => {
 
     const getDatesForTheMonth = selectedMonth => {
         let dates = [];

@@ -4,7 +4,7 @@ import OutsideClick from '../../components/Utils/OutsideClick';
 import { Button } from '../../components/Forms/Button';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Destination } from './Destination';
-import { Calendar, ECalendarPostition } from '../../components/Forms/Calendar';
+import { CalendarInput, ECalendarPostition } from '../../components/Forms/CalendarInput';
 import { addDays, addYears, datesEqual, formatDate } from '../../Utils';
 
 export const Sidebar = props => {
@@ -108,9 +108,9 @@ export const Sidebar = props => {
                                                 <div className="home--sidebar--header--date--from--label">
                                                     From
                                                 </div>                   
-                                                <Calendar calendarPosition={ECalendarPostition.BOTTOM_RIGHT} onSelect={date => changeDate(date)} selectedDate={props.trip?.from ? new Date(props.trip.from) : null} minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
+                                                <CalendarInput calendarPosition={ECalendarPostition.BOTTOM_RIGHT} onSelect={date => changeDate(date)} selectedDate={props.trip?.from ? new Date(props.trip.from) : null} minDate={new Date()} maxDate={addYears(new Date(), 1)} className="home--sidebar--header--from">
                                                     From
-                                                </Calendar>
+                                                </CalendarInput>
                                             </div>                      
                                             <div className="home--sidebar--header--date--to">                     
                                                 <div className="home--sidebar--header--date--to--label">
@@ -137,7 +137,7 @@ export const Sidebar = props => {
                                                 )
                                             }
                                         </div>                                        
-                                        <Button onClick={() => console.log("Trip review")} className="home--sidebar--review">
+                                        <Button onClick={() => props.history.push(`/trip/${props.trip._id}`)} className="home--sidebar--review">
                                             <IonIcon className="home--sidebar--review--icon" icon="trail-sign-outline" /> Trip overview
                                         </Button>
                                     </div>

@@ -271,7 +271,7 @@ export default class Home extends Component {
                 </Dropdown>
             </div>
 
-            <Sidebar handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} handleDeleteTrip={this.handleDeleteTrip} trip={this.state.selectedTrip} />
+            <Sidebar history={this.props.history} handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} handleDeleteTrip={this.handleDeleteTrip} trip={this.state.selectedTrip} />
         </div>
         )
     }

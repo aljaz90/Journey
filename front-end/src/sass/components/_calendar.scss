@@ -1,4 +1,9 @@
 .calendar {
+    &-static {
+        border: 1px solid $color-grey;
+        border-radius: 4px;
+        width: 35rem;
+    }
 
     &--wrapper {
         position: relative;
@@ -32,7 +37,6 @@
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         z-index: 5;
         width: 35rem;
-        //height: 35rem;
         border: 1px solid $color-grey;
         padding: 0 2rem;
 
