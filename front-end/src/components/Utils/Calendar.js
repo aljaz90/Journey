@@ -47,10 +47,14 @@ export const Calendar = props => {
         return weeks;
     };
 
+    const [selectedMonth, setSelectedMonth] = useState(new Date());
+    const [weeks, setWeeks] = useState(getDatesForTheMonth(new Date()));
+    const [_selectedDate, _setSelectedDate] = useState(props.defaultDate ? props.defaultDate : null);
+
     const getDropdownOptions = () => {
         let options = [];
 
-        let month = new Date();
+        let month = new Date(selectedMonth.valueOf());
         for (let i = 0; i < 13; i++) {
             options.push(`${monthNames[month.getMonth()]} ${month.getFullYear()}`);
             month = addMonths(month, 1);
@@ -58,10 +62,6 @@ export const Calendar = props => {
 
         return options;
     };
-
-    const [selectedMonth, setSelectedMonth] = useState(new Date());
-    const [weeks, setWeeks] = useState(getDatesForTheMonth(new Date()));
-    const [_selectedDate, _setSelectedDate] = useState(props.defaultDate ? props.defaultDate : null);
 
     const nextMonth = () => {
         let nextMonth = addMonths(selectedMonth, 1);
@@ -98,6 +98,7 @@ export const Calendar = props => {
     };
 
     const selectedDate = props.selectedDate !== undefined ? props.selectedDate : _selectedDate;
+    let range = props.range ? props.range : null;
 
     return (
         <div className="calendar-static">
@@ -143,11 +144,28 @@ export const Calendar = props => {
                         weeks.map((week, i) => 
                             <tr key={i}>
                                 {
-                                    week.map((el, j) => 
-                                        <td onClick={() => setSelectedDate(el)} key={j} className={`calendar--calendar--dates--item ${el.getMonth() !== selectedMonth.getMonth() ? "calendar--calendar--dates--item-not_important" : ""} ${selectedDate && datesEqual(selectedDate, el) ? "calendar--calendar--dates--item-selected" : ""} ${(props.maxDate && el > props.maxDate) || (props.minDate && el < props.minDate) ? "calendar--calendar--dates--item-disabled" : ""}`}>
-                                            <span className="calendar--calendar--dates--item--text">{el.getDate()}</span>
-                                        </td>
-                                    )
+                                    week.map((el, j) => {
+                                        let className = `calendar--calendar--dates--item ${el.getMonth() !== selectedMonth.getMonth() ? "calendar--calendar--dates--item-not_important" : ""} ${selectedDate && datesEqual(selectedDate, el) ? "calendar--calendar--dates--item-selected" : ""} ${(props.maxDate && el > props.maxDate) || (props.minDate && el < props.minDate) ? "calendar--calendar--dates--item-disabled" : ""}`;
+
+                                        if (range) {
+                                            className += " calendar--calendar--dates--item-range-normal";
+                                            if (datesEqual(el, range[0])) {
+                                                className += " calendar--calendar--dates--item-range-start";
+                                            }
+                                            else if (datesEqual(el, range[1])) {
+                                                className += " calendar--calendar--dates--item-range-end";
+                                            }
+                                            else if (el > range[0] && el < range[1]) {
+                                                className += " calendar--calendar--dates--item-range-middle";
+                                            }
+                                        }
+
+                                        return (
+                                            <td onClick={() => setSelectedDate(el)} key={j} className={className}>
+                                                <span className="calendar--calendar--dates--item--text">{el.getDate()}</span>
+                                            </td>
+                                        );
+                                    })
                                 }
                             </tr>
                         )

@@ -191,6 +191,53 @@
                 &-disabled:hover::after {
                     border: 1px solid transparent;
                 }
+
+                &-range {
+                    &-normal {
+                        &::after {
+                            transition: border .3s;
+                        }
+                    }
+
+                    &-start, &-middle, &-end {
+                        color: $color-white;
+                        transition: none;
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            top: 50%;
+                            left: 0;
+                            transform: translateY(calc(-50% + 0.5rem));
+                            width: 100%;
+                            height: 4rem;
+                            border-radius: 50%;
+                            border: 1px solid transparent;
+                            transition: none;
+                            z-index: 4;
+                            background-color: $color-primary;
+                            border: 1px solid transparent !important;        
+                        }
+                    }
+
+                    &-start {
+                        &::after {
+                            border-top-right-radius: 0;
+                            border-bottom-right-radius: 0;
+                        }                        
+                    }
+                    &-middle {
+                        &::after {
+                            border-radius: 0;
+                        }   
+                    }
+                    &-end {
+                        &::after {
+                            border-top-left-radius: 0;
+                            border-bottom-left-radius: 0;
+                        }   
+                    }
+                }
             }
         }
     }

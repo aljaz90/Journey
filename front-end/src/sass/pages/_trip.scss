@@ -29,11 +29,10 @@
         display: flex;
         flex-direction: column;
 
-        &--calendar {
-            align-self: center;
-            padding-top: 7rem;
+        &--details, &--calendar {
             position: relative;
-
+            padding-top: 6rem;
+            
             &--title {
                 position: absolute;
                 left: 1rem;
@@ -44,6 +43,67 @@
                 user-select: none;
                 font-family: $font-heading;
             }
+        }
+
+        &--details {
+            display: flex;
+            flex-direction: column;
+            padding: 6rem 2rem 0 2rem;
+
+            &--title {
+                top: 1rem;
+            }
+
+            &--name {
+                font-size: 2.8rem;
+                font-family: $font-heading;
+                background-image: linear-gradient(to right bottom, $color-primary, $color-secondary);
+                color: transparent;
+                background-clip: text;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid $color-grey;
+                padding-bottom: 1rem;
+
+                &--icon {
+                    margin-right: 1rem;
+                    color: $color-grey-3;
+                }
+            }
+
+            &--item {
+                display: flex;
+                font-size: 1.6rem;
+                font-weight: 600;
+                background-color: $color-white-2;
+                padding: 0.25rem 0.5rem;
+                
+                &:not(:last-child) {
+                    border-bottom: 1px solid $color-grey;
+                }
+
+
+                &--label {
+                    flex-basis: 0;
+                    flex-grow: 1.5;
+                    color: $color-grey-2;
+                    
+                    &--icon {
+                        margin-right: 1rem;
+                    }
+                }
+                
+                &--value {
+                    padding-left: 2rem;
+                    flex-basis: 0;
+                    flex-grow: 1;
+                    color: $color-primary;
+                }
+            }
+        }
+
+        &--calendar {
+            display: flex;
+            justify-content: center;
         }
     }
 }

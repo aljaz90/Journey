@@ -58,10 +58,15 @@ export const CalendarInput = props => {
         return weeks;
     };
 
+    const [showing, setShowing] = useState(false);
+    const [selectedMonth, setSelectedMonth] = useState(new Date());
+    const [weeks, setWeeks] = useState(getDatesForTheMonth(new Date()));
+    const [_selectedDate, _setSelectedDate] = useState(props.defaultDate ? props.defaultDate : null);
+
     const getDropdownOptions = () => {
         let options = [];
 
-        let month = new Date();
+        let month = new Date(selectMonth.valueOf());
         for (let i = 0; i < 13; i++) {
             options.push(`${monthNames[month.getMonth()]} ${month.getFullYear()}`);
             month = addMonths(month, 1);
@@ -70,10 +75,6 @@ export const CalendarInput = props => {
         return options;
     };
 
-    const [showing, setShowing] = useState(false);
-    const [selectedMonth, setSelectedMonth] = useState(new Date());
-    const [weeks, setWeeks] = useState(getDatesForTheMonth(new Date()));
-    const [_selectedDate, _setSelectedDate] = useState(props.defaultDate ? props.defaultDate : null);
 
     const nextMonth = () => {
         let nextMonth = addMonths(selectedMonth, 1);

@@ -13,8 +13,10 @@ export default class App extends Component {
     constructor(props) {
         super(props);
 
+        let isAuthenticated = getCookie("session") ? true : false;
+
         this.state = {
-            isAuthenticated: false,
+            isAuthenticated: isAuthenticated,
             user: {},
             trips: null,
             notification: null,
