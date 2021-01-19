@@ -15,8 +15,50 @@
         border: 1px solid $color-grey;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         margin-right: 4rem;
-        max-height: 100%;
+        max-height: calc(100vh - 17rem);
         overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+
+        &--item {
+            display: flex;
+            justify-content: space-between;
+            min-height: 20rem;
+            padding: 1rem 4rem;
+            border-bottom: 1px solid $color-grey;
+            position: relative;
+
+            &--name {
+                font-size: 3.2rem;
+                font-weight: 100;
+                align-self: center;
+                font-family: $font-heading;
+                color: $color-white;
+                background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark-2);
+                padding: 0.25rem 3rem;
+                position: absolute;
+                top: 2rem;
+                left: 5rem;
+            }
+
+            &--details {
+                display: flex;
+                flex-direction: column;
+
+                &--item {
+                    padding: 1rem 2rem;
+                    font-size: 2rem;
+
+                    &:not(:last-child) {
+                        border-bottom: 1px solid $color-grey;
+                    }
+                    
+                    &--icon {
+                        margin-right: 2rem;
+                    }
+                }
+            }
+        }
     }
     
     &--sidebar {

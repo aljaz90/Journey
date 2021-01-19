@@ -1591,6 +1591,23 @@ body {
       width: 100%;
       height: 7rem;
       z-index: 90; } }
+  .nav--map {
+    width: 6rem;
+    height: 6rem;
+    padding: 0;
+    background-color: #640AFF;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+    .nav--map-position {
+      position: fixed;
+      top: 12rem;
+      left: 5rem;
+      z-index: 1; }
   .nav--logo {
     /*height: 3rem;
         width: 20rem;
@@ -2030,7 +2047,7 @@ body {
           .auth--container--main--list--item--input:hover {
             border: 1px solid #777; }
           .auth--container--main--list--item--input:focus {
-            border: 1px solid #0085E5;
+            border: 1px solid #640AFF;
             outline: none; }
           .auth--container--main--list--item--input-password {
             padding-right: 4rem; }
@@ -2724,8 +2741,38 @@ body {
     border: 1px solid #eee;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     margin-right: 4rem;
-    max-height: 100%;
-    overflow-y: auto; }
+    max-height: calc(100vh - 17rem);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column; }
+    .trip--destinations--item {
+      display: flex;
+      justify-content: space-between;
+      min-height: 20rem;
+      padding: 1rem 4rem;
+      border-bottom: 1px solid #eee;
+      position: relative; }
+      .trip--destinations--item--name {
+        font-size: 3.2rem;
+        font-weight: 100;
+        align-self: center;
+        font-family: "Tajawal", sans-serif;
+        color: #fff;
+        background-image: linear-gradient(to right bottom, #843dff, #3c00a3);
+        padding: 0.25rem 3rem;
+        position: absolute;
+        top: 2rem;
+        left: 5rem; }
+      .trip--destinations--item--details {
+        display: flex;
+        flex-direction: column; }
+        .trip--destinations--item--details--item {
+          padding: 1rem 2rem;
+          font-size: 2rem; }
+          .trip--destinations--item--details--item:not(:last-child) {
+            border-bottom: 1px solid #eee; }
+          .trip--destinations--item--details--item--icon {
+            margin-right: 2rem; }
   .trip--sidebar {
     width: 20%;
     height: 100%;

@@ -4,6 +4,7 @@ import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Calendar } from '../../components/Utils/Calendar';
 import { Loader } from '../../components/Utils/Loader';
 import { addDays } from '../../Utils';
+import { iso1A2Code } from '@ideditor/country-coder';
 
 export default class Trip extends Component {
     
@@ -61,7 +62,24 @@ export default class Trip extends Component {
         return (
             <div className="trip">
                 <div className="trip--destinations">
-                    
+                    {
+                        trip.stopovers.map((el, i) => 
+                            <div className="trip--destinations--item">
+                                <div className="trip--destinations--item--name">
+                                    {i+1}. {el.name}
+                                </div>
+                                <div></div>
+                                <div className="trip--destinations--item--details">
+                                    <div className="trip--destinations--item--details--item">
+                                        <IonIcon className="trip--destinations--item--details--item--icon" icon="flag-outline" /> Italy
+                                    </div>
+                                    <div className="trip--destinations--item--details--item">
+                                        <IonIcon className="trip--destinations--item--details--item--icon" icon="today-outline" /> You will spend <span>{el.days || 1}</span> {(el.days || 1) === 1 ? "day" : "days"} here
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
                 </div>
                 <div className="trip--sidebar">
                     <div className="trip--sidebar--details">

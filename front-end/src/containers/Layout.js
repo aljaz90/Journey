@@ -5,6 +5,7 @@ import { signOut, getInitialsForName } from '../Utils';
 import { ImageSelector } from '../components/Forms/ImageSelector';
 import { IonIcon } from '../components/IonIcons/IonIcon';
 import { Logo } from '../components/Layout/Logo';
+import { Button } from '../components/Forms/Button';
 
 export const Layout = props => {
     const [showingImageSelection, setShowingImageSelection] = useState(false);
@@ -88,6 +89,9 @@ export const Layout = props => {
                     }
                 </div>
             </div>
+            <Button hintText="Open map" hintPosition="right" wrapperClassName="nav--map-position" className="nav--map">
+                <IonIcon icon="map-outline" className="nav--map--icon" />
+            </Button>
         </React.Fragment>
     )
 }
