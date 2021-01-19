@@ -2763,12 +2763,59 @@ body {
         position: absolute;
         top: 2rem;
         left: 5rem; }
+      .trip--destinations--item--coordinates {
+        position: absolute;
+        bottom: 2rem;
+        left: 5rem;
+        display: flex;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        padding: 0.75rem 1rem; }
+        .trip--destinations--item--coordinates--title {
+          position: absolute;
+          top: -3rem;
+          left: 0;
+          text-transform: uppercase;
+          font-size: 1.3rem;
+          font-family: "Tajawal", sans-serif;
+          font-weight: 600;
+          color: #777;
+          display: none; }
+        .trip--destinations--item--coordinates--lat, .trip--destinations--item--coordinates--long {
+          position: relative;
+          border: 0;
+          font-family: "Lato", sans-serif;
+          color: #333;
+          font-size: 1.3rem;
+          font-weight: 600;
+          padding: 0.5rem 1rem;
+          width: 50%;
+          text-align: center; }
+          .trip--destinations--item--coordinates--lat--title, .trip--destinations--item--coordinates--long--title {
+            position: absolute;
+            top: -2rem;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            font-family: "Tajawal", sans-serif;
+            font-weight: 600;
+            transform: translateX(-50%);
+            color: #777;
+            background-color: #fff;
+            user-select: none; }
+        .trip--destinations--item--coordinates--lat {
+          margin-right: 2rem; }
       .trip--destinations--item--details {
         display: flex;
-        flex-direction: column; }
+        flex-direction: column;
+        justify-content: center; }
         .trip--destinations--item--details--item {
           padding: 1rem 2rem;
-          font-size: 2rem; }
+          font-size: 1.8rem;
+          min-width: 38.76rem; }
+          .trip--destinations--item--details--item-important {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #640AFF; }
           .trip--destinations--item--details--item:not(:last-child) {
             border-bottom: 1px solid #eee; }
           .trip--destinations--item--details--item--icon {

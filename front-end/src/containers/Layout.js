@@ -89,7 +89,7 @@ export const Layout = props => {
                     }
                 </div>
             </div>
-            <Button hintText="Open map" hintPosition="right" wrapperClassName="nav--map-position" className="nav--map">
+            <Button onClick={() => window.location.href = "/"} hintText="Open map" hintPosition="right" wrapperClassName="nav--map-position" className="nav--map">
                 <IonIcon icon="map-outline" className="nav--map--icon" />
             </Button>
         </React.Fragment>

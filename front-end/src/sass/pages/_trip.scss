@@ -41,13 +41,73 @@
                 left: 5rem;
             }
 
+            &--coordinates {
+                position: absolute;
+                bottom: 2rem;
+                left: 5rem;
+                display: flex;
+                border: 1px solid $color-grey;
+                border-radius: 4px;
+                padding: 0.75rem 1rem;
+
+                &--title {
+                    position: absolute;
+                    top: -3rem;
+                    left: 0;
+                    text-transform: uppercase;
+                    font-size: 1.3rem;
+                    font-family: $font-heading;
+                    font-weight: 600;
+                    //transform: translateX(-50%);
+                    color: $color-grey-2;
+                    display: none;
+                }
+
+                &--lat, &--long {
+                    position: relative;
+                    border: 0;
+                    font-family: $font-primary;
+                    color: $color-grey-3;
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    padding: 0.5rem 1rem;
+                    width: 50%;
+                    text-align: center;
+
+                    &--title {
+                        position: absolute;
+                        top: -2rem;
+                        text-transform: uppercase;
+                        font-size: 1.3rem;
+                        font-family: $font-heading;
+                        font-weight: 600;
+                        transform: translateX(-50%);
+                        color: $color-grey-2;
+                        background-color: $color-white;
+                        user-select: none;
+                    }
+                }
+
+                &--lat {
+                    margin-right: 2rem;
+                }
+            }
+
             &--details {
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
 
                 &--item {
                     padding: 1rem 2rem;
-                    font-size: 2rem;
+                    font-size: 1.8rem;
+                    min-width: 38.76rem; 
+                    
+                    &-important {
+                        font-size: 2rem;
+                        font-weight: 600;
+                        color: $color-primary;
+                    }
 
                     &:not(:last-child) {
                         border-bottom: 1px solid $color-grey;
@@ -56,6 +116,7 @@
                     &--icon {
                         margin-right: 2rem;
                     }
+
                 }
             }
         }
