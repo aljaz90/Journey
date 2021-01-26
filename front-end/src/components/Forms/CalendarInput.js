@@ -66,7 +66,7 @@ export const CalendarInput = props => {
     const getDropdownOptions = () => {
         let options = [];
 
-        let month = new Date(selectMonth.valueOf());
+        let month = new Date(selectedMonth.valueOf());
         for (let i = 0; i < 13; i++) {
             options.push(`${monthNames[month.getMonth()]} ${month.getFullYear()}`);
             month = addMonths(month, 1);
