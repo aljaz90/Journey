@@ -31,7 +31,7 @@ export default class Home extends Component {
         }
     }
 
-    handleAddTrip = async () => {
+    addCustomTrip = async () => {
         try {
             const config = {
                 headers: {
@@ -248,6 +248,16 @@ export default class Home extends Component {
         }
     }
 
+    handleAddTrip = type => {
+        if (type === "custom") {
+            this.addCustomTrip();
+        }
+        else {
+            // Open popup
+            //this.setState({...this.state, })
+        }
+    };
+
     render() {
         if (!this.props.isAuthenticated) {
             return <Redirect to="/signin" />;
@@ -266,7 +276,7 @@ export default class Home extends Component {
                 <Dropdown selectedOption={this.state.selectedTrip ? this.state.selectedTrip._id : null} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id === tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
                     Select a trip
                 </Dropdown>
-                <Dropdown noOpenIcon={true} staticButton={true} onSelect={opt => this.handleAddTrip()} options={[{ text: "Custom", key: "custom", icon: "pin-outline" }, { text: "Generated", key: "generated", icon: "hardware-chip-outline" }]} className="home--trips--add" hintText="Add trip">
+                <Dropdown noOpenIcon={true} staticButton={true} onSelect={opt => this.handleAddTrip(opt)} options={[{ text: "Custom", key: "custom", icon: "pin-outline" }, { text: "Generated", key: "generated", icon: "hardware-chip-outline" }]} className="home--trips--add" hintText="Add trip">
                     <IonIcon icon="add-outline" />
                 </Dropdown>
             </div>

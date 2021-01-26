@@ -21,6 +21,7 @@ module.exports.PasswordResetLink = require("./password_reset_link");
 module.exports.Upload = require("./upload");
 module.exports.Trip = require("./trip");
 module.exports.Destination = require("./destination");
+module.exports.Country = require("./country");
 module.exports.Stopover = require("./stopover");
 module.exports.Route = require("./route");
 module.exports.Segment = require("./segment");
