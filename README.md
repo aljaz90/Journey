@@ -1,1 +1,2 @@
-# Simple authentication template for React 
+# Journey
+## Travel planner and a trip generator
