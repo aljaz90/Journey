@@ -17,8 +17,8 @@ const countrySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    currency: {
-        type: String,
+    safetyRating: {
+        type: Number,
         required: true
     },
     destinations: [{type: mongoose.Schema.ObjectId, ref: 'Destination'}]
