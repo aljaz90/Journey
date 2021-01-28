@@ -11,11 +11,11 @@ const countrySchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        default: "No description yet"
     },
     currency: {
         type: String,
-        required: true
+        default: "Unknown"
     },
     safetyRating: {
         type: Number,
