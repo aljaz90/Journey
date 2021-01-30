@@ -20,7 +20,9 @@ export default class App extends Component {
             user: {},
             trips: null,
             notification: null,
-            notificationsBuffer: []
+            notificationsBuffer: [],
+            countries: [],
+            destinations: []
         };
 
         this.setters = {
@@ -85,6 +87,8 @@ export default class App extends Component {
         if (isAuthenticated) {
             newState.user = data.user;
             newState.trips = data.user.trips;
+            newState.countries = data.countries;
+            newState.destinations = data.destinations;
         }
         this.setState(newState, () => { if (callback) { callback(); } });
     };

@@ -14,7 +14,10 @@ Date.prototype.addHours = function(hours) {
 router.get("/", middleware.isLoggedIn, async (req, res) => {
     try {
         let user = await db.User.populate(req.user, [{ path: "uploads", model: "Upload" }, { path: "trips", model: "Trip", populate: [{ path: "stopovers", model: "Stopover" }, { path: "segments", model: "Segment" }] }]);
-        const userData = {user: user._doc};
+        let countries = await db.Country.find({});
+        let destinations = await db.Destination.find({});
+        
+        const userData = { user: user._doc, countries: countries, destinations: destinations };
         res.json(userData);
     }
     catch (err) {
@@ -36,7 +39,7 @@ router.put("/", middleware.isLoggedIn, async (req, res) => {
         }
 
         // Updating permitted fields
-        await db.User.updateOne({ _id: req.user._id }, {$set: newUserData});
+        await db.User.updateOne({ _id: req.user._id }, { $set: newUserData });
         res.json({...req.user._doc, ...newUserData});
     }
     catch (err) {
@@ -64,7 +67,10 @@ router.post("/new", async (req, res) => {
                 req.session.session = session._id;
                 req.session.expiration = session.expire_at;
 
-                const userData = { user: req.user._doc };
+                let countries = await db.Country.find({});
+                let destinations = await db.Destination.find({});
+                
+                const userData = { user: req.user._doc, countries: countries, destinations: destinations };
                 res.json(userData);
             }
             catch (err) {
@@ -106,7 +112,10 @@ router.post("/", passport.authenticate('local', { session: false }), async (req,
         req.session.expiration = session.expire_at;
 
         let user = await db.User.populate(req.user, [{ path: "uploads", model: "Upload" }, { path: "trips", model: "Trip", populate: [{ path: "stopovers", model: "Stopover" }, { path: "segments", model: "Segment" }] }]);
-        const userData = { user: user._doc };
+        let countries = await db.Country.find({});
+        let destinations = await db.Destination.find({});
+        
+        const userData = { user: user._doc, countries: countries, destinations: destinations };
         res.json(userData);
     }
     catch (err) {

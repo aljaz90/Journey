@@ -7,10 +7,10 @@ export const Destination = props => {
 
     let icon = "flag-outline";
     if (props.firstDestination) {
-
+        icon = "caret-down-outline";
     }
     else if (props.lastDestination) {
-
+        icon = "caret-up-outline";
     }
 
 
