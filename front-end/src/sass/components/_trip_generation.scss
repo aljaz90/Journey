@@ -1,0 +1,63 @@
+.trip_generation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $color-white;
+    min-width: 55rem;
+    min-height: 60rem;
+    //border: 1px solid $color-grey;
+    border-radius: 4px;
+    z-index: 5;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+
+    &--header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        min-height: 7rem;
+        max-height: 7rem;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        background-image: linear-gradient(to right, $color-primary, $color-secondary);
+        //border-bottom: 1px solid $color-grey;
+
+        &--title {
+            color: $color-white;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+            user-select: none;
+
+            &--icon {
+                margin-right: 2rem;
+            }
+        }
+
+        &--close {
+            background-color: unset;
+            color: $color-white;
+            padding: 0;
+            border-radius: 0;
+            font-size: 2rem;
+
+            &:hover {
+                background-color: unset;
+                color: $color-white-2;
+            }   
+
+            &--wrapper {
+                position: absolute;
+                right: 2rem;
+                top: 2rem;
+            }
+        }
+    }
+
+    &--form {
+
+    }
+}

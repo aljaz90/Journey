@@ -9,6 +9,7 @@ import { Loader } from '../../components/Utils/Loader';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Sidebar } from './Sidebar';
 import { AccountDropdown } from './AccountDropdown';
+import { TripGeneration } from './TripGeneration';
 
 export default class Home extends Component {
 
@@ -18,8 +19,9 @@ export default class Home extends Component {
         this.state = {
             selectedTrip: null,
             autosaveTimeout: null,
-            center: {lat: 51.505, lng: 0},
-            updatedStopovers: []
+            center: { lat: 51.505, lng: 0 },
+            updatedStopovers: [],
+            showingGeneration: false
         }
 
         this.mapSelectionDropdown = null;
@@ -253,8 +255,7 @@ export default class Home extends Component {
             this.addCustomTrip();
         }
         else {
-            // Open popup
-            //this.setState({...this.state, })
+            this.setState({...this.state, showingGeneration: true });
         }
     };
 
@@ -268,7 +269,8 @@ export default class Home extends Component {
 
         return (
         <div className="home">
-            <AccountDropdown saveUserData={this.props.saveUserData} user={this.props.user} />            
+            <AccountDropdown saveUserData={this.props.saveUserData} user={this.props.user} />
+            <TripGeneration showing={this.state.showingGeneration} onClose={() => this.setState({...this.state, showingGeneration: false })} />          
             <MapChart onCenterChange={latlang => this.setState({...this.state, center: latlang})} handleDragMarker={this.handleDragMarker} trip={this.state.selectedTrip} />
             <Logo background="white" className="home--logo" />
 
