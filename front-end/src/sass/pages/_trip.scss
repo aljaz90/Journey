@@ -98,15 +98,65 @@
                 flex-direction: column;
                 justify-content: center;
 
+                &--country {
+                    margin-left: 1rem;
+
+                    &--container {
+                        display: flex;
+                        flex-direction: column;
+                        width: 63rem;
+                        min-height: 10rem;
+                        max-height: 40rem;
+                        right: -15rem;
+                    }
+
+                    &--header {
+                        display: flex;
+                        border-bottom: 1px solid $color-grey;
+                        padding: 0.25rem 1rem;
+
+                        &--item {
+                            display: flex;
+                            align-items: center;
+
+                            &:not(:last-child) {
+                                margin-right: 2rem;
+                            }
+
+                            &--label {
+                                font-size: 1.4rem;
+                                color: $color-grey-2;
+                                margin-right: 1rem;
+
+                                &--icon {
+                                    margin-right: 0.3rem;
+                                }
+                            }
+
+                            &--value {
+                                font-size: 1.5rem;
+                            }
+                        }
+                    }
+
+                    &--description {
+                        font-size: 1.4rem;
+                        padding: 0.5rem 1rem;
+                    }
+                }
+
                 &--item {
                     padding: 1rem 2rem;
                     font-size: 1.8rem;
-                    min-width: 38.76rem; 
+                    min-width: 38.76rem;
+                    display: flex;
+                    align-items: center;
                     
                     &-important {
                         font-size: 2rem;
                         font-weight: 600;
                         color: $color-primary;
+                        padding: 0 0.5rem;
                     }
 
                     &:not(:last-child) {

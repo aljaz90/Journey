@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router';
+import { CountryInfo } from './CountryInfo';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Calendar } from '../../components/Utils/Calendar';
 import { Loader } from '../../components/Utils/Loader';
@@ -65,7 +66,10 @@ export default class Trip extends Component {
                     {
                         trip.stopovers.map((el, i) => {
 
-                            let country = getCountryNameByCode(iso1A2Code([el.long, el.lat]));
+                            let countryCode = iso1A2Code([el.long, el.lat]);
+                            let country = getCountryNameByCode(countryCode);
+                            let countryData = this.props.countries.find(el => el.code === countryCode);
+
                             return (
                                 <div className="trip--destinations--item">
                                     <div className="trip--destinations--item--name">
@@ -92,7 +96,7 @@ export default class Trip extends Component {
                                     <div className="trip--destinations--item--details">
                                         {   country &&
                                                 <div className="trip--destinations--item--details--item">
-                                                    <IonIcon className="trip--destinations--item--details--item--icon" icon="flag-outline" /> {country}
+                                                    <IonIcon className="trip--destinations--item--details--item--icon" icon="flag-outline" /> {country} <CountryInfo country={countryData} />
                                                 </div>
                                         }
                                         <div className="trip--destinations--item--details--item">
