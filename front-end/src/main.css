@@ -2521,25 +2521,47 @@ body {
       .home--sidebar--destinations--list {
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 34rem);
-        max-height: calc(100vh - 34rem);
+        height: calc(100vh - 26rem);
+        max-height: calc(100vh - 26rem);
         overflow-y: auto;
         border-top: 2px solid #eee;
         position: relative; }
       .home--sidebar--destinations--item {
         display: flex;
-        border-bottom: 1px solid #eee;
-        position: relative; }
+        position: relative;
+        padding: 1rem 0 1rem 1rem; }
+        .home--sidebar--destinations--item--icon {
+          position: absolute;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+          background-color: #843dff;
+          left: 0.3rem;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          font-size: 1.3rem; }
         .home--sidebar--destinations--item::before {
           content: "";
           position: absolute;
-          left: 1rem;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 7px;
-          height: 80%;
-          background-color: #640AFF;
-          border-radius: 4px; }
+          left: 1.5rem;
+          top: 0;
+          width: 6px;
+          height: 100%;
+          background-color: #640AFF; }
+        .home--sidebar--destinations--item-first::before {
+          top: unset;
+          bottom: 0;
+          height: 50%;
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px; }
+        .home--sidebar--destinations--item-last::before {
+          height: 50%;
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px; }
         .home--sidebar--destinations--item--delete {
           background-color: unset;
           font-size: 1.3rem;
@@ -2620,10 +2642,21 @@ body {
               .home--sidebar--destinations--item--details--coordinates--item:focus {
                 outline: none; }
     .home--sidebar--review {
-      margin-top: 2rem;
-      align-self: center; }
-      .home--sidebar--review--icon {
-        margin-right: 1rem; }
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      font-size: 2rem; }
+      .home--sidebar--review--wrapper {
+        position: absolute;
+        bottom: 2rem;
+        right: -8rem; }
+        .home--sidebar--review--wrapper .dropdown--hint {
+          font-size: 1.4rem; }
 
 .account {
   grid-column: center-start / center-end;

@@ -4,11 +4,25 @@ import { Dropdown } from '../../components/Forms/Dropdown';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 
 export const Destination = props => {
+
+    let icon = "flag-outline";
+    if (props.firstDestination) {
+
+    }
+    else if (props.lastDestination) {
+
+    }
+
+
+
     return (
-        <div className="home--sidebar--destinations--item">
+        <div className={`home--sidebar--destinations--item ${props.firstDestination && "home--sidebar--destinations--item-first"} ${props.lastDestination && "home--sidebar--destinations--item-last"}`}>
             <Button hintText="Delete stop" hintPosition="left" className="home--sidebar--destinations--item--delete" wrapperClassName="home--sidebar--destinations--item--delete--wrapper" onClick={() => props.handleDeleteDestination(props.destination._id)}>
                 <IonIcon icon="close-outline" />
             </Button>
+            <div className="home--sidebar--destinations--item--icon">
+                <IonIcon icon={icon} />
+            </div>
             <div className="home--sidebar--destinations--item--details">
                 <input onChange={e => props.handleTripChange("stopover", { _id: props.destination._id, key: "name", value: e.target.value })} value={props.destination.name} placeholder="Stop name" className="home--sidebar--destinations--item--details--name" />
                 <div className="home--sidebar--destinations--item--details--coordinates">

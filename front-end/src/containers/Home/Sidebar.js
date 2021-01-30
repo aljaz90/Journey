@@ -132,13 +132,13 @@ export const Sidebar = props => {
                                         </Button>
                                         <div className="home--sidebar--destinations--list">
                                             {
-                                                props.trip?.stopovers.map(el => 
-                                                    <Destination key={el._id} destination={el} handleTripChange={props.handleTripChange} handleDeleteDestination={props.handleDeleteDestination} />
+                                                props.trip?.stopovers.map((el, i) => 
+                                                    <Destination firstDestination={i === 0} lastDestination={i === props.trip.stopovers.length - 1} key={el._id} destination={el} handleTripChange={props.handleTripChange} handleDeleteDestination={props.handleDeleteDestination} />
                                                 )
                                             }
                                         </div>                                        
-                                        <Button onClick={() => props.history.push(`/trip/${props.trip._id}`)} className="home--sidebar--review">
-                                            <IonIcon className="home--sidebar--review--icon" icon="trail-sign-outline" /> Trip overview
+                                        <Button hintText="Trip overview" hintPosition="right" onClick={() => props.history.push(`/trip/${props.trip._id}`)} wrapperClassName="home--sidebar--review--wrapper" className="home--sidebar--review">
+                                            <IonIcon className="home--sidebar--review--icon" icon="trail-sign-outline" />
                                         </Button>
                                     </div>
                             }
