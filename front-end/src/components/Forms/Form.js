@@ -4,6 +4,7 @@ import { Button } from './Button';
 import { Checkbox } from './Checkbox';
 import { Dropdown } from './Dropdown';
 import { Switch } from './Switch';
+import { CalendarInput } from './CalendarInput';
 
 export const EFormType = {
     DEFAULT: "default",
@@ -17,7 +18,12 @@ export const Form = props => {
         for (let i = 0; i<props.rows.length; i++) {
             for (let j = 0; j<props.rows[i].length; j++) {
                 let input = props.rows[i][j];
-                values[input.key] = input.defaultValue ? input.defaultValue : "";
+                if (input.type === "checkbox[]") {
+                    values[input.key] = [];
+                }
+                else {
+                    values[input.key] = input.defaultValue ? input.defaultValue : "";
+                }
             }
         }
         return values;
@@ -58,6 +64,15 @@ export const Form = props => {
         }
     };
 
+    const toggleCheckbox = (key, value) => {
+        if (values[key].includes(value)) {
+            onChange(key, values[key].filter(el => el !== value));
+        }
+        else {
+            onChange(key, [...values[key], value]);
+        }
+    };
+
     return (
         <div className={`form ${props.className}`}>
             {
@@ -95,9 +110,17 @@ export const Form = props => {
                                 else if (input.type === "dropdown") {
                                     return (
                                         <div key={input.key} className="form--row--input_group">
-                                            <Dropdown wrapperclassName="form--row--input_group--input-dropdown--wrapper" className="form--row--input_group--input form--row--input_group--input-dropdown" options={input.options} onSelect={seletedItem => onChange(input.key, seletedItem)}>
+                                            <Dropdown searchEnabled={input.searchEnabled} wrapperclassName="form--row--input_group--input-dropdown--wrapper" className="form--row--input_group--input form--row--input_group--input-dropdown" options={input.options} onSelect={seletedItem => onChange(input.key, seletedItem)}>
                                                 {input.text}
                                             </Dropdown>
+                                            <label className="form--row--input_group--label">{input.text}</label>
+                                        </div>
+                                    );
+                                }
+                                else if (input.type === "calendar") {
+                                    return (
+                                        <div key={input.key} className="form--row--input_group">
+                                            <CalendarInput className="form--row--input_group--input-calendar" onSelect={seletedItem => onChange(input.key, seletedItem)} />
                                             <label className="form--row--input_group--label">{input.text}</label>
                                         </div>
                                     );
@@ -149,6 +172,23 @@ export const Form = props => {
                                             <Checkbox className="form--row--input_group--input-checkbox" id={input.key} defaultValue={values[input.key]} onSelect={state => onChange(input.key, state)} />
                                         </div>
                                     );
+                                }
+                                else if (input.type === "checkbox[]") {
+                                    return (
+                                        <div key={input.key} className="form--row--input_group-checkbox_array">
+                                            <label className="form--row--input_group--label">{input.text}</label>
+                                            {
+                                                input.options.map((el, i) => 
+                                                    <div key={i} style={{flexGrow: input.fullWidth ? "1" : null}} className="form--row--input_group form--row--input_group-checkbox form--row--input_group-checkbox_array_item">
+                                                        <label className="form--row--input_group--label form--row--input_group--label-checkbox form--row--input_group--label-checkbox_array" htmlFor={el}>{el}</label>
+                                                        <Checkbox className="form--row--input_group--input-checkbox" id={el} defaultValue={values[input.key].includes(el)} onSelect={() => toggleCheckbox(input.key, el)} />
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
+                                    )
+                                    
+                                    
                                 }
                                 return (
                                     <div key={input.key} style={{flexGrow: input.fullWidth ? "1" : null}} className="form--row--input_group">

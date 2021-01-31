@@ -539,7 +539,7 @@ body {
     border-radius: 2px;
     overflow-x: hidden;
     overflow-y: auto;
-    z-index: 20;
+    z-index: 22;
     background-color: #fff;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     max-height: 22rem; }
@@ -1468,6 +1468,22 @@ body {
         align-items: center; }
         .form--row--input_group-checkbox:not(:last-child) {
           margin-right: 5rem; }
+      .form--row--input_group-checkbox_array {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 3.5rem;
+        position: relative;
+        padding-left: 4rem; }
+        .form--row--input_group-checkbox_array:not(:last-child) {
+          margin-right: 5rem; }
+      .form--row--input_group-checkbox_array_item {
+        margin-bottom: 2rem;
+        width: 12rem;
+        justify-content: space-between; }
+        .form--row--input_group-checkbox_array_item:not(:last-child) {
+          margin-right: 7rem; }
       .form--row--input_group--label {
         color: #777;
         font-size: 1.3rem;
@@ -1483,6 +1499,9 @@ body {
           left: unset;
           margin-right: 2rem;
           cursor: pointer; }
+        .form--row--input_group--label-checkbox_array {
+          margin-right: 1.5rem;
+          color: #333; }
       .form--row--input_group--show_password {
         position: absolute;
         right: 1rem;
@@ -1511,6 +1530,8 @@ body {
         transition: font-weight .3s;
         margin-top: 2.6rem;
         min-width: 25rem; }
+        .form--row--input_group--input-calendar {
+          margin-top: 2rem; }
         .form--row--input_group--input-password {
           padding-right: 4rem; }
           .form--row--input_group--input-password:focus {
@@ -1567,7 +1588,7 @@ body {
                 margin-bottom: 0.1rem; }
         .form--row--input_group--input-switch {
           margin-top: 3rem;
-          min-width: 17.523rem; }
+          min-width: 15.523rem; }
         .form--row--input_group--input:focus {
           padding: calc(1.25rem - 1px) calc(1rem - 1px);
           border: 2px solid #640AFF;

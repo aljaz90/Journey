@@ -38,6 +38,30 @@
                     margin-right: 5rem;
                 }
             }
+            
+            &-checkbox_array {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                flex-wrap: wrap;
+                padding-top: 3.5rem;
+                position: relative;
+                padding-left: 4rem;
+
+                &:not(:last-child) {
+                    margin-right: 5rem;
+                }
+            }
+
+            &-checkbox_array_item {
+                margin-bottom: 2rem;
+                width: 12rem;
+                justify-content: space-between;
+                
+                &:not(:last-child) {
+                    margin-right: 7rem;
+                }
+            }
 
             &--label {
                 color: $color-grey-2;
@@ -55,6 +79,11 @@
                     left: unset;
                     margin-right: 2rem;
                     cursor: pointer;
+                }
+
+                &-checkbox_array {
+                    margin-right: 1.5rem;
+                    color: $color-grey-3;
                 }
             }
 
@@ -92,6 +121,10 @@
                 transition: font-weight .3s;
                 margin-top: 2.6rem;
                 min-width: 25rem;
+
+                &-calendar {
+                    margin-top: 2rem;
+                }
 
                 &-password {
                     padding-right: 4rem;
@@ -178,7 +211,7 @@
 
                 &-switch {
                     margin-top: 3rem;
-                    min-width: 17.523rem;
+                    min-width: 15.523rem;
                 }
                 
                 &:focus {

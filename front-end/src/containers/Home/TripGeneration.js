@@ -21,7 +21,16 @@ export const TripGeneration = props => {
                                     </Button>
                                 </div>
                                 <div className="trip_generation--form">
-                                    <Form rows={[[{ text: "Country", key: "country", type: "dropdown", options: ["fgfdg", "gdfg"] }]]} />
+                                    <Form
+                                        onSubmit={data => console.log(data)}
+                                        rows={[
+                                            [{ text: "Trip name", key: "name", type: "text" }, { text: "Country", key: "country", type: "dropdown", searchEnabled: true, options: ["fgfdg", "gdfg"] }],
+                                            [{ text: "From", key: "from", type: "calendar" }, { text: "To", key: "to", type: "calendar" }],
+                                            [{ text: "Pace", key: "pace", type: "switch", defaultValue: "Normal", options: ["Slow", "Normal", "Fast"] }],
+                                            [{ text: "Activities", key: "activities", type: "checkbox[]", options: ["Nature", "Culture", "Shopping", "Historic site", "Beaches", "Relaxing", "Wildlife", "Museums"] }],
+                                        ]}
+                                        submitText="Generate"                                    
+                                    />
                                 </div>
                             </div>
                 }

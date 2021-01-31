@@ -117,7 +117,7 @@ export const CalendarInput = props => {
 
     return (
         <OutsideClick onOutsideClick={() => setShowing(false)}>
-            <div className="calendar">
+            <div className={`calendar ${props.className}`}>
                 <div className="calendar--wrapper">
                     <div onClick={() => setShowing(s => !s)} className="calendar--button">
                         { (selectedDate !== null && formatDate(selectedDate)) || props.children || "Select a date" } <IonIcon className="calendar--button--icon" icon="calendar-outline" />
