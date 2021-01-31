@@ -22,9 +22,9 @@ export const TripGeneration = props => {
                                 </div>
                                 <div className="trip_generation--form">
                                     <Form
-                                        onSubmit={data => console.log(data)}
+                                        onSubmit={props.onSubmit}
                                         rows={[
-                                            [{ text: "Trip name", key: "name", type: "text" }, { text: "Country", key: "country", type: "dropdown", searchEnabled: true, options: ["fgfdg", "gdfg"] }],
+                                            [{ text: "Trip name", key: "name", type: "text" }, { text: "Country", key: "country", type: "dropdown", searchEnabled: true, options: props.countries.filter(el => el.currency !== "Unknown").map(el => ({ text: el.name, key: el._id })) }],
                                             [{ text: "From", key: "from", type: "calendar" }, { text: "To", key: "to", type: "calendar" }],
                                             [{ text: "Pace", key: "pace", type: "switch", defaultValue: "Normal", options: ["Slow", "Normal", "Fast"] }],
                                             [{ text: "Activities", key: "activities", type: "checkbox[]", options: ["Nature", "Culture", "Shopping", "Historic site", "Beaches", "Relaxing", "Wildlife", "Museums"] }],

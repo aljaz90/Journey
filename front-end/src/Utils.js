@@ -192,3 +192,7 @@ export const datesEqual = (date, date2) => {
             && date.getMonth() === date2.getMonth()
             && date.getDate() === date2.getDate();
 };
+
+export const daysBetween = (startDate, endDate) => {
+    return Math.floor(( endDate - startDate ) / 86400000); 
+};

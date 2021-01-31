@@ -535,6 +535,7 @@ body {
     transform: translate(-50%, calc(100% + 1rem));
     flex-direction: column;
     display: flex;
+    min-width: 100%;
     border: 1px solid #eee;
     border-radius: 2px;
     overflow-x: hidden;
@@ -555,7 +556,8 @@ body {
         font-size: 600;
         padding: 1rem 1.75rem 1rem 4rem;
         transition: all .3s;
-        overflow-x: hidden; }
+        overflow-x: hidden;
+        width: 100%; }
       .dropdown--options--search--icon {
         color: #333;
         position: absolute;
@@ -628,7 +630,7 @@ body {
   cursor: pointer;
   transition: all .3s;
   user-select: none;
-  min-width: 15.2rem;
+  min-width: 15.6rem;
   text-align: center; }
   .calendar--button:hover {
     background-color: #eee; }
@@ -1617,7 +1619,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  min-width: 55rem;
+  min-width: 40rem;
   min-height: 60rem;
   border-radius: 4px;
   z-index: 5;

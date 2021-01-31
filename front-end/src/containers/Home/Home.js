@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { Logo } from '../../components/Layout/Logo';
 import { Dropdown } from '../../components/Forms/Dropdown';
 import { MapChart } from '../../components/Map/MapChart';
-import { isEmpty } from '../../Utils';
+import { daysBetween, isEmpty, shuffleArray } from '../../Utils';
 import { Loader } from '../../components/Utils/Loader';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Sidebar } from './Sidebar';
@@ -162,7 +162,7 @@ export default class Home extends Component {
         }
 
         return stopovers;
-    }
+    };
 
     saveChanges = async () => {
         let stopoversSaved = [...this.state.updatedStopovers];
@@ -221,7 +221,7 @@ export default class Home extends Component {
             console.error("An error occured while trying to delete a trip");
             console.log(err);
         }
-    }
+    };
 
     handleDeleteDestination = async destinationId => {
         const config = {
@@ -248,7 +248,7 @@ export default class Home extends Component {
             console.error("An error occured while trying to delete a destination");
             console.log(err);
         }
-    }
+    };
 
     handleAddTrip = type => {
         if (type === "custom") {
@@ -257,6 +257,48 @@ export default class Home extends Component {
         else {
             this.setState({...this.state, showingGeneration: true });
         }
+    };
+
+    handleGenerateTrip = data => {
+        if (data.name === "" || data.country === "" || data.from === "" || data.to === "") {
+            this.props.showNotification({
+                type: "toast",
+                contentType: "error",
+                text: "Please fill out all fields",
+                time: 1.5
+            });
+            return;
+        }
+        else if (data.activities.length === 0) {
+            this.props.showNotification({
+                type: "toast",
+                contentType: "error",
+                text: "Select at least 1 activity",
+                time: 1.5
+            });
+            return;
+        }
+        else if (data.to < data.from) {
+            this.props.showNotification({
+                type: "toast",
+                contentType: "error",
+                text: "This app unfortunately doesn't support time travel",
+                time: 1.5
+            });
+            return;
+        }
+
+        let days = daysBetween(data.from, data.to);
+        let destinations = this.props.destinations.filter(el => el.country === data.country).filter(el => {
+            for (let activity of data.activities) {
+                if (el.tags.includes(activity)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        destinations = shuffleArray(destinations);
     };
 
     render() {
@@ -270,7 +312,7 @@ export default class Home extends Component {
         return (
         <div className="home">
             <AccountDropdown saveUserData={this.props.saveUserData} user={this.props.user} />
-            <TripGeneration showing={this.state.showingGeneration} onClose={() => this.setState({...this.state, showingGeneration: false })} />          
+            <TripGeneration showing={this.state.showingGeneration} countries={this.props.countries} onSubmit={this.handleGenerateTrip} onClose={() => this.setState({...this.state, showingGeneration: false })} />          
             <MapChart onCenterChange={latlang => this.setState({...this.state, center: latlang})} handleDragMarker={this.handleDragMarker} trip={this.state.selectedTrip} />
             <Logo background="white" className="home--logo" />
 
