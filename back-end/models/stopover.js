@@ -13,6 +13,9 @@ const stopoverSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId, ref: 'Trip',
         required: true
     },
+    description: {
+        type: String
+    },
     lat: {
         type: Number,
         required: true

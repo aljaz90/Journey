@@ -52,7 +52,7 @@ export default class Destinations extends Component {
     };
     
     handleSelectDestinationPosition = latlng => {
-        console.log(latlng)
+        console.log(this.state.formData)
         this.setState({ ...this.state, selectingDestinationPosition: false, formData: null });
     }
 
@@ -76,7 +76,7 @@ export default class Destinations extends Component {
                 </div>
                 <MapChart selectingDestinationPosition={this.state.selectingDestinationPosition} onMarkerPositionSelected={this.handleSelectDestinationPosition} type="destinations" destinations={[]} />
                 <Logo background="white" className="destinations--logo" />
-                {   true &&
+                {   this.props.user.role === "admin" &&
                         <Button hintText="Add destination" hintPosition="right" onClick={() => this.setState({ ...this.state, showingAddDestination: true })} className="destinations--add--button" wrapperClassName="destinations--add--button--wrapper">
                             <IonIcon icon="add-outline" /> 
                         </Button>

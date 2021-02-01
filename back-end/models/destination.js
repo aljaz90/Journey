@@ -14,12 +14,11 @@ const destinationSchema = new mongoose.Schema({
         required: true
     },
     description: {
-        type: String,
-        required: true
+        type: String
     },
     recommendedDays: {
-        type: Number,
-        default: 1
+        type: String,
+        default: "1"
     },
     country: {
         type: mongoose.Schema.ObjectId, 

@@ -29,6 +29,12 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    role: {
+        type: String,
+        required: true,
+        enum: ["admin", "user"],
+        default: "user"
+    },
     uploads: [{type: mongoose.Schema.ObjectId, ref: 'Upload'}],
     trips: [{type: mongoose.Schema.ObjectId, ref: 'Trip'}],
 });
