@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Redirect } from 'react-router';
 import { Button } from '../../components/Forms/Button';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
@@ -22,7 +23,6 @@ export default class Destinations extends Component {
     }
 
     handleAddDestination = data => {
-        console.log(data)
         if (data.name === "" || data.country === "" || data.recommendedDays === "" || data.data === "") {
             this.props.showNotification({
                 type: "toast",
@@ -51,11 +51,50 @@ export default class Destinations extends Component {
         });
     };
     
-    handleSelectDestinationPosition = latlng => {
-        console.log(this.state.formData)
+    handleSelectDestinationPosition = async latlng => {
+        if (!this.state.selectingDestinationPosition || this.state.formData === null) {
+            return;
+        }
+        const data = this.state.formData;
+        
+        const requestBody = {
+            name: data.name,
+            lat: latlng.lat,
+            long: latlng.lng,
+            description: data.description,
+            recommendedDays: data.recommendedDays,
+            rating: data.rating,
+            country: data.country,
+            tags: data.tags
+        };
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+
+        try {
+            let res = await axios.post("http://localhost:4000/api/destination/new", requestBody, config);
+            this.props.setDestinations([...this.props.destinations, res.data]);
+            this.props.showNotification({
+                type: "toast",
+                contentType: "success",
+                text: "Destination successfully added",
+                time: 1.5
+            });
+        } 
+        catch (err) {
+            this.props.showNotification({
+                type: "toast",
+                contentType: "error",
+                text: "An error occured while trying to add a destination",
+                time: 2.5
+            });
+            console.error("An error occured while trying to add a destination");
+            console.log(err);
+        }
         this.setState({ ...this.state, selectingDestinationPosition: false, formData: null });
     }
-
 
     render() {
         if (!this.props.isAuthenticated) {
@@ -74,7 +113,7 @@ export default class Destinations extends Component {
                     </Button>
                     <AccountDropdown saveUserData={this.props.saveUserData} user={this.props.user} />
                 </div>
-                <MapChart selectingDestinationPosition={this.state.selectingDestinationPosition} onMarkerPositionSelected={this.handleSelectDestinationPosition} type="destinations" destinations={[]} />
+                <MapChart selectingDestinationPosition={this.state.selectingDestinationPosition} onMarkerPositionSelected={this.handleSelectDestinationPosition} type="destinations" destinations={this.props.destinations} />
                 <Logo background="white" className="destinations--logo" />
                 {   this.props.user.role === "admin" &&
                         <Button hintText="Add destination" hintPosition="right" onClick={() => this.setState({ ...this.state, showingAddDestination: true })} className="destinations--add--button" wrapperClassName="destinations--add--button--wrapper">

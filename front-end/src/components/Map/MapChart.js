@@ -34,8 +34,8 @@ export const MapChart = props => {
                             </Marker>
                     }
                     {
-                        props.destinations.map((el, i) => 
-                            <Marker key={el._id} draggable={true} position={[el.lat, el.long]}>
+                        props.destinations.map(el => 
+                            <Marker key={el._id} position={[el.lat, el.long]}>
                                 <Tooltip >
                                     {el.name}
                                 </Tooltip>

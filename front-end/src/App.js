@@ -36,13 +36,16 @@ export default class App extends Component {
             setTrip: (trip, callback=null) => {
                 let trips = [...this.state.trips];
                 let index = trips.findIndex(el => el._id === trip._id);
-
+                
                 if (index !== -1) {
                     trips[index] = trip;
                 }
-
+                
                 this.setState({ ...this.state, trips: trips });
-            }
+            },
+            setDestinations: (destinations, callback=null) => {
+                this.setState({ ...this.state, destinations: destinations }, callback);
+            },
         };
     };
 

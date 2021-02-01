@@ -20,6 +20,10 @@ const destinationSchema = new mongoose.Schema({
         type: String,
         default: "1"
     },
+    rating: {
+        type: Number,
+        default: 1
+    },
     country: {
         type: mongoose.Schema.ObjectId, 
         ref: 'Country',

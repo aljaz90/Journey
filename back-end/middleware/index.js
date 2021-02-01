@@ -57,4 +57,11 @@ middlewareObj.isLoggedIn = async (req, res, next) => {
     }
 };
 
+middlewareObj.isAdmin = (req, res, next) => {
+    if (req.user.role === "admin") {
+        return next();
+    }
+    res.status(403).send("Forbidden");
+};
+
 module.exports = middlewareObj;

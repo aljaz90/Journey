@@ -1,21 +1,22 @@
 const   // CORE EXPRESS
-        express         = require("express"),
-        app             = express(),
+        express           = require("express"),
+        app               = express(),
         // ROUTES
-        userRoutes      = require("./routes/users"),
-        uploadRoutes    = require("./routes/uploads"),
-        tripRoutes      = require("./routes/trips"),
+        userRoutes        = require("./routes/users"),
+        uploadRoutes      = require("./routes/uploads"),
+        tripRoutes        = require("./routes/trips"),
+        destinationRoutes = require("./routes/destinations"),
         // DATABASE
-        db              = require("./models"),
+        db                = require("./models"),
         // CONFIG FILES
-        CONFIG          = require("./config/config"),
+        CONFIG            = require("./config/config"),
         // EXTERNAL MODULES
-        passport        = require("passport"),
-        LocalStrategy   = require("passport-local").Strategy,
-        bodyParser      = require("body-parser"),
-        cookieSession   = require("cookie-session"),
-        cors            = require("cors"),
-        path            = require("path");
+        passport          = require("passport"),
+        LocalStrategy     = require("passport-local").Strategy,
+        bodyParser        = require("body-parser"),
+        cookieSession     = require("cookie-session"),
+        cors              = require("cors"),
+        path              = require("path");
 
 
 app.use(cookieSession({
@@ -53,6 +54,7 @@ passport.deserializeUser(db.User.deserializeUser());
 app.use("/api/user", userRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/trip", tripRoutes);
+app.use("/api/destination", destinationRoutes);
 
 app.get("api/*", (_, res) => {
     res.status(404).send("Url not found: 404");
