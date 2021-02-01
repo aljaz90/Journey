@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Leaflet, { LatLngBounds } from 'leaflet';
-import { MapContainer, TileLayer, Marker, Tooltip, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Tooltip, Polyline, Popup } from 'react-leaflet';
 import { MapEvents } from './MapEvents';
 
 import 'leaflet/dist/leaflet.css';
@@ -16,7 +16,38 @@ let DefaultIcon = Leaflet.icon({
         Leaflet.Marker.prototype.options.icon = DefaultIcon;
   
 export const MapChart = props => {
+
+    const [destinationPosition, setDestinationPosition] = useState([0, 0]);    
     const center = [51.505, 0];
+
+    if (props.type === "destinations") {
+        return (
+            <div className="map">
+                <MapContainer zoomControl={false} worldCopyJump={true} center={center} maxBounds={new LatLngBounds([-85, -99999999999999999], [85, 99999999999999999])} maxBoundsViscosity={0.9} minZoom={2} zoom={3} scrollWheelZoom={true}>
+                    <TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {
+                        props.selectingDestinationPosition &&
+                            <Marker draggable={true} position={destinationPosition}>
+                            </Marker>
+                    }
+                    {
+                        props.destinations.map((el, i) => 
+                            <Marker key={el._id} draggable={true} position={[el.lat, el.long]}>
+                                <Tooltip >
+                                    {el.name}
+                                </Tooltip>
+                            </Marker>
+                        )
+                    }
+                    <MapEvents onClick={e => props.onMarkerPositionSelected(e.latlng)} onMouseMove={e => setDestinationPosition([e.latlng.lat, e.latlng.lng])} />
+            </MapContainer>
+            </div>
+        );
+    
+    }
 
     return (
         <div className="map">

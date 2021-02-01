@@ -1,0 +1,143 @@
+.sup {
+    filter: hue-rotate(120deg);
+}
+
+
+.destinations {
+    grid-row: 1 / -1;
+    grid-column: 1 / -1;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 90;
+    background-color: $color-white;
+
+    &--nav {
+        background-color: $color-white;
+        position: absolute;
+        top: 2rem;
+        right: 8rem;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        height: 5rem;
+        border-radius: 4.18rem;
+
+        &--button {
+            background-color: transparent;
+            color: $color-primary;
+            font-weight: 600;
+            border: 3px solid transparent;
+            
+            &:hover {
+                background-color: transparent;
+                color: $color-primary-light;
+                border: 3px solid $color-primary-light;
+            }
+            
+            &:active {
+                background-color: transparent;
+                color: $color-primary-light-2;
+            }
+        }
+    }
+
+    &--logo {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        color: $color-primary-light;
+
+        .logo--title {
+            font-size: 2rem;
+        }
+
+        .logo--subtitle {
+            font-size: 1rem;
+        }
+    }
+
+    &--add {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $color-white;
+        min-width: 40rem;
+        min-height: 60rem;
+        //border: 1px solid $color-grey;
+        border-radius: 4px;
+        z-index: 5;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+    
+        &--header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 7rem;
+            max-height: 7rem;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            background-image: linear-gradient(to right, $color-primary, $color-secondary);
+            //border-bottom: 1px solid $color-grey;
+    
+            &--title {
+                color: $color-white;
+                font-size: 2.2rem;
+                letter-spacing: 1px;
+                font-weight: 400;
+                user-select: none;
+    
+                &--icon {
+                    margin-right: 2rem;
+                }
+            }
+    
+            &--close {
+                background-color: unset;
+                color: $color-white;
+                padding: 0;
+                border-radius: 0;
+                font-size: 2rem;
+    
+                &:hover {
+                    background-color: unset;
+                    color: $color-white-2;
+                }   
+    
+                &--wrapper {
+                    position: absolute;
+                    right: 2rem;
+                    top: 2rem;
+                }
+            }
+        }
+    
+        &--button {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+
+            &--wrapper {
+                position: absolute;
+                bottom: 4rem;
+                left: 8rem;
+                z-index: 5;
+            }
+        }
+
+        &--form {
+            margin-bottom: 2rem;
+        }
+    }
+}

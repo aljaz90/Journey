@@ -10,6 +10,7 @@ import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Sidebar } from './Sidebar';
 import { AccountDropdown } from './AccountDropdown';
 import { TripGeneration } from './TripGeneration';
+import { Button } from '../../components/Forms/Button';
 
 export default class Home extends Component {
 
@@ -310,23 +311,28 @@ export default class Home extends Component {
         }
 
         return (
-        <div className="home">
-            <AccountDropdown saveUserData={this.props.saveUserData} user={this.props.user} />
-            <TripGeneration showing={this.state.showingGeneration} countries={this.props.countries} onSubmit={this.handleGenerateTrip} onClose={() => this.setState({...this.state, showingGeneration: false })} />          
-            <MapChart onCenterChange={latlang => this.setState({...this.state, center: latlang})} handleDragMarker={this.handleDragMarker} trip={this.state.selectedTrip} />
-            <Logo background="white" className="home--logo" />
+            <div className="home">
+                <div className="home--nav">
+                    <Button onClick={() => this.props.history.push("/destinations")} className="home--nav--button">
+                        Destinations
+                    </Button>
+                    <AccountDropdown saveUserData={this.props.saveUserData} user={this.props.user} />
+                </div>
+                <TripGeneration showing={this.state.showingGeneration} countries={this.props.countries} onSubmit={this.handleGenerateTrip} onClose={() => this.setState({...this.state, showingGeneration: false })} />          
+                <MapChart onCenterChange={latlang => this.setState({...this.state, center: latlang})} handleDragMarker={this.handleDragMarker} trip={this.state.selectedTrip} />
+                <Logo background="white" className="home--logo" />
 
-            <div className="home--trips">
-                <Dropdown selectedOption={this.state.selectedTrip ? this.state.selectedTrip._id : null} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id === tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
-                    Select a trip
-                </Dropdown>
-                <Dropdown noOpenIcon={true} staticButton={true} onSelect={opt => this.handleAddTrip(opt)} options={[{ text: "Custom", key: "custom", icon: "pin-outline" }, { text: "Generated", key: "generated", icon: "hardware-chip-outline" }]} className="home--trips--add" hintText="Add trip">
-                    <IonIcon icon="add-outline" />
-                </Dropdown>
+                <div className="home--trips">
+                    <Dropdown selectedOption={this.state.selectedTrip ? this.state.selectedTrip._id : null} selectedClassName="home--trips--dropdown--selected" className="home--trips--dropdown" onSelect={tripID => this.setState({...this.state, selectedTrip: this.props.trips.find(el => el._id === tripID)})} options={this.props.trips.map(el => ({key: el._id, text: el.name}))}>
+                        Select a trip
+                    </Dropdown>
+                    <Dropdown noOpenIcon={true} staticButton={true} onSelect={opt => this.handleAddTrip(opt)} options={[{ text: "Custom", key: "custom", icon: "pin-outline" }, { text: "Generated", key: "generated", icon: "hardware-chip-outline" }]} className="home--trips--add" hintText="Add trip">
+                        <IonIcon icon="add-outline" />
+                    </Dropdown>
+                </div>
+
+                <Sidebar history={this.props.history} handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} handleDeleteTrip={this.handleDeleteTrip} trip={this.state.selectedTrip} />
             </div>
-
-            <Sidebar history={this.props.history} handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} handleDeleteTrip={this.handleDeleteTrip} trip={this.state.selectedTrip} />
-        </div>
-        )
+        );
     }
 }

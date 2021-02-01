@@ -1539,7 +1539,8 @@ body {
           .form--row--input_group--input-password:focus {
             padding-right: calc(4rem - 1px) !important; }
         .form--row--input_group--input-textarea {
-          width: 100%; }
+          width: 100%;
+          min-width: 48rem; }
         .form--row--input_group--input-dropdown {
           position: relative;
           font-size: 1.6rem;
@@ -2293,6 +2294,28 @@ body {
   overflow: hidden;
   z-index: 90;
   background-color: #fff; }
+  .home--nav {
+    background-color: #fff;
+    position: absolute;
+    top: 2rem;
+    right: 8rem;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    border-radius: 4.18rem; }
+    .home--nav--button {
+      background-color: transparent;
+      color: #640AFF;
+      font-weight: 600;
+      border: 3px solid transparent; }
+      .home--nav--button:hover {
+        background-color: transparent;
+        color: #843dff;
+        border: 3px solid #843dff; }
+      .home--nav--button:active {
+        background-color: transparent;
+        color: #a570ff; }
   .home--logo {
     position: absolute;
     bottom: 1rem;
@@ -2321,10 +2344,7 @@ body {
       .home--account--button + .dropdown--options {
         min-width: 15rem; }
     .home--account--wrapper {
-      position: absolute;
-      top: 2rem;
-      right: 8rem;
-      z-index: 5; }
+      margin-right: -1rem; }
     .home--account--icon {
       text-transform: uppercase;
       font-size: 2rem;
@@ -3054,3 +3074,108 @@ body {
     .trip--sidebar--calendar {
       display: flex;
       justify-content: center; }
+
+.sup {
+  filter: hue-rotate(120deg); }
+
+.destinations {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: 90;
+  background-color: #fff; }
+  .destinations--nav {
+    background-color: #fff;
+    position: absolute;
+    top: 2rem;
+    right: 8rem;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    border-radius: 4.18rem; }
+    .destinations--nav--button {
+      background-color: transparent;
+      color: #640AFF;
+      font-weight: 600;
+      border: 3px solid transparent; }
+      .destinations--nav--button:hover {
+        background-color: transparent;
+        color: #843dff;
+        border: 3px solid #843dff; }
+      .destinations--nav--button:active {
+        background-color: transparent;
+        color: #a570ff; }
+  .destinations--logo {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    color: #843dff; }
+    .destinations--logo .logo--title {
+      font-size: 2rem; }
+    .destinations--logo .logo--subtitle {
+      font-size: 1rem; }
+  .destinations--add {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    min-width: 40rem;
+    min-height: 60rem;
+    border-radius: 4px;
+    z-index: 5;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column; }
+    .destinations--add--header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 7rem;
+      max-height: 7rem;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      background-image: linear-gradient(to right, #640AFF, #E04B00); }
+      .destinations--add--header--title {
+        color: #fff;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+        font-weight: 400;
+        user-select: none; }
+        .destinations--add--header--title--icon {
+          margin-right: 2rem; }
+      .destinations--add--header--close {
+        background-color: unset;
+        color: #fff;
+        padding: 0;
+        border-radius: 0;
+        font-size: 2rem; }
+        .destinations--add--header--close:hover {
+          background-color: unset;
+          color: #f4f4f4; }
+        .destinations--add--header--close--wrapper {
+          position: absolute;
+          right: 2rem;
+          top: 2rem; }
+    .destinations--add--button {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0; }
+      .destinations--add--button--wrapper {
+        position: absolute;
+        bottom: 4rem;
+        left: 8rem;
+        z-index: 5; }
+    .destinations--add--form {
+      margin-bottom: 2rem; }

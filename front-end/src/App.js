@@ -7,6 +7,7 @@ import { Layout } from './containers/Layout';
 import { getCookie, getUser } from './Utils';
 import Account from './containers/Account';
 import Trip from './containers/Trip/Trip';
+import Destinations from './containers/Destinations/Destinations';
 
 export default class App extends Component {
 
@@ -101,6 +102,7 @@ export default class App extends Component {
                 <Layout {...this.state} {...this.setters} showNotification={this.showNotification} saveUserData={this.saveUserData} />
                 <Switch>
                     <Route exact path="/" render={props => <Home showNotification={this.showNotification} {...this.state} {...this.setters} {...props} />} />
+                    <Route exact path="/destinations" render={props => <Destinations showNotification={this.showNotification} {...this.state} {...this.setters} {...props} />} />
                     <Route path="/trip" render={props => <Trip showNotification={this.showNotification} {...this.state} {...this.setters} {...props} />} />
                     <Route exact path="/account" render={props => <Account showNotification={this.showNotification} {...this.state} {...this.setters} {...props} />} />
                     <Route path="/signin" render={props => <Auth showNotification={this.showNotification} {...this.state} {...this.setters} {...props} saveUserData={this.saveUserData} />} />
