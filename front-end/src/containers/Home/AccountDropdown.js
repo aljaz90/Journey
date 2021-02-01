@@ -16,7 +16,7 @@ export const AccountDropdown = props => {
 
     return (
         <div className="home--account--wrapper">
-            <Dropdown onSelect={opt => handleUserAction(opt)} staticButton={true} options={[{key: "edit", text: "Edit account"}, {key: "signout", text: "Sign out"}]} className="home--account--button" wrapperClassName="home--account--button--wrapper">
+            <Dropdown onSelect={opt => handleUserAction(opt)} staticButton={true} options={[{key: "edit", text: "Edit account", icon: "person-outline"}, {key: "signout", text: "Sign out", icon: "log-out-outline"}]} className="home--account--button" wrapperClassName="home--account--button--wrapper">
                 <div style={{backgroundImage: `url(${props.user.imageUrl ? props.user.imageUrl.replaceAll(" ", "%20") : null})`}} className="home--account--icon">
                     {props.user.imageUrl ? "" : getInitialsForName(props.user.name)}
                 </div>
