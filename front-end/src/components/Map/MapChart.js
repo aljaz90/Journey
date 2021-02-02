@@ -51,11 +51,16 @@ export const MapChart = props => {
 
     return (
         <div className="map">
-            <MapContainer eventHandlers={{drag: e => console.log(e)}} zoomControl={false} worldCopyJump={true} center={center} maxBounds={new LatLngBounds([-85, -99999999999999999], [85, 99999999999999999])} maxBoundsViscosity={0.9} minZoom={2} zoom={3} scrollWheelZoom={true}>
+            <MapContainer zoomControl={false} worldCopyJump={true} center={center} maxBounds={new LatLngBounds([-85, -99999999999999999], [85, 99999999999999999])} maxBoundsViscosity={0.9} minZoom={2} zoom={3} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                {
+                    props.selectingDestinationPosition &&
+                        <Marker draggable={true} position={destinationPosition}>
+                        </Marker>
+                }
                 {
                     props.trip?.stopovers.map((el, i) => 
                         <Marker key={el._id} eventHandlers={{drag: e => props.handleDragMarker(e.latlng, el._id)}} draggable={true} position={[el.lat, el.long]}>
@@ -84,7 +89,7 @@ export const MapChart = props => {
                     })
                     
                 }
-                <MapEvents onDragEnd={(latlang) => props.onCenterChange(latlang)} />
+                <MapEvents onClick={e => props.onMarkerPositionSelected(e.latlng)} onMouseMove={e => setDestinationPosition([e.latlng.lat, e.latlng.lng])} />
         </MapContainer>
         </div>
     );

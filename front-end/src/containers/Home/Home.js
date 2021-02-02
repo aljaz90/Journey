@@ -20,9 +20,9 @@ export default class Home extends Component {
         this.state = {
             selectedTrip: null,
             autosaveTimeout: null,
-            center: { lat: 51.505, lng: 0 },
             updatedStopovers: [],
-            showingGeneration: false
+            showingGeneration: false,
+            selectingDestinationPosition: false
         }
 
         this.mapSelectionDropdown = null;
@@ -115,15 +115,19 @@ export default class Home extends Component {
         this.setState({...this.state, updatedStopovers: updatedStopovers, selectedTrip: trip, autosaveTimeout: setTimeout(() => this.saveChanges(), 2000)});
     };
 
-    handleAddDestination = async (data={}) => {
+    handleAddDestination = async (latlng, data={}) => {
+        if (isEmpty(data) && !this.state.selectingDestinationPosition) {
+            return;
+        }
+
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         };
         let body = {
-            lat: this.state.center.lat,
-            long: this.state.center.lng,
+            lat: latlng?.lat,
+            long: latlng?.lng,
             ...data
         };
 
@@ -142,7 +146,7 @@ export default class Home extends Component {
             let selectedTrip = { ...this.state.selectedTrip, stopovers: [...this.state.selectedTrip.stopovers, stopover], segments: segments };
             let trip = { ...this.props.trips.find(el => el._id === selectedTrip._id), stopovers: [...this.state.selectedTrip.stopovers, stopover], segments: segments };
 
-            this.setState({...this.state, selectedTrip: selectedTrip});
+            this.setState({...this.state, selectedTrip: selectedTrip, selectingDestinationPosition: false});
             this.props.setTrip(trip);
         }
         catch (err) {
@@ -351,7 +355,7 @@ export default class Home extends Component {
         await this.addCustomTrip(trip);
 
         for (let stopover of stopovers) {
-            await this.handleAddDestination(stopover);
+            await this.handleAddDestination(null, stopover);
         }
     };
 
@@ -372,7 +376,7 @@ export default class Home extends Component {
                     <AccountDropdown saveUserData={this.props.saveUserData} user={this.props.user} />
                 </div>
                 <TripGeneration showing={this.state.showingGeneration} countries={this.props.countries} onSubmit={this.handleGenerateTrip} onClose={() => this.setState({...this.state, showingGeneration: false })} />          
-                <MapChart onCenterChange={latlang => this.setState({...this.state, center: latlang})} handleDragMarker={this.handleDragMarker} trip={this.state.selectedTrip} />
+                <MapChart selectingDestinationPosition={this.state.selectingDestinationPosition} onMarkerPositionSelected={this.handleAddDestination} handleDragMarker={this.handleDragMarker} trip={this.state.selectedTrip} />
                 <Logo background="white" className="home--logo" />
 
                 <div className="home--trips">
@@ -384,7 +388,7 @@ export default class Home extends Component {
                     </Dropdown>
                 </div>
 
-                <Sidebar history={this.props.history} handleAddDestination={this.handleAddDestination} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} handleDeleteTrip={this.handleDeleteTrip} trip={this.state.selectedTrip} />
+                <Sidebar history={this.props.history} handleAddDestination={() => this.setState({ ...this.state, selectingDestinationPosition: true })} handleDeleteDestination={this.handleDeleteDestination} handleTripChange={this.handleTripChange} handleDeleteTrip={this.handleDeleteTrip} trip={this.state.selectedTrip} />
             </div>
         );
     }
