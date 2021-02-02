@@ -9,6 +9,7 @@ import { Loader } from '../../components/Utils/Loader';
 import { isEmpty } from '../../Utils';
 import { AccountDropdown } from '../Home/AccountDropdown';
 import { AddDestinationPopup } from './AddDestinationPopup';
+import { iso1A2Code } from '@ideditor/country-coder';
 
 export default class Destinations extends Component {
 
@@ -51,12 +52,24 @@ export default class Destinations extends Component {
         });
     };
     
-    handleSelectDestinationPosition = async latlng => {
+    handleSelectDestinationPosition = async latlng => {        
         if (!this.state.selectingDestinationPosition || this.state.formData === null) {
             return;
         }
-        const data = this.state.formData;
-        
+
+        let countryCode = iso1A2Code([latlng.lng, latlng.lat]);
+        let country = this.props.countries.find(el => el.code === countryCode);
+
+        if (!country) {
+            return this.props.showNotification({
+                type: "toast",
+                contentType: "error",
+                text: "Please place the marker within some country's borders",
+                time: 1.5
+            });
+        }
+
+        const data = this.state.formData;        
         const requestBody = {
             name: data.name,
             lat: latlng.lat,
@@ -64,7 +77,7 @@ export default class Destinations extends Component {
             description: data.description,
             recommendedDays: data.recommendedDays,
             rating: data.rating,
-            country: data.country,
+            country: country._id,
             tags: data.tags
         };
         const config = {

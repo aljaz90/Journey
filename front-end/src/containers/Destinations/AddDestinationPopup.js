@@ -30,7 +30,7 @@ export const AddDestinationPopup = props => {
                                     <Form
                                         onSubmit={props.onSubmit}
                                         rows={[
-                                            [{ text: "Name", key: "name", type: "text" }, { text: "Country", key: "country", type: "dropdown", searchEnabled: true, options: props.countries.filter(el => el.currency !== "Unknown").map(el => ({ text: el.name, key: el._id })) }],
+                                            [{ text: "Name", key: "name", type: "text" }],
                                             [{ text: "Recommended stop duration", key: "recommendedDays", type: "dropdown", options: [...days, { text: "10+ days", key: "10+" }] }],
                                             [{ text: "Must see rating", key: "rating", type: "dropdown", options: [1,2,3,4,5,6,7,8,9,10] }],
                                             [{ text: "Description", key: "description", type: "textarea" }],
