@@ -5,6 +5,7 @@ import { Checkbox } from './Checkbox';
 import { Dropdown } from './Dropdown';
 import { Switch } from './Switch';
 import { CalendarInput } from './CalendarInput';
+import { ImageSelector } from './ImageSelector';
 
 export const EFormType = {
     DEFAULT: "default",
@@ -40,6 +41,7 @@ export const Form = props => {
     const [values, setValues] = useState(() => initialiseValues());
     const [showingPasswords, setShowingPasswords] = useState([]);
     const [formType] = useState(getFormType());
+    const [imageSelectionFor, setImageSelectionFor] = useState(null);
 
     const submitForm = () => {
         props.onSubmit(values);
@@ -75,6 +77,7 @@ export const Form = props => {
 
     return (
         <div className={`form ${props.className}`}>
+            <ImageSelector showNotification={props.showNotification} user={props.user} setUser={props.setUser} onSelect={url => { onChange(imageSelectionFor, url); setImageSelectionFor(null); }} onClose={() => setImageSelectionFor(null)} showing={imageSelectionFor !== null} />
             {
                 props.title &&
                     <div className="form--title">
@@ -103,6 +106,16 @@ export const Form = props => {
                                     return (
                                         <div key={input.key} className="form--row--input_group">
                                             <Switch className="form--row--input_group--input-switch" defaultOption={input.defaultValue} options={input.options} onSelect={seletedItem => onChange(input.key, seletedItem)} />
+                                            <label className="form--row--input_group--label">{input.text}</label>
+                                        </div>
+                                    );
+                                }
+                                else if (input.type === "image") {
+                                    return (
+                                        <div key={input.key} className="form--row--input_group">
+                                            <Button onClick={() => setImageSelectionFor(input.key)} className="form--row--input_group--button">
+                                                <IonIcon className="form--row--input_group--button--icon" icon="images-outline" /> {values[input.key] === "" ? input.text : "Added"}
+                                            </Button>
                                             <label className="form--row--input_group--label">{input.text}</label>
                                         </div>
                                     );
@@ -186,9 +199,7 @@ export const Form = props => {
                                                 )
                                             }
                                         </div>
-                                    )
-                                    
-                                    
+                                    );
                                 }
                                 return (
                                     <div key={input.key} style={{flexGrow: input.fullWidth ? "1" : null}} className="form--row--input_group">
@@ -208,5 +219,5 @@ export const Form = props => {
                     </Button>
             }
         </div>
-    )
+    );
 }

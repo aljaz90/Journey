@@ -28,9 +28,12 @@ export const AddDestinationPopup = props => {
                                 </div>
                                 <div className="destinations--add--form">
                                     <Form
+                                        setUser={props.setUser}
+                                        user={props.user}
+                                        showNotification={props.showNotification}
                                         onSubmit={props.onSubmit}
                                         rows={[
-                                            [{ text: "Name", key: "name", type: "text" }],
+                                            [{ text: "Name", key: "name", type: "text" }, { key: "imageUrl", text: "Add image", type: "image" }],
                                             [{ text: "Recommended stop duration", key: "recommendedDays", type: "dropdown", options: [...days, { text: "10+ days", key: "10+" }] }],
                                             [{ text: "Must see rating", key: "rating", type: "dropdown", options: [1,2,3,4,5,6,7,8,9,10] }],
                                             [{ text: "Description", key: "description", type: "textarea" }],

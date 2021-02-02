@@ -63,6 +63,16 @@
                 }
             }
 
+            &--button {
+                font-weight: 400;
+                font-size: 1.6rem;
+                margin-top: 2.7rem;
+
+                &--icon {
+                    margin-right: 1rem;
+                }
+            }
+
             &--label {
                 color: $color-grey-2;
                 font-size: 1.3rem;

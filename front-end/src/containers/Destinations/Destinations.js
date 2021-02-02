@@ -69,11 +69,13 @@ export default class Destinations extends Component {
             });
         }
 
-        const data = this.state.formData;        
+        const data = this.state.formData; 
+
         const requestBody = {
             name: data.name,
             lat: latlng.lat,
             long: latlng.lng,
+            imageUrl: data.imageUrl,
             description: data.description,
             recommendedDays: data.recommendedDays,
             rating: data.rating,
@@ -119,7 +121,15 @@ export default class Destinations extends Component {
 
         return (
             <div className="destinations">
-                <AddDestinationPopup countries={this.props.countries} onSubmit={this.handleAddDestination} showing={this.state.showingAddDestination} onClose={() => this.setState({ ...this.state, showingAddDestination: false })} />
+                <AddDestinationPopup 
+                    setUser={this.props.setUser}
+                    user={this.props.user}
+                    showNotification={this.props.showNotification}
+                    countries={this.props.countries} 
+                    onSubmit={this.handleAddDestination} 
+                    showing={this.state.showingAddDestination} 
+                    onClose={() => this.setState({ ...this.state, showingAddDestination: false })}
+                />
                 <div className="destinations--nav">
                     <Button onClick={() => this.props.history.push("/")} className="destinations--nav--button">
                         Trips

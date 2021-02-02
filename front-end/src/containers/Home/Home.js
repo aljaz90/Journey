@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { Logo } from '../../components/Layout/Logo';
 import { Dropdown } from '../../components/Forms/Dropdown';
 import { MapChart } from '../../components/Map/MapChart';
-import { daysBetween, isEmpty, shuffleArray } from '../../Utils';
+import { daysBetween, isEmpty } from '../../Utils';
 import { Loader } from '../../components/Utils/Loader';
 import { IonIcon } from '../../components/IonIcons/IonIcon';
 import { Sidebar } from './Sidebar';
@@ -34,7 +34,7 @@ export default class Home extends Component {
         }
     }
 
-    addCustomTrip = async () => {
+    addCustomTrip = async (data={}, callback=null) => {
         try {
             const config = {
                 headers: {
@@ -42,17 +42,19 @@ export default class Home extends Component {
                 }
             };
 
-            let res = await axios.post("http://localhost:4000/api/trip/new", {}, config);
+            let res = await axios.post("http://localhost:4000/api/trip/new", data, config);
 
-            this.props.showNotification({
-                type: "toast",
-                contentType: "success",
-                text: "Trip successfully created",
-                time: 1.5
-            });
+            if (isEmpty(data)) {
+                this.props.showNotification({
+                    type: "toast",
+                    contentType: "success",
+                    text: "Trip successfully created",
+                    time: 1.5
+                });
+            }
 
             this.props.setTrips([...this.props.trips, res.data], () => {
-                this.setState({...this.state, selectedTrip: res.data});
+                this.setState({...this.state, selectedTrip: res.data}, () => callback ? callback() : null);
             });
 
         } 
@@ -113,15 +115,16 @@ export default class Home extends Component {
         this.setState({...this.state, updatedStopovers: updatedStopovers, selectedTrip: trip, autosaveTimeout: setTimeout(() => this.saveChanges(), 2000)});
     };
 
-    handleAddDestination = async () => {
+    handleAddDestination = async (data={}) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         };
-        const body = {
+        let body = {
             lat: this.state.center.lat,
-            long: this.state.center.lng
+            long: this.state.center.lng,
+            ...data
         };
 
         try {
@@ -260,7 +263,7 @@ export default class Home extends Component {
         }
     };
 
-    handleGenerateTrip = data => {
+    handleGenerateTrip = async data => {
         if (data.name === "" || data.country === "" || data.from === "" || data.to === "") {
             this.props.showNotification({
                 type: "toast",
@@ -289,7 +292,8 @@ export default class Home extends Component {
             return;
         }
 
-        let days = daysBetween(data.from, data.to);
+        // Preparations
+        let days = daysBetween(data.from, data.to) + 1;
         let destinations = this.props.destinations.filter(el => el.country === data.country).filter(el => {
             for (let activity of data.activities) {
                 if (el.tags.includes(activity)) {
@@ -299,7 +303,56 @@ export default class Home extends Component {
             return false;
         });
 
-        destinations = shuffleArray(destinations);
+        destinations.sort((a, b) => {
+            if (a.rating === b.rating) {
+                return Math.random() - 0.5;
+            }
+            return b.rating - a.rating;
+        });
+
+        //Generation
+        let trip = {
+            name: data.name,
+            from: data.from,
+        };
+
+        let stopovers = [];
+
+        for (let destination of destinations) {
+            let recommendedDays = destination.recommendedDays;
+            if (data.pace === "Slow") {
+                recommendedDays = (recommendedDays*1.5).toFixed(0);
+            }
+            else if (data.pace === "Fast") {
+                recommendedDays = (recommendedDays*0.75).toFixed(0);
+            }
+
+            stopovers.push({ destination: destination._id, name: destination.name, lat: destination.lat, long: destination.long, days: days });
+            days -= recommendedDays;
+            if (days <= 0) {
+                days = 0;
+                break;
+            }
+        }
+
+        if (days > 0) {
+            let i = 0;
+            while (days > 0) {
+                stopovers[i].days++;
+                days--;
+                i++;
+                if (i === stopovers.length) {
+                    i = 0;
+                }
+            }
+        }
+
+        //Saving
+        await this.addCustomTrip(trip);
+
+        for (let stopover of stopovers) {
+            await this.handleAddDestination(stopover);
+        }
     };
 
     render() {

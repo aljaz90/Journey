@@ -5,7 +5,7 @@ const express     = require("express"),
 
 router.post("/new", middleware.isLoggedIn, middleware.isAdmin, async (req, res) => {
     try {
-        let destination = new db.Destination({ name: req.body.name, lat: req.body.lat, long: req.body.long, description: req.body.description, recommendedDays: req.body.recommendedDays, rating: req.body.rating, country: req.body.country, tags: req.body.tags });
+        let destination = new db.Destination({ name: req.body.name, lat: req.body.lat, long: req.body.long, imageUrl: req.body.imageUrl, description: req.body.description, recommendedDays: req.body.recommendedDays, rating: req.body.rating, country: req.body.country, tags: req.body.tags });
         await destination.save();
         res.json(destination._doc);
     } 

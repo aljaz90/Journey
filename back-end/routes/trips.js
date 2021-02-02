@@ -5,7 +5,7 @@ const express     = require("express"),
 
 router.post("/new", middleware.isLoggedIn, async (req, res) => {
     try {
-        let trip = new db.Trip({ name: "Unnamed trip", author: req.user._id, stopovers: [], segments: []});
+        let trip = new db.Trip({ name: req.body.name || "Unnamed trip", from: req.body.from ? new Date(req.body.from) : null, author: req.user._id, stopovers: [], segments: []});
         await trip.save();
 
         req.user.trips.push(trip._id);
@@ -129,7 +129,7 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
 
         
         let segment = null;
-        let stopover = new db.Stopover({ name: "Unknown stop", days: 1, author: req.user._id, trip: trip._id, lat: lat, long: long, days: 1 });
+        let stopover = new db.Stopover({ name: req.body.name || "Unknown stop", days: req.body.days || 1, author: req.user._id, trip: trip._id, lat: lat, long: long, destination: req.body.destination ? req.body.destination : null });
         await stopover.save();
         
         if (trip.stopovers.length > 0) {           
@@ -140,6 +140,10 @@ router.post("/:id/stopover/new", middleware.isLoggedIn, async (req, res) => {
 
         trip.stopovers.push(stopover);
         await trip.save();
+
+        if (stopover.destination) {
+            await db.Stopover.populate(stopover, { model: "Destination", path: "destination" });
+        }
 
         res.json({stopover: stopover._doc, segment: segment ? segment._doc : undefined});
     } 

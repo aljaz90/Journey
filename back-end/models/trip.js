@@ -13,9 +13,6 @@ const tripSchema = new mongoose.Schema({
     from: {
         type: Date
     },
-    to: {
-        type: Date
-    },
     stopovers: [{type: mongoose.Schema.ObjectId, ref: 'Stopover'}],
     segments: [{type: mongoose.Schema.ObjectId, ref: 'Segment'}]
 });

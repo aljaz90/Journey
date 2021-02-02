@@ -13,6 +13,9 @@ const destinationSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    imageUrl: {
+        type: String
+    },
     description: {
         type: String
     },

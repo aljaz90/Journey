@@ -13,8 +13,8 @@ const stopoverSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId, ref: 'Trip',
         required: true
     },
-    description: {
-        type: String
+    destination: {
+        type: mongoose.Schema.ObjectId, ref: 'Destination',
     },
     lat: {
         type: Number,

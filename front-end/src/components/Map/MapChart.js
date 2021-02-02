@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Leaflet, { LatLngBounds } from 'leaflet';
-import { MapContainer, TileLayer, Marker, Tooltip, Polyline, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Tooltip, Polyline } from 'react-leaflet';
 import { MapEvents } from './MapEvents';
 
 import 'leaflet/dist/leaflet.css';

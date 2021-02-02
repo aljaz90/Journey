@@ -1486,6 +1486,12 @@ body {
         justify-content: space-between; }
         .form--row--input_group-checkbox_array_item:not(:last-child) {
           margin-right: 7rem; }
+      .form--row--input_group--button {
+        font-weight: 400;
+        font-size: 1.6rem;
+        margin-top: 2.7rem; }
+        .form--row--input_group--button--icon {
+          margin-right: 1rem; }
       .form--row--input_group--label {
         color: #777;
         font-size: 1.3rem;
