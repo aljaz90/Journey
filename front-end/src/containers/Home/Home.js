@@ -357,6 +357,15 @@ export default class Home extends Component {
         for (let stopover of stopovers) {
             await this.handleAddDestination(null, stopover);
         }
+
+        this.props.showNotification({
+            type: "toast",
+            contentType: "success",
+            text: "Trip successfully generated",
+            time: 1.5
+        });
+        this.setState({ ...this.state, showingGeneration: false });
+
     };
 
     render() {

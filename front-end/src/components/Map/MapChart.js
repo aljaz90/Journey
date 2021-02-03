@@ -90,7 +90,7 @@ export const MapChart = props => {
                     
                 }
                 <MapEvents onClick={e => props.onMarkerPositionSelected(e.latlng)} onMouseMove={e => setDestinationPosition([e.latlng.lat, e.latlng.lng])} />
-        </MapContainer>
+            </MapContainer>
         </div>
     );
 };
