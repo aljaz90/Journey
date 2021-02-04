@@ -7,6 +7,7 @@ import { Loader } from '../../components/Utils/Loader';
 import { addDays } from '../../Utils';
 import { iso1A2Code } from '@ideditor/country-coder';
 import { getCountryNameByCode } from '../../Countries';
+import { StopoverInfo } from './StopoverInfo';
 
 export default class Trip extends Component {
     
@@ -70,46 +71,16 @@ export default class Trip extends Component {
                             let country = getCountryNameByCode(countryCode);
                             let countryData = this.props.countries.find(el => el.code === countryCode);
 
+                            if (el.destination) {
+                                return (
+                                    <div className="trip--destinations--item-extended">
+                                        <StopoverInfo el={el} i={i} country={country} countryData={countryData} />
+                                    </div>
+                                );
+                            }
+
                             return (
-                                <div className="trip--destinations--item">
-                                    <div className="trip--destinations--item--name">
-                                        {i+1}. {el.name}
-                                    </div>
-                                    <div className="trip--destinations--item--coordinates">
-                                        <div className="trip--destinations--item--coordinates--lat">
-                                            <div className="trip--destinations--item--coordinates--title">
-                                                Coordinates
-                                            </div>
-                                            <div className="trip--destinations--item--coordinates--long--title">
-                                                Lat.
-                                            </div>
-                                            {el.lat.toFixed(2)}
-                                        </div>
-                                        <div className="trip--destinations--item--coordinates--long">
-                                            <div className="trip--destinations--item--coordinates--long--title">
-                                                Long.
-                                            </div>
-                                            {el.long.toFixed(2)}                                        
-                                        </div>
-                                    </div>
-                                    <div></div>
-                                    <div className="trip--destinations--item--details">
-                                        {   country &&
-                                                <div className="trip--destinations--item--details--item">
-                                                    <IonIcon className="trip--destinations--item--details--item--icon" icon="flag-outline" /> {country} <CountryInfo country={countryData} />
-                                                </div>
-                                        }
-                                        <div className="trip--destinations--item--details--item">
-                                            <IonIcon className="trip--destinations--item--details--item--icon" icon="today-outline" /> You will spend <span className="trip--destinations--item--details--item-important">{el.days || 1}</span> {(el.days || 1) === 1 ? "day" : "days"} here
-                                        </div>
-                                        {
-                                            el.days > 1 &&
-                                                <div className="trip--destinations--item--details--item">
-                                                    <IonIcon className="trip--destinations--item--details--item--icon" icon="bed-outline" /> You will need a place to stay for <span className="trip--destinations--item--details--item-important">{el.days - 1}</span> {(el.days - 1) === 1 ? "night" : "nights"}
-                                                </div>
-                                        }
-                                    </div>
-                                </div>
+                                <StopoverInfo el={el} i={i} country={country} countryData={countryData} />
                             );
                         })
                     }
