@@ -84,7 +84,26 @@ export const MapChart = props => {
                     props.trip?.stopovers.map((el, i) => 
                         <Marker key={el._id} eventHandlers={{drag: e => props.handleDragMarker(e.latlng, el._id)}} draggable={true} position={[el.lat, el.long]}>
                             <Tooltip offset={[5, 0]}>
-                                {i+1}. {el.name}
+                                {
+                                    el.destination ?
+                                        <div className="destinations--map--destination--marker">
+                                            <img className="destinations--map--destination--marker--image" src={el.destination.imageUrl || "http://localhost:4000/api/upload/image/z5Mi8gFDr.png"} alt="Destination image" />
+                                            <div className="destinations--map--destination--marker--tags">
+                                                {
+                                                    el.destination.tags.map(tag => 
+                                                        <div className="destinations--map--destination--marker--tags--item">
+                                                            {tag}
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                            <div className="destinations--map--destination--marker--name">
+                                                {i+1}. {el.name}
+                                            </div>
+                                        </div>
+                                    :
+                                        <React.Fragment>{i+1}. {el.name}</React.Fragment>
+                                }
                             </Tooltip>
                         </Marker>
                     )

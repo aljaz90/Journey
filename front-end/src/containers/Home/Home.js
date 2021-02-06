@@ -267,6 +267,10 @@ export default class Home extends Component {
         }
     };
 
+    calculateDistance = (latlong1, latlong2) => {
+        return Math.sqrt(Math.pow(latlong1.lat - latlong2.lat, 2) + Math.pow(latlong1.long - latlong2.long, 2));
+    }
+
     handleGenerateTrip = async data => {
         if (data.name === "" || data.country === "" || data.from === "" || data.to === "") {
             this.props.showNotification({
@@ -323,7 +327,7 @@ export default class Home extends Component {
         let stopovers = [];
 
         for (let destination of destinations) {
-            let recommendedDays = destination.recommendedDays;
+            let recommendedDays = parseInt(destination.recommendedDays);
             if (data.pace === "Slow") {
                 recommendedDays = (recommendedDays*1.5).toFixed(0);
             }
@@ -331,7 +335,13 @@ export default class Home extends Component {
                 recommendedDays = (recommendedDays*0.75).toFixed(0);
             }
 
-            stopovers.push({ destination: destination._id, name: destination.name, lat: destination.lat, long: destination.long, days: days });
+            if (days < recommendedDays) {
+                stopovers.push({ destination: destination._id, name: destination.name, lat: destination.lat, long: destination.long, days: days });
+            }
+            else {
+                stopovers.push({ destination: destination._id, name: destination.name, lat: destination.lat, long: destination.long, days: recommendedDays });
+            }
+
             days -= recommendedDays;
             if (days <= 0) {
                 days = 0;
@@ -349,6 +359,51 @@ export default class Home extends Component {
                     i = 0;
                 }
             }
+        }
+
+        //Finiding the optimal path
+        if (stopovers.length > 1) {
+            let distances = [];
+    
+            for (let stop of stopovers) {
+                let stopDistances = [];
+                for (let stop2 of stopovers) {
+                    if (stop === stop2) {
+                        continue;
+                    }
+                    stopDistances.push({ to: stop2.destination, distance: this.calculateDistance({ lat: stop.lat, long: stop.long }, { lat: stop2.lat, long: stop2.long }) });
+                }
+                stopDistances.sort((a, b) => b.distance - a.distance);
+                distances.push({ ...stopDistances[0], from: stop.destination });
+            }
+
+            distances.sort((a, b) => b.distance - a.distance);
+
+            let from = stopovers.find(el => el.destination === distances[0].from);
+            let to = stopovers.find(el => el.destination === distances[0].to);
+
+            stopovers = stopovers.filter(el => el.destination !== from.destination && el.destination !== to.destination);
+
+            let newPath = [from];
+            let length = stopovers.length;
+
+            for (let i = 0; i < length; i++) {
+                let nearestDistance = null;
+                let nearestStop = null;
+
+                for (let stop of stopovers) {
+                    let distance = this.calculateDistance({ lat: newPath[newPath.length-1].lat, long: newPath[newPath.length-1].long }, { lat: stop.lat, long: stop.long })
+                    if (!nearestStop || nearestDistance > distance) {
+                        nearestStop = stop;
+                        nearestDistance = distance;
+                    }
+                }
+
+                newPath.push(nearestStop);
+                stopovers = stopovers.filter(el => el.destination !== nearestStop.destination);
+            }
+
+            stopovers = [...newPath, to];
         }
 
         //Saving
