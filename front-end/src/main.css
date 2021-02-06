@@ -2919,6 +2919,26 @@ body {
       padding: 1rem 4rem;
       border-bottom: 1px solid #eee;
       position: relative; }
+      .trip--destinations--item-extended {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2rem; }
+        .trip--destinations--item-extended .trip--destinations--item {
+          border-bottom: 0;
+          border-top: 1px solid #eee; }
+        .trip--destinations--item-extended--data {
+          display: flex;
+          border-bottom: 1px solid #eee; }
+          .trip--destinations--item-extended--data--image {
+            object-fit: cover;
+            object-position: center;
+            width: 60rem; }
+          .trip--destinations--item-extended--data--description {
+            font-size: 1.6rem;
+            margin: 1rem;
+            margin-left: 2rem;
+            padding: 2rem;
+            border: 1px solid #eee; }
       .trip--destinations--item--name {
         font-size: 3.2rem;
         font-weight: 100;
@@ -2982,8 +3002,13 @@ body {
             flex-direction: column;
             width: 63rem;
             min-height: 10rem;
-            max-height: 40rem;
-            right: -15rem; }
+            max-height: 65rem;
+            right: -15rem;
+            border: 0;
+            overflow: hidden; }
+          .trip--destinations--item--details--country--image {
+            object-fit: cover;
+            object-position: center; }
           .trip--destinations--item--details--country--header {
             display: flex;
             border-bottom: 1px solid #eee;
@@ -3081,9 +3106,6 @@ body {
       display: flex;
       justify-content: center; }
 
-.sup {
-  filter: hue-rotate(120deg); }
-
 .destinations {
   grid-row: 1 / -1;
   grid-column: 1 / -1;
@@ -3126,6 +3148,36 @@ body {
       font-size: 2rem; }
     .destinations--logo .logo--subtitle {
       font-size: 1rem; }
+  .destinations--map--destination--marker {
+    display: flex;
+    flex-direction: column; }
+    .destinations--map--destination--marker--image {
+      object-fit: cover;
+      object-position: center;
+      max-width: 40rem; }
+    .destinations--map--destination--marker--tags {
+      display: flex;
+      margin-top: 0.75rem;
+      margin-left: 0.5rem; }
+      .destinations--map--destination--marker--tags--item {
+        background-color: #640AFF;
+        color: #fff;
+        padding: 0.2rem 1rem;
+        border-radius: 2.18rem;
+        font-weight: 500;
+        font-family: "Lato", sans-serif; }
+        .destinations--map--destination--marker--tags--item:not(:last-child) {
+          margin-right: 0.5rem; }
+    .destinations--map--destination--marker--name {
+      align-self: flex-start;
+      margin-top: 0.75rem;
+      margin-left: 0.5rem;
+      font-size: 2.2rem;
+      font-weight: 400;
+      font-family: "Tajawal", sans-serif;
+      max-width: 40rem;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
   .destinations--add {
     position: fixed;
     top: 50%;

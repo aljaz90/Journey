@@ -72,9 +72,16 @@ export default class Trip extends Component {
                             let countryData = this.props.countries.find(el => el.code === countryCode);
 
                             if (el.destination) {
+                                
                                 return (
                                     <div className="trip--destinations--item-extended">
                                         <StopoverInfo el={el} i={i} country={country} countryData={countryData} />
+                                        <div className="trip--destinations--item-extended--data">
+                                            <img alt="destination image" src={el.destination.imageUrl || "http://localhost:4000/api/upload/image/z5Mi8gFDr.png"} className="trip--destinations--item-extended--data--image" />
+                                            <div className="trip--destinations--item-extended--data--description">
+                                                {el.destination.description}
+                                            </div>
+                                        </div>
                                     </div>
                                 );
                             }

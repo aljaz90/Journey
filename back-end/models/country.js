@@ -9,6 +9,9 @@ const countrySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    imageUrl: {
+        type: String
+    },
     description: {
         type: String,
         default: "No description yet"

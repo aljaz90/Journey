@@ -5,6 +5,10 @@ import { Info } from '../../components/Utils/Info'
 export const CountryInfo = props => {
     return (
         <Info className="trip--destinations--item--details--country" containerClassName="trip--destinations--item--details--country--container" position="bottom_left">
+            {
+                props.country.imageUrl &&
+                    <img src={props.country.imageUrl} className="trip--destinations--item--details--country--image" alt="country image" />
+            }
             <div className="trip--destinations--item--details--country--header">
                 <div className="trip--destinations--item--details--country--header--item">
                     <div className="trip--destinations--item--details--country--header--item--label">

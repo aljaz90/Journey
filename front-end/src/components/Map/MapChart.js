@@ -36,8 +36,27 @@ export const MapChart = props => {
                     {
                         props.destinations.map(el => 
                             <Marker key={el._id} position={[el.lat, el.long]}>
-                                <Tooltip >
-                                    {el.name}
+                                <Tooltip>
+                                   {
+                                       el.imageUrl ?
+                                            <div className="destinations--map--destination--marker">
+                                                <img className="destinations--map--destination--marker--image" src={el.imageUrl} alt="Destination image" />
+                                                <div className="destinations--map--destination--marker--tags">
+                                                    {
+                                                        el.tags.map(el => 
+                                                            <div className="destinations--map--destination--marker--tags--item">
+                                                                {el}
+                                                            </div>
+                                                        )
+                                                    }
+                                                </div>
+                                                <div className="destinations--map--destination--marker--name">
+                                                    {el.name}
+                                                </div>
+                                            </div>
+                                        :
+                                            el.name
+                                    }
                                 </Tooltip>
                             </Marker>
                         )
