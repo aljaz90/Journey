@@ -113,36 +113,6 @@ export const isEmpty = obj => {
     return Object.keys(obj).length === 0;
 };
 
-export const getCategories = async (courses, setCategories) => {
-    try {
-        let res = await axios.get(`http://localhost:4000/api/category/`);
-        let categories = [...res.data, {name: "Uncategorised", color: "#028da8"}];
-        let categoriesWithCourses = categories.map(category => {
-            let categoryCourses = courses.filter(el => {
-                if (category.name === "Uncategorised" && (el.categories === null || el.categories.length === 0)) {
-                    return true;
-                }
-                else if (el.categories === null) {
-                    return false;
-                }
-
-                return el.categories.some(el => el.name === category.name);
-            });
-
-            return {
-                ...category,
-                courses: categoryCourses
-            };
-        });
-
-        setCategories(categoriesWithCourses);
-    } 
-    catch (err) {
-        console.error("An error occured while trying get categories");
-        console.log(err);
-    }
-};
-
 export const formatDigits = (number, digits) => {
     let num = String(number);
 
