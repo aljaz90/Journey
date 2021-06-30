@@ -17,15 +17,15 @@
 
 ### Dashboard
 
-![alt text](https://raw.githubusercontent.com/aljaz90/Simple-Auth-Template/master/dashboard.png)
+![Dashboard](https://raw.githubusercontent.com/aljaz90/Journey/master/dashboard.png)
 
 ### Sign in / Sign up form
 
-![alt text](https://raw.githubusercontent.com/aljaz90/Simple-Auth-Template/master/login.png)
+![Sign in form](https://raw.githubusercontent.com/aljaz90/Journey/master/login.png)
 
 ### Profile
 
-![alt text](https://raw.githubusercontent.com/aljaz90/Simple-Auth-Template/master/profile.png)
+![Profile](https://raw.githubusercontent.com/aljaz90/Journey/master/profile.png)
 
 ## LICENCE
 
